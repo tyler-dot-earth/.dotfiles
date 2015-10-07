@@ -12,7 +12,7 @@ Plugin 'gmarik/Vundle.vim'
 " original repos on github
 Plugin 'tpope/vim-fugitive'
 Plugin 'Lokaltog/vim-easymotion'
-Plugin 'mattn/zencoding-vim'
+Plugin 'mattn/emmet-vim'
 Plugin 'msanders/snipmate.vim'
 Plugin 'vim-scripts/ScrollColors'
 Plugin 'mattn/gist-vim'
@@ -20,7 +20,7 @@ Plugin 'scrooloose/nerdtree'
 Plugin 'scrooloose/nerdcommenter'
 Plugin 'groenewege/vim-less'
 Plugin 'tomasr/molokai'
-Plugin 'tsaleh/vim-matchit'
+Plugin 'vim-scripts/matchit.zip'
 Plugin 'othree/html5.vim'
 Plugin 'skammer/vim-css-color'
 Plugin 'hail2u/vim-css3-syntax'
@@ -34,7 +34,10 @@ Plugin 'kien/ctrlp.vim'
 Plugin 'brettof86/vim-swigjs'
 Plugin 'airblade/vim-gitgutter'
 Plugin 'kchmck/vim-coffee-script'
-Plugin 'vim-scripts/AutoComplPop'
+"Plugin 'othree/yajs.vim'
+Plugin 'pangloss/vim-javascript'
+Plugin 'mxw/vim-jsx'
+"Plugin 'vim-scripts/AutoComplPop'
 
 " Plugin 'vim-scripts/L9' " Dependency for FuzzyFinder
 " Plugin 'vim-scripts/FuzzyFinder'
@@ -61,11 +64,22 @@ set ruler
 " No toolbar if in gvim
 set guioptions-=T  "remove toolbar
 set t_Co=256 " more colors
-set gfn=Ubuntu\ Mono\ 10 " Default font
+set visualbell!
+if has("gui_running")
+  if has("gui_gtk2")
+    set guifont=Hack\ 11
+  elseif has("gui_macvim")
+    set guifont=Hack:h11
+  elseif has("gui_win32")
+    set guifont=Consolas:h11:cANSI
+  endif
+endif
+
+" Disable visual bell
 set visualbell!
 
 " GVIM: File name in tab only
-set guitablabel=%t
+set guitablabel=%M%t
 
 " Set <leader> back to default
 let mapleader = "\\"
@@ -83,8 +97,11 @@ syntax on
 au BufNewFile,BufRead *.less set filetype=less
 au BufNewFile,BufRead *.styl set filetype=stylus
 
+" set tpl (bottle template files) to HTML filetype for syntax highlighting
+au BufNewFile,BufRead *.tpl set filetype=html
+
 " Stop ^w for removing underscores
-set iskeyword-=_
+"set iskeyword-=_
 
 " Add - for autocompletes and such
 set iskeyword+=-
@@ -95,6 +112,10 @@ set listchars=tab:→\ ,eol:\↵
 
 " Start NERDTree on VIM start
 "autocmd VimEnter * NERDTree
+
+" Show line numbers in NERDTree
+let NERDTreeShowLineNumbers=1
+
 " The following will put the cursor on the code window instead of NERDTree
 autocmd VimEnter * wincmd p
 
@@ -127,3 +148,22 @@ cab sp Sp
 
 " Enable syntax? TODO: investigate necessity.
 syntax enable
+
+" Set window transparency
+" set transparency=8
+
+" Required for matchit.vim
+runtime macros/matchit.vim
+
+" Aliases
+"" :Tabnew -> :tabnew
+cnoreabbrev <expr> Tabnew ((getcmdtype() is# ':' && getcmdline() is# 'Tabnew')?('tabnew'):('Tabnew'))
+
+" set shell for gitgutter
+set shell=/bin/zsh
+
+" Increase gitgutter max sign count
+let g:gitgutter_max_signs = 500
+
+" Enable JSX in .js files
+let g:jsx_ext_required = 0

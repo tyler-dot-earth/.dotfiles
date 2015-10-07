@@ -36,3 +36,6 @@ eval "$(rbenv init -)"
 
 # NPM
 export PATH="$PATH:$HOME/.npm/bin"
+
+export NVM_DIR="/home/tyler/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
