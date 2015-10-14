@@ -167,3 +167,6 @@ let g:gitgutter_max_signs = 500
 
 " Enable JSX in .js files
 let g:jsx_ext_required = 0
+
+" Hide stuff from Ctrl P
+set wildignore+=*/.git/*,*/.hg/*,*/.svn/*,*/.DS_Store,*/dist/*
