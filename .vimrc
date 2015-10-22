@@ -169,4 +169,4 @@ let g:gitgutter_max_signs = 500
 let g:jsx_ext_required = 0
 
 " Hide stuff from Ctrl P
-set wildignore+=*/.git/*,*/.hg/*,*/.svn/*,*/.DS_Store,*/dist/*
+set wildignore+=*/.git/*,*/.hg/*,*/.svn/*,*/.DS_Store,*/dist/*,*/node_modules/*,*/bower_components/*
