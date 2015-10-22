@@ -37,5 +37,9 @@ eval "$(rbenv init -)"
 # NPM
 export PATH="$PATH:$HOME/.npm/bin"
 
+# NVM (NodeJS version manager)
 export NVM_DIR="/home/tyler/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
+
+# Flow (JS static type checking)
+export PATH="$PATH:/home/tyler/Projects/flow/"
