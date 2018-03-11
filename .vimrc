@@ -1,172 +1,205 @@
-set nocompatible " be iMproved
-filetype off " required!
+"""""""""""""""""""""""""""""""""""""
+""""""""PLUGIN SETUP SECTION"""""""""
+"""""""""""""""""""""""""""""""""""""
 
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
-
-" let Vundle manage Vundle
-" required! 
-Plugin 'gmarik/Vundle.vim'
-
-" My Bundles:
-" original repos on github
-Plugin 'tpope/vim-fugitive'
-Plugin 'Lokaltog/vim-easymotion'
-Plugin 'mattn/emmet-vim'
-Plugin 'msanders/snipmate.vim'
-Plugin 'vim-scripts/ScrollColors'
-Plugin 'mattn/gist-vim'
-Plugin 'scrooloose/nerdtree'
-Plugin 'scrooloose/nerdcommenter'
-Plugin 'groenewege/vim-less'
-Plugin 'tomasr/molokai'
-Plugin 'vim-scripts/matchit.zip'
-Plugin 'othree/html5.vim'
-Plugin 'skammer/vim-css-color'
-Plugin 'hail2u/vim-css3-syntax'
-Plugin 'tomtom/tcomment_vim.git'
-Plugin 'digitaltoad/vim-jade'
-Plugin 'jamessan/vim-gnupg'
-Plugin 'slim-template/vim-slim'
-Plugin 'wavded/vim-stylus'
-Plugin 'terryma/vim-multiple-cursors'
-Plugin 'kien/ctrlp.vim'
-Plugin 'brettof86/vim-swigjs'
-Plugin 'airblade/vim-gitgutter'
-Plugin 'kchmck/vim-coffee-script'
-"Plugin 'othree/yajs.vim'
-Plugin 'pangloss/vim-javascript'
-Plugin 'mxw/vim-jsx'
-"Plugin 'vim-scripts/AutoComplPop'
-
-" Plugin 'vim-scripts/L9' " Dependency for FuzzyFinder
-" Plugin 'vim-scripts/FuzzyFinder'
-
-call vundle#end()
-
-filetype plugin on
-
-filetype plugin indent on     " required!
-
-colorscheme molokai
-
-set expandtab
-set tabstop=2
-set shiftwidth=2
-set nowrap
-set autoindent
-set relativenumber
-set number " in combination with relativenumber, we get 'hybrid mode' that has the current linenumber on your current row position (instead of the default '0')
-set cursorline
-set cursorline cursorcolumn
-set ruler
-
-" No toolbar if in gvim
-set guioptions-=T  "remove toolbar
-set t_Co=256 " more colors
-set visualbell!
-if has("gui_running")
-  if has("gui_gtk2")
-    set guifont=Hack\ 11
-  elseif has("gui_macvim")
-    set guifont=Hack:h11
-  elseif has("gui_win32")
-    set guifont=Consolas:h11:cANSI
-  endif
+" Automatically install Plug if Vim starts without it
+if empty(glob('~/.vim/autoload/plug.vim'))
+  silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
+    \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+  autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
 endif
 
-" Disable visual bell
-set visualbell!
+" Directory for plugins.
+" > avoid using standard Vim directory names like 'plugin'
+call plug#begin('~/.vim/plugged')
 
-" GVIM: File name in tab only
-set guitablabel=%M%t
+" NERDTree: file browser sidebar. Just type execute `:NERDTree`
+Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' } " On-demand loading
 
-" Set <leader> back to default
-let mapleader = "\\"
+" Comment stuff out. Just execute `gcc` (or `gc` + motion).
+Plug 'tpope/vim-commentary'
 
-" Set auto complete (default ctrl x ctrl o) to ctrl space
-imap <C-Space> <C-x><C-o>
-imap <C-@> <C-Space>
+" Work with variants of words,
+" like: `:%Subvert/facilit{y,ies}/building{,s}/g`
+Plug 'tpope/vim-abolish'
 
-" No bell for macvim
-set vb
-set t_vb=
+" Git in vim.
+Plug 'tpope/vim-fugitive'
 
-" less css syntax highlighting
+" Navigate files by filename, just execute `CTRL-P`
+" Plug 'ctrlpvim/ctrlp.vim'
+
+" Theme 'Oceanic Next'
+Plug 'mhartington/oceanic-next'
+
+" Shows whether a line has been modified (per VCS like git)
+Plug 'mhinz/vim-signify'
+
+" Navigate files fuzzily with fuzzy finder
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'junegunn/fzf.vim'
+
+" Icons in NERDTree
+Plug 'ryanoasis/vim-devicons' " Needs to happen after nerdtree stuff.
+
+" Javascript syntax stuff
+Plug 'pangloss/vim-javascript'
+
+" JSX syntax stuff
+Plug 'mxw/vim-jsx'
+
+" Multiple cursors! Highlight a word, hit CTRL N to highlight/modify multiple words.
+Plug 'terryma/vim-multiple-cursors'
+
+" Code completion
+Plug 'Valloric/YouCompleteMe', { 'do': './install.py --tern-completer' }
+
+" Initialize plugin system
+call plug#end()
+
+"""""""""""""""""""""""""""""""""""""
+"""""""""""MISC SETTINGS"""""""""""""
+"""""""""""""""""""""""""""""""""""""
+
+set autoindent " Minimal automatic indenting for any filetype.
+set backspace=indent,eol,start " Proper backspace behavior.
+set hidden " Possibility to have more than one unsaved buffers.
+set incsearch " Incremental search, hit '<CR>' to stop.
+set ruler " Shows the current line number at the bottom right of the screen.
+set wildmenu " Great command-line completion, use '<Tab>' to move around and '<CR>' to validate.
+set relativenumber " Relative line numbers on left.
+set number " in combination with relativenumber, we get 'hybrid mode' that has the current linenumber on your current row position (instead of the default '0')
+set cursorline " Highlight current row
+set cursorline cursorcolumn " Highlight current column
+set nowrap " Don't line wrap
+set foldmethod=indent " When folding, base it on line indentation
+set noexpandtab " Don't turn tabs to space
+set tabstop=2 " how many columns a tab counts for
+set shiftwidth=2 " how many columns text is indented with the reindent operations
+
+" Enabling filetype support provides filetype-specific indenting, syntax
+" highlighting, omni-completion and other useful settings.
+filetype plugin indent on
 syntax on
-au BufNewFile,BufRead *.less set filetype=less
-au BufNewFile,BufRead *.styl set filetype=stylus
 
-" set tpl (bottle template files) to HTML filetype for syntax highlighting
-au BufNewFile,BufRead *.tpl set filetype=html
+" 'matchit.vim' is built-in so let's enable it!
+" Hit '%' on 'if' to jump to 'else'.
+runtime macros/matchit.vim
 
-" Stop ^w for removing underscores
-"set iskeyword-=_
+" General colorscheme (theme)
+colorscheme OceanicNext
 
-" Add - for autocompletes and such
-set iskeyword+=-
+" Options for 'GUI Vim'
+if has("gui_running")
+  set guioptions-=T  " Remove toolbar
+  set visualbell! " No visual bell (flash)
+  set guifont=Fira\ Code\ Nerd\ Font\ Medium\ 12
+endif
+
+" Hide stuff from Ctrl P
+set wildignore+=*/.git/*,*/.hg/*,*/.svn/*,*/.DS_Store,*/dist/*,*/node_modules/*,*/bower_components/*,*/dist_server/*
 
 " Special line characters
 set list
-set listchars=tab:→\ ,eol:\↵
+set listchars=tab:→·,eol:↵,trail:·,precedes:←,extends:→
+set showbreak=↪\
 
-" Start NERDTree on VIM start
-"autocmd VimEnter * NERDTree
-
-" Show line numbers in NERDTree
-let NERDTreeShowLineNumbers=1
-
-" The following will put the cursor on the code window instead of NERDTree
-autocmd VimEnter * wincmd p
+" Always keep N number of lines from edge
+set scrolloff=2
 
 " Auto change the directory to the current file I'm working on
 autocmd BufEnter * lcd %:p:h
 
-" Make tab character gray
-highlight SpecialKey ctermfg=8
+"""""""""""""""""""""""""""""""""""""
+"""""""""""""""ALIASES"""""""""""""""
+"""""""""""""""""""""""""""""""""""""
 
-" Two-space tabs in particular file types
-autocmd FileType javascript setlocal shiftwidth=2 tabstop=2 expandtab
-autocmd FileType jade setlocal shiftwidth=2 tabstop=2 noexpandtab
-autocmd FileType stylus setlocal shiftwidth=2 tabstop=2 noexpandtab
-
-" Multi-file sp
-function! Sp(...)
-  if(a:0 == 0)
-    sp
-  else
-    let i = a:0
-    while(i > 0)
-      execute 'let file = a:' . i
-      execute 'sp ' . file
-      let i = i - 1
-    endwhile
-  endif
-endfunction
-com! -nargs=* -complete=file Sp call Sp(<f-args>)
-cab sp Sp
-
-" Enable syntax? TODO: investigate necessity.
-syntax enable
-
-" Set window transparency
-" set transparency=8
-
-" Required for matchit.vim
-runtime macros/matchit.vim
-
-" Aliases
-"" :Tabnew -> :tabnew
+" :Tabnew -> :tabnew
 cnoreabbrev <expr> Tabnew ((getcmdtype() is# ':' && getcmdline() is# 'Tabnew')?('tabnew'):('Tabnew'))
 
-" set shell for gitgutter
-set shell=/bin/zsh
 
-" Increase gitgutter max sign count
-let g:gitgutter_max_signs = 500
+"""""""""""""""""""""""""""""""""""""
+"""""""""""PLUGIN SETTINGS"""""""""""
+"""""""""""""""""""""""""""""""""""""
 
-" Enable JSX in .js files
-let g:jsx_ext_required = 0
+""""""""""" NERDTree """"""""""""""""
 
-" Hide stuff from Ctrl P
-set wildignore+=*/.git/*,*/.hg/*,*/.svn/*,*/.DS_Store,*/dist/*,*/node_modules/*,*/bower_components/*
+" Minimal NERDTree UI
+let NERDTreeMinimalUI=1
+
+" Show hidden files by default
+let NERDTreeShowHidden=1
+
+
+""""""""""""" Tern """"""""""""""""""
+" Start autocompletion after 4 chars
+let g:ycm_min_num_of_chars_for_completion = 4
+let g:ycm_min_num_identifier_candidate_chars = 4
+let g:ycm_enable_diagnostic_highlighting = 0
+
+" Don't show YCM's preview window
+set completeopt-=preview
+let g:ycm_add_preview_to_completeopt = 0
+
+
+
+""""""""""" fzf + ripgrep """""""""""
+" --column: Show column number
+" --line-number: Show line number
+" --no-heading: Do not show file headings in results
+" --fixed-strings: Search term as a literal string
+" --ignore-case: Case insensitive search
+" --no-ignore: Do not respect .gitignore, etc...
+" --hidden: Search hidden files and folders
+" --follow: Follow symlinks
+" --glob: Additional conditions for search (in this case ignore everything in the .git/ folder)
+" --color: Search color options
+command! -bang -nargs=* Find
+  \ call fzf#vim#grep('rg --column --line-number --no-heading --fixed-strings --ignore-case --no-ignore --hidden --follow --glob "!.git/*" --color "always" '.shellescape(<q-args>), 1, <bang>0)
+
+" Files command with preview window
+command! -bang -nargs=? -complete=dir Files
+  \ call fzf#vim#files(<q-args>,
+  \                    fzf#vim#with_preview(),
+  \                    <bang>0)
+
+" :Ag  - Start fzf with hidden preview window that can be enabled with "?" key
+" :Ag! - Start fzf in fullscreen and display the preview window above
+command! -bang -nargs=* Ag
+  \ call fzf#vim#ag(<q-args>,
+  \                 <bang>0 ? fzf#vim#with_preview('up:60%')
+  \                         : fzf#vim#with_preview('right:50%:hidden', '?'),
+  \                 <bang>0)
+
+" Open files, split in window.
+let g:fzf_action = {
+      \ 'ctrl-s': 'split',
+      \ 'ctrl-v': 'vsplit'
+      \ }
+
+" Open fzf to search files via CTRL P
+nnoremap <c-p> :FZF<cr>
+
+
+"""""""""""""""""""""""""""""""""""""
+"""""""""""STATUSLINE SETUP""""""""""
+"""""""""""""""""""""""""""""""""""""
+
+" via https://www.reddit.com/r/vim/comments/6b7b08/my_custom_statusline/
+function! ActiveStatus()
+  let statusline=" "
+  let statusline.="%{fugitive#head()!=''?'\ \ '.fugitive#head().'\ ':''}"
+  let statusline.="%{&modified?'\ \ +':''}"
+  let statusline.="%{&readonly?'\ \ ':''}"
+  let statusline.="%=" " Right-align shit after this line
+  let statusline.="\ %{''!=#&filetype?&filetype:'none'}"
+  return statusline
+endfunction
+
+set laststatus=2
+set statusline=%!ActiveStatus()
+
+augroup status
+  autocmd!
+  autocmd WinEnter * setlocal statusline=%!ActiveStatus()
+augroup END
