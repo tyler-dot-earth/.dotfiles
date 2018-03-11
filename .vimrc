@@ -48,6 +48,9 @@ Plug 'pangloss/vim-javascript'
 " JSX syntax stuff
 Plug 'mxw/vim-jsx'
 
+" Flow type checking on save (+ completions)
+Plug 'flowtype/vim-flow'
+
 " Multiple cursors! Highlight a word, hit CTRL N to highlight/modify multiple words.
 Plug 'terryma/vim-multiple-cursors'
 
@@ -198,7 +201,7 @@ let g:fzf_action = {
       \ }
 
 " Open fzf to search files via CTRL P
-nnoremap <c-p> :FZF<cr>
+nnoremap <c-p> :GFiles<cr>
 
 " Search buffers via ; (semicolon key)
 nmap ; :Buffers<CR>
