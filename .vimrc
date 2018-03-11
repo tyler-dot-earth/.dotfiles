@@ -58,6 +58,9 @@ Plug 'Valloric/YouCompleteMe', { 'do': './install.py --tern-completer' }
 " all whitespace)
 Plug 'nathanaelkane/vim-indent-guides', { 'on':  'IndentGuidesToggle' } " On-demand loading
 
+" Visualize undos from vim's undo branches via :UndotreeToggle
+Plug 'mbbill/undotree', { 'on': 'UndotreeToggle' }
+
 " Initialize plugin system
 call plug#end()
 
