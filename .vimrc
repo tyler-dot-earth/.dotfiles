@@ -54,6 +54,10 @@ Plug 'terryma/vim-multiple-cursors'
 " Code completion
 Plug 'Valloric/YouCompleteMe', { 'do': './install.py --tern-completer' }
 
+" Indent guides (bars representing indentations, kinda like cursorline but for
+" all whitespace)
+Plug 'nathanaelkane/vim-indent-guides', { 'on':  'IndentGuidesToggle' } " On-demand loading
+
 " Initialize plugin system
 call plug#end()
 
