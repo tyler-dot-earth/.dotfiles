@@ -61,6 +61,9 @@ Plug 'nathanaelkane/vim-indent-guides', { 'on':  'IndentGuidesToggle' } " On-dem
 " Visualize undos from vim's undo branches via :UndotreeToggle
 Plug 'mbbill/undotree', { 'on': 'UndotreeToggle' }
 
+" Emmet for vim. Turn css selectors into longform HTML via CTRL-Y.
+Plug 'mattn/emmet-vim'
+
 " Initialize plugin system
 call plug#end()
 
@@ -84,6 +87,7 @@ set noexpandtab " Don't turn tabs to space
 set tabstop=2 " how many columns a tab counts for
 set shiftwidth=2 " how many columns text is indented with the reindent operations
 set scrolloff=2 " Always keep N number of lines from edge
+set conceallevel=3 " Special characters use this to conceal multiple characters (i.e. ==> to arrow)
 
 " Enabling filetype support provides filetype-specific indenting, syntax
 " highlighting, omni-completion and other useful settings.
@@ -139,6 +143,12 @@ let NERDTreeMinimalUI=1
 
 " Show hidden files by default
 let NERDTreeShowHidden=1
+
+" Adjust square brackets around devicons in NERDTree
+" https://github.com/ryanoasis/vim-devicons/wiki/FAQ-&-Troubleshooting#square-brackets-around-icons
+let g:WebDevIconsUnicodeDecorateFolderNodes = 1
+let g:webdevicons_conceal_nerdtree_brackets = 1
+let g:webdevicons_enable_nerdtree = 1
 
 
 """"""""""""" Tern """"""""""""""""""
