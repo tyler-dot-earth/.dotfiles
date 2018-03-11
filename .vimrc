@@ -200,6 +200,9 @@ let g:fzf_action = {
 " Open fzf to search files via CTRL P
 nnoremap <c-p> :FZF<cr>
 
+" Search buffers via ; (semicolon key)
+nmap ; :Buffers<CR>
+
 
 """""""""""""""""""""""""""""""""""""
 """""""""""STATUSLINE SETUP""""""""""
