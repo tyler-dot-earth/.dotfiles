@@ -115,6 +115,11 @@ set showbreak=↪\
 " Auto change the directory to the current file I'm working on
 autocmd BufEnter * lcd %:p:h
 
+" Allow mouse use in vim (💀)
+if has('mouse')
+  set mouse=a
+endif
+
 """""""""""""""""""""""""""""""""""""
 """""""""""""""ALIASES"""""""""""""""
 """""""""""""""""""""""""""""""""""""
