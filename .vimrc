@@ -83,6 +83,7 @@ set foldmethod=indent " When folding, base it on line indentation
 set noexpandtab " Don't turn tabs to space
 set tabstop=2 " how many columns a tab counts for
 set shiftwidth=2 " how many columns text is indented with the reindent operations
+set scrolloff=2 " Always keep N number of lines from edge
 
 " Enabling filetype support provides filetype-specific indenting, syntax
 " highlighting, omni-completion and other useful settings.
@@ -110,9 +111,6 @@ set wildignore+=*/.git/*,*/.hg/*,*/.svn/*,*/.DS_Store,*/dist/*,*/node_modules/*,
 set list
 set listchars=tab:→·,eol:↵,trail:·,precedes:←,extends:→
 set showbreak=↪\
-
-" Always keep N number of lines from edge
-set scrolloff=2
 
 " Auto change the directory to the current file I'm working on
 autocmd BufEnter * lcd %:p:h
