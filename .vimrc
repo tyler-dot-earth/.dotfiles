@@ -259,7 +259,7 @@ function! ActiveStatus()
 
   let statusline.="\ %{''!=#&filetype?&filetype:'none'}" " display filetype if present
   let statusline.=" " " blank space
-  let statusline.="buffer#%n" " buffer #
+  let statusline.="[buffer#%n]" " buffer #
   let statusline.=" "
   return statusline
 endfunction
