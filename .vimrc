@@ -3,8 +3,13 @@
 """""""" A GREATER VIMMING """"""""""
 """""""""""""""""""""""""""""""""""""
 
-" Instead of undoing/redoing to navigate to those changes:
+" Go to older/newer positions in the change list (same file only):
 " g; jumps to the previous change and g, to the next change.
+" via https://www.reddit.com/r/vim/comments/6819r9/til_use_ctrlo_and_ctrli_to_navigate_cursor/dgv02jz/
+
+" Jump around cursor history (even across files):
+" CTRL O and CTRL I.
+" via https://www.reddit.com/r/vim/comments/6819r9/til_use_ctrlo_and_ctrli_to_navigate_cursor/
 
 """""""""""""""""""""""""""""""""""""
 """"""""PLUGIN SETUP SECTION"""""""""
