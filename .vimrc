@@ -110,6 +110,9 @@ set conceallevel=3 " Special characters use this to conceal multiple characters 
 filetype plugin indent on
 syntax on
 
+" Filetype-specific settings
+autocmd FileType python setlocal shiftwidth=2 tabstop=2 noexpandtab
+
 " 'matchit.vim' is built-in so let's enable it!
 " Hit '%' on 'if' to jump to 'else'.
 runtime macros/matchit.vim
