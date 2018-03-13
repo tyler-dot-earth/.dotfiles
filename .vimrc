@@ -7,7 +7,7 @@
 " g; jumps to the previous change and g, to the next change.
 " via https://www.reddit.com/r/vim/comments/6819r9/til_use_ctrlo_and_ctrli_to_navigate_cursor/dgv02jz/
 
-" Jump around cursor history (even across files):
+" Navigate :jumps -- move around cursor history (even across files):
 " CTRL O and CTRL I.
 " via https://www.reddit.com/r/vim/comments/6819r9/til_use_ctrlo_and_ctrli_to_navigate_cursor/
 
