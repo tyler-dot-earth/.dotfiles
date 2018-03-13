@@ -74,9 +74,6 @@ call plug#end()
 """""""""""MISC SETTINGS"""""""""""""
 """""""""""""""""""""""""""""""""""""
 
-" Leader key is space (instead of \)
-let mapleader = "\<Space>"
-
 set autoindent " Minimal automatic indenting for any filetype.
 set backspace=indent,eol,start " Proper backspace behavior.
 set hidden " Possibility to have more than one unsaved buffers.
@@ -129,6 +126,16 @@ autocmd BufEnter * lcd %:p:h
 if has('mouse')
   set mouse=a
 endif
+
+""""""""""""""""""""""""""""""""""""
+"""""""""""LEADER MAPPINGS""""""""""
+""""""""""""""""""""""""""""""""""""
+
+" Leader key is space (instead of default \)
+let mapleader = "\<Space>"
+
+" Select all text in buffer
+map <Leader>a ggVG
 
 """""""""""""""""""""""""""""""""""""
 """""""""""""""ALIASES"""""""""""""""
