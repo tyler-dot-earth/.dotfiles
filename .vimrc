@@ -74,6 +74,9 @@ call plug#end()
 """""""""""MISC SETTINGS"""""""""""""
 """""""""""""""""""""""""""""""""""""
 
+" Leader key is space (instead of \)
+let mapleader = "\<Space>"
+
 set autoindent " Minimal automatic indenting for any filetype.
 set backspace=indent,eol,start " Proper backspace behavior.
 set hidden " Possibility to have more than one unsaved buffers.
