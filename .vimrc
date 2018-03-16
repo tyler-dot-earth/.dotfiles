@@ -80,6 +80,9 @@ Plug 'mbbill/undotree', { 'on': 'UndotreeToggle' }
 " Emmet for vim. Turn css selectors into longform HTML via CTRL-Y.
 Plug 'mattn/emmet-vim'
 
+" Easy motion for navigation. To use: LEADER-J or LEADER-K.
+Plug 'easymotion/vim-easymotion'
+
 " Initialize plugin system
 call plug#end()
 
