@@ -83,6 +83,10 @@ Plug 'mattn/emmet-vim'
 " Easy motion for navigation. To use: LEADER-J or LEADER-K.
 Plug 'easymotion/vim-easymotion'
 
+" ALE (Asynchronous Linting Engine) provides inline linting hints for ESLint,
+" Flow, etc.
+Plug 'w0rp/ale'
+
 " Initialize plugin system
 call plug#end()
 
@@ -181,6 +185,10 @@ let NERDTreeShowHidden=1
 let g:WebDevIconsUnicodeDecorateFolderNodes = 1
 let g:webdevicons_conceal_nerdtree_brackets = 1
 let g:webdevicons_enable_nerdtree = 1
+
+"""""""""""" vim-flow """""""""""""""
+" Hide quickfix menu (since ALE is being used)
+let g:flow#showquickfix = 0
 
 
 """"""""""""" Tern """"""""""""""""""
