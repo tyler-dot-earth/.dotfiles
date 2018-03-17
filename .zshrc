@@ -13,8 +13,8 @@ export SAVEHIST=$HISTSIZE # enable history
 bindkey '^R' history-incremental-search-backward
 
 ## default editor
-export EDITOR=/usr/bin/vim
-export VISUAL=/usr/bin/vim
+export EDITOR=/usr/local/bin/vim
+export VISUAL=/usr/local/bin/vim
 
 ## modern completion system
 zstyle ':completion:*' menu select=long
@@ -63,6 +63,9 @@ export FZF_DEFAULT_COMMAND='rg --files --no-ignore --hidden --follow --glob "!.g
 # https://github.com/zsh-users/zsh-autosuggestions
 source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
 ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=cyan" # ghost color
+
+# Colors in byobu/tmux + vim
+export TERM="xterm-256color"
 
 # get some secret stuff
 source ~/.zshrc_private
