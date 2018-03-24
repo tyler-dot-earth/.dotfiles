@@ -68,7 +68,7 @@ Plug 'flowtype/vim-flow'
 Plug 'terryma/vim-multiple-cursors'
 
 " Code completion
-Plug 'Valloric/YouCompleteMe', { 'do': './install.py --tern-completer' }
+Plug 'maralla/completor.vim', { 'dir': '~/.vim/plugged/completor.vim/pythonx/completers/javascript', 'do': 'npm install'}
 
 " Indent guides (bars representing indentations, kinda like cursorline but for
 " all whitespace)
@@ -86,6 +86,9 @@ Plug 'easymotion/vim-easymotion'
 " ALE (Asynchronous Linting Engine) provides inline linting hints for ESLint,
 " Flow, etc.
 Plug 'w0rp/ale'
+
+" GraphQL syntax stuff
+Plug 'jparise/vim-graphql'
 
 " Initialize plugin system
 call plug#end()
@@ -189,6 +192,14 @@ let g:webdevicons_enable_nerdtree = 1
 """""""""""" vim-flow """""""""""""""
 " Hide quickfix menu (since ALE is being used)
 let g:flow#showquickfix = 0
+
+
+"""""""""""""" ALE """"""""""""""""""
+" Let ALE fix files using these fixers...
+let g:ale_fixers = {
+\   'javascript': ['eslint'],
+\   'jsx': ['eslint'],
+\}
 
 
 """"""""""""" Tern """"""""""""""""""
