@@ -202,12 +202,7 @@ let g:ale_fixers = {
 \}
 
 
-""""""""""""" Tern """"""""""""""""""
-" Start autocompletion after 4 chars
-let g:ycm_min_num_of_chars_for_completion = 2
-let g:ycm_min_num_identifier_candidate_chars = 2
-let g:ycm_enable_diagnostic_highlighting = 0
-
+""""""""""""" Completor """""""""""""
 " Tell completor/tern where node is
 let g:completor_node_binary = '~/.nvm/versions/node/v8.6.0/bin/node'
 
