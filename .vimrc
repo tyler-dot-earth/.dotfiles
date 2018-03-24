@@ -90,6 +90,10 @@ Plug 'w0rp/ale'
 " GraphQL syntax stuff
 Plug 'jparise/vim-graphql'
 
+" Opens a pane synchronized to your main buffer which displays the results of
+" evaluating each line as you type. To use: :Codi [filetype]
+Plug 'metakirby5/codi.vim'
+
 " Initialize plugin system
 call plug#end()
 
