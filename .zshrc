@@ -69,3 +69,8 @@ export TERM="xterm-256color"
 
 # get some secret stuff
 source ~/.zshrc_private
+
+# Configure pagers for better file inspection.
+export PAGER=less
+export LESS="-iMSx4 -FX"
+export GIT_PAGER="diff-so-fancy | less --tabs=2 -RFX"
