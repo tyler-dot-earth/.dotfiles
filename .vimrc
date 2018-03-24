@@ -123,6 +123,7 @@ set conceallevel=3 " Special characters use this to conceal multiple characters 
 " highlighting, omni-completion and other useful settings.
 filetype plugin indent on
 syntax on
+set omnifunc=syntaxcomplete#Complete " Enable CTRL X CTRL O autocompletion.
 
 " Filetype-specific settings
 autocmd FileType python setlocal shiftwidth=2 tabstop=2 noexpandtab
