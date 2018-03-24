@@ -118,6 +118,7 @@ set tabstop=2 " how many columns a tab counts for
 set shiftwidth=2 " how many columns text is indented with the reindent operations
 set scrolloff=2 " Always keep N number of lines from edge
 set conceallevel=3 " Special characters use this to conceal multiple characters (i.e. ==> to arrow)
+set timeout timeoutlen=1000 ttimeoutlen=100 " Because https://stackoverflow.com/a/2158610/498975
 
 " Enabling filetype support provides filetype-specific indenting, syntax
 " highlighting, omni-completion and other useful settings.
