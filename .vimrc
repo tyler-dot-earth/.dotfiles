@@ -68,7 +68,7 @@ Plug 'flowtype/vim-flow'
 Plug 'terryma/vim-multiple-cursors'
 
 " Code completion
-Plug 'maralla/completor.vim', { 'dir': '~/.vim/plugged/completor.vim/pythonx/completers/javascript', 'do': 'npm install'}
+Plug 'maralla/completor.vim', { 'dir': '~/.vim/plugged/completor.vim/pythonx/completers/javascript', 'do': 'make js'}
 
 " Indent guides (bars representing indentations, kinda like cursorline but for
 " all whitespace)
@@ -204,14 +204,12 @@ let g:ale_fixers = {
 
 """"""""""""" Tern """"""""""""""""""
 " Start autocompletion after 4 chars
-let g:ycm_min_num_of_chars_for_completion = 4
-let g:ycm_min_num_identifier_candidate_chars = 4
+let g:ycm_min_num_of_chars_for_completion = 2
+let g:ycm_min_num_identifier_candidate_chars = 2
 let g:ycm_enable_diagnostic_highlighting = 0
 
-" Don't show YCM's preview window
-set completeopt-=preview
-let g:ycm_add_preview_to_completeopt = 0
-
+" Tell completor/tern where node is
+let g:completor_node_binary = '~/.nvm/versions/node/v8.6.0/bin/node'
 
 
 """"""""""" fzf + ripgrep """""""""""
