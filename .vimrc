@@ -222,7 +222,7 @@ let g:completor_node_binary = '~/.nvm/versions/node/v8.6.0/bin/node'
 " --no-ignore: Do not respect .gitignore, etc...
 " --hidden: Search hidden files and folders
 " --follow: Follow symlinks
-" --glob: Additional conditions for search (in this case ignore everything in the .git/ folder)
+" --glob: Additional conditions for search
 " --color: Search color options
 "
 " fzf#vim#grep(command, with_column, [options], [fullscreen])
