@@ -237,7 +237,7 @@ command! -bang -nargs=* GitFiles
 " Search git file content (i.e. git grep)
 command! -bang -nargs=* GitGrep
   \ call fzf#vim#grep(
-  \   'rg --column --line-number --hidden --no-heading --color=always --ignore-case '.shellescape(<q-args>),
+  \   'rg --column --line-number --hidden --no-heading --glob="!package-lock.json" --glob="!.git/*" --color=always --ignore-case '.shellescape(<q-args>),
   \   1,
   \   <bang>0 ? fzf#vim#with_preview('up:60%')
   \           : fzf#vim#with_preview('right:50%:hidden', '?'),
