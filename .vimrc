@@ -224,22 +224,35 @@ let g:completor_node_binary = '~/.nvm/versions/node/v8.6.0/bin/node'
 " --follow: Follow symlinks
 " --glob: Additional conditions for search (in this case ignore everything in the .git/ folder)
 " --color: Search color options
-command! -bang -nargs=* Find
-  \ call fzf#vim#grep('rg --column --line-number --no-heading --fixed-strings --ignore-case --no-ignore --hidden --follow --glob "!.git/*" --color "always" '.shellescape(<q-args>), 1, <bang>0)
+"
+" fzf#vim#grep(command, with_column, [options], [fullscreen])
 
-" Files command with preview window
-command! -bang -nargs=? -complete=dir Files
-  \ call fzf#vim#files(<q-args>,
-  \                    fzf#vim#with_preview(),
-  \                    <bang>0)
+" Search git filesnames (i.e. git ls-files)
+command! -bang -nargs=* GitFiles
+  \ call fzf#vim#gitfiles(
+    \ '.',
+    \ fzf#vim#with_preview('right:50%')
+  \ )
 
-" :Ag  - Start fzf with hidden preview window that can be enabled with "?" key
-" :Ag! - Start fzf in fullscreen and display the preview window above
-command! -bang -nargs=* Ag
-  \ call fzf#vim#ag(<q-args>,
-  \                 <bang>0 ? fzf#vim#with_preview('up:60%')
-  \                         : fzf#vim#with_preview('right:50%:hidden', '?'),
-  \                 <bang>0)
+" Search git file content (i.e. git grep)
+command! -bang -nargs=* GitGrep
+  \ call fzf#vim#grep(
+  \   'rg --column --line-number --hidden --no-heading --color=always --ignore-case '.shellescape(<q-args>),
+  \   1,
+  \   <bang>0 ? fzf#vim#with_preview('up:60%')
+  \           : fzf#vim#with_preview('right:50%:hidden', '?'),
+  \   <bang>0)
+
+" Ripgrep to search contents of all files.
+" :Rg  - Start fzf with hidden preview window that can be enabled with "?" key
+" :Rg! - Start fzf in fullscreen and display the preview window above
+command! -bang -nargs=* Rg
+  \ call fzf#vim#grep(
+  \   'rg --column --line-number --no-heading --color=always '.shellescape(<q-args>),
+  \   1,
+  \   <bang>0 ? fzf#vim#with_preview('up:60%')
+  \           : fzf#vim#with_preview('right:50%:hidden', '?'),
+  \   <bang>0)
 
 " Open files, split in window.
 let g:fzf_action = {
@@ -248,7 +261,7 @@ let g:fzf_action = {
       \ }
 
 " Open fzf to search files via CTRL P
-nnoremap <c-p> :GFiles<cr>
+nnoremap <c-p> :GitFiles<cr>
 
 " Search buffers via ; (semicolon key)
 nmap ; :Buffers<CR>
