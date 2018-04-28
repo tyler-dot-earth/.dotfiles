@@ -25,7 +25,7 @@ compinit
 # Print an empty line before the PROMPT is rendered
 # precmd() { print "" }
 ## %/     Present  working  directory
-LOCATION=$'%/' # current location
+LOCATION=$'# %/' # current location
 NEWLINE=$'\n' # newline
 AUTOHASH=$'%#' # character that shows as % (normal user) or # (sudo user)
 PROMPT=%B${NEWLINE}${LOCATION}%b${NEWLINE}${AUTOHASH}" "
