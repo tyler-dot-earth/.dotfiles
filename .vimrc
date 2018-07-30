@@ -52,6 +52,12 @@ Plug 'mhinz/vim-signify'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 
+" Distraction-free writing
+Plug 'junegunn/goyo.vim'
+
+" Dim text near focus
+Plug 'junegunn/limelight.vim'
+
 " Icons in NERDTree
 Plug 'ryanoasis/vim-devicons' " Needs to happen after nerdtree stuff.
 
@@ -94,6 +100,12 @@ Plug 'jparise/vim-graphql'
 " evaluating each line as you type. To use: :Codi [filetype]
 Plug 'metakirby5/codi.vim'
 
+" Illuminate the other uses of the current word under the cursor
+Plug 'RRethy/vim-illuminate'
+hi link illuminatedWord Visual
+" Time in millis (default 250)
+let g:Illuminate_delay = 150
+
 " Initialize plugin system
 call plug#end()
 
@@ -112,7 +124,7 @@ set number " in combination with relativenumber, we get 'hybrid mode' that has t
 set cursorline " Highlight current row
 set cursorline cursorcolumn " Highlight current column
 set nowrap " Don't line wrap
-set foldmethod=indent " When folding, base it on line indentation
+" set foldmethod=indent " When folding, base it on line indentation
 set noexpandtab " Don't turn tabs to space
 set tabstop=2 " how many columns a tab counts for
 set shiftwidth=2 " how many columns text is indented with the reindent operations
@@ -127,7 +139,9 @@ syntax on
 set omnifunc=syntaxcomplete#Complete " Enable CTRL X CTRL O autocompletion.
 
 " Filetype-specific settings
-autocmd FileType python setlocal shiftwidth=2 tabstop=2 noexpandtab
+autocmd FileType javascript setlocal shiftwidth=2 tabstop=2 expandtab
+autocmd FileType jsx setlocal shiftwidth=2 tabstop=2 expandtab
+autocmd FileType python setlocal shiftwidth=4 tabstop=4 expandtab
 
 " 'matchit.vim' is built-in so let's enable it!
 " Hit '%' on 'if' to jump to 'else'.
@@ -158,6 +172,13 @@ autocmd BufEnter * lcd %:p:h
 if has('mouse')
   set mouse=a
 endif
+
+" ZEN MODE.
+" 1. Goyo (narrow, centered writing area)
+" 2. limelight (dims text near focus)
+autocmd! User GoyoEnter Limelight
+autocmd! User GoyoLeave Limelight!
+command Zen Goyo
 
 """"""""""""""""""""""""""""""""""""
 """""""""""LEADER MAPPINGS""""""""""
@@ -205,6 +226,10 @@ let g:flow#showquickfix = 0
 let g:ale_fixers = {
 \   'javascript': ['eslint'],
 \   'jsx': ['eslint'],
+\}
+let g:ale_linters = {
+\   'javascript': ['eslint', 'flow'],
+\   'jsx': ['eslint', 'flow'],
 \}
 
 
