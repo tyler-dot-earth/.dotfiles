@@ -1,7 +1,7 @@
 """"""""""""""""""""""""""""""""""""""
-"""""""" GENERAL NOTES FOR """"""""""
-"""""""" A GREATER VIMMING """"""""""
-"""""""""""""""""""""""""""""""""""""
+""""""""" GENERAL NOTES FOR """"""""""
+""""""""" A GREATER VIMMING """"""""""
+""""""""""""""""""""""""""""""""""""""
 
 " Go to older/newer positions in the change list (same file only):
 " g; jumps to the previous change and g, to the next change.
@@ -25,9 +25,12 @@ endif
 " Directory for plugins.
 " > avoid using standard Vim directory names like 'plugin'
 call plug#begin('~/.vim/plugged')
+" Don't forget to include this after all Plugs have been defined:
+" call plug#end() " Initialize Plugs
 
-" NERDTree: file browser sidebar. Just type execute `:NERDTree`
-Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' } " On-demand loading
+" NERDTree: file browser sidebar.
+" Just type execute `:NERDTree`
+source ~/.vim/settings/nerdtree.vimrc
 
 " Comment stuff out. Just execute `gcc` (or `gc` + motion).
 Plug 'tpope/vim-commentary'
@@ -45,36 +48,26 @@ Plug 'tpope/vim-fugitive'
 " Theme 'Oceanic Next'
 Plug 'mhartington/oceanic-next'
 
-" Shows whether a line has been modified (per VCS like git)
-Plug 'mhinz/vim-signify'
+" Theme 'vim-one' (atom)
+" Plug 'rakr/vim-one'
 
 " Navigate files fuzzily with fuzzy finder
-Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 
-" Distraction-free writing
-Plug 'junegunn/goyo.vim'
+" Shows whether a line has been modified (per VCS like git)
+Plug 'mhinz/vim-signify'
+" TODO vim-signify...ify? these gitgutter settings:
+" let g:gitgutter_sign_added = emoji#for('small_blue_diamond')
+" let g:gitgutter_sign_modified = emoji#for('small_orange_diamond')
+" let g:gitgutter_sign_removed = emoji#for('small_red_triangle')
+" let g:gitgutter_sign_modified_removed = emoji#for('collision')
 
-" Dim text near focus
-Plug 'junegunn/limelight.vim'
-
-" Icons in NERDTree
-Plug 'ryanoasis/vim-devicons' " Needs to happen after nerdtree stuff.
-
-" Javascript syntax stuff
-Plug 'pangloss/vim-javascript'
-
-" JSX syntax stuff
-Plug 'mxw/vim-jsx'
-
-" Flow type checking on save (+ completions)
-Plug 'flowtype/vim-flow'
+" Emoji lol
+source ~/.vim/settings/vim-emoji.vimrc
 
 " Multiple cursors! Highlight a word, hit CTRL N to highlight/modify multiple words.
 Plug 'terryma/vim-multiple-cursors'
-
-" Code completion
-Plug 'maralla/completor.vim', { 'dir': '~/.vim/plugged/completor.vim/pythonx/completers/javascript', 'do': 'make js'}
 
 " Indent guides (bars representing indentations, kinda like cursorline but for
 " all whitespace)
@@ -83,28 +76,60 @@ Plug 'nathanaelkane/vim-indent-guides', { 'on':  'IndentGuidesToggle' } " On-dem
 " Visualize undos from vim's undo branches via :UndotreeToggle
 Plug 'mbbill/undotree', { 'on': 'UndotreeToggle' }
 
-" Emmet for vim. Turn css selectors into longform HTML via CTRL-Y.
+" Emmet for vim. Turn css selectors into longform HTML
+" Type CSS selectors, then trigger via CTRL-Y.
 Plug 'mattn/emmet-vim'
 
 " Easy motion for navigation. To use: LEADER-J or LEADER-K.
-Plug 'easymotion/vim-easymotion'
+" Plug 'easymotion/vim-easymotion'
 
-" ALE (Asynchronous Linting Engine) provides inline linting hints for ESLint,
-" Flow, etc.
-Plug 'w0rp/ale'
+" Distraction-free writing
+" Plug 'junegunn/goyo.vim'
+" ZEN MODE.
+" 1. Goyo (narrow, centered writing area)
+" 2. limelight (dims text near focus)
+" autocmd! User GoyoEnter Limelight
+" autocmd! User GoyoLeave Limelight!
+" command! Zen Goyo
 
-" GraphQL syntax stuff
-Plug 'jparise/vim-graphql'
+" Dim text near focus
+" Plug 'junegunn/limelight.vim'
+
+" Conquerer of Completion.
+" Provides inline hints for TypeScript, ESLint, Flow, etc.
+source ~/.vim/settings/coc.vimrc
 
 " Opens a pane synchronized to your main buffer which displays the results of
 " evaluating each line as you type. To use: :Codi [filetype]
-Plug 'metakirby5/codi.vim'
+" Plug 'metakirby5/codi.vim'
+
+" Prettier: automatic code-formatting
+source ~/.vim/settings/prettier.vimrc
 
 " Illuminate the other uses of the current word under the cursor
-Plug 'RRethy/vim-illuminate'
-hi link illuminatedWord Visual
-" Time in millis (default 250)
-let g:Illuminate_delay = 150
+" Plug 'RRethy/vim-illuminate'
+" let g:Illuminate_delay = 250 " Time in millis (default 250)
+" let g:Illuminate_highlightUnderCursor = 0
+" let g:Illuminate_ftblacklist = ['nerdtree']
+" hi link illuminatedWord Visual
+
+" ReasonML
+" Plug 'jordwalke/vim-reasonml'
+
+" JSX syntax stuff
+" Plug 'mxw/vim-jsx'
+
+" React/JSX syntax highlighting for TypeScript
+Plug 'peitalin/vim-jsx-typescript'
+
+" Javascript syntax stuff
+Plug 'pangloss/vim-javascript'
+
+" TypeScript
+Plug 'leafgarland/typescript-vim'
+
+" GraphQL syntax stuff
+Plug 'jparise/vim-graphql'
 
 " Initialize plugin system
 call plug#end()
@@ -113,6 +138,7 @@ call plug#end()
 """""""""""MISC SETTINGS"""""""""""""
 """""""""""""""""""""""""""""""""""""
 
+set textwidth=80 " Max column width for text-wrapping
 set autoindent " Minimal automatic indenting for any filetype.
 set backspace=indent,eol,start " Proper backspace behavior.
 set hidden " Possibility to have more than one unsaved buffers.
@@ -125,12 +151,20 @@ set cursorline " Highlight current row
 set cursorline cursorcolumn " Highlight current column
 set nowrap " Don't line wrap
 " set foldmethod=indent " When folding, base it on line indentation
+" set expandtab! " Turn tabs to space
 set noexpandtab " Don't turn tabs to space
 set tabstop=2 " how many columns a tab counts for
 set shiftwidth=2 " how many columns text is indented with the reindent operations
 set scrolloff=2 " Always keep N number of lines from edge
 set conceallevel=3 " Special characters use this to conceal multiple characters (i.e. ==> to arrow)
 set timeout timeoutlen=1000 ttimeoutlen=100 " Because https://stackoverflow.com/a/2158610/498975
+set splitbelow " Preferred split direction
+set splitright " Preferred vsplit direction
+
+" Make sure encoding is UTF-8. Not sure why, but some plugins (like
+" vim-devicons) suggest doing it.
+set encoding=UTF-8 " The encoding displayed.
+" set fileencoding=utf-8 " The encoding written to file.
 
 " Enabling filetype support provides filetype-specific indenting, syntax
 " highlighting, omni-completion and other useful settings.
@@ -141,7 +175,15 @@ set omnifunc=syntaxcomplete#Complete " Enable CTRL X CTRL O autocompletion.
 " Filetype-specific settings
 autocmd FileType javascript setlocal shiftwidth=2 tabstop=2 expandtab
 autocmd FileType jsx setlocal shiftwidth=2 tabstop=2 expandtab
+" autocmd FileType ts setlocal shiftwidth=2 tabstop=2 expandtab
+" autocmd FileType tsx setlocal shiftwidth=2 tabstop=2 expandtab
 autocmd FileType python setlocal shiftwidth=4 tabstop=4 expandtab
+autocmd FileType css setlocal shiftwidth=2 tabstop=2 expandtab
+autocmd FileType html setlocal shiftwidth=2 tabstop=2 expandtab
+autocmd FileType reason setlocal shiftwidth=2 tabstop=2 expandtab
+
+" set filetypes as typescript.tsx
+autocmd BufNewFile,BufRead *.tsx,*.jsx set filetype=typescript.tsx
 
 " 'matchit.vim' is built-in so let's enable it!
 " Hit '%' on 'if' to jump to 'else'.
@@ -151,11 +193,7 @@ runtime macros/matchit.vim
 colorscheme OceanicNext
 
 " Options for 'GUI Vim'
-if has("gui_running")
-  set guioptions-=T  " Remove toolbar
-  set visualbell! " No visual bell (flash)
-  set guifont=Fira\ Code\ Nerd\ Font\ Medium\ 12
-endif
+source ~/.vim/settings/gui.vimrc
 
 " Hide stuff from Ctrl P
 set wildignore+=*/.git/*,*/.hg/*,*/.svn/*,*/.DS_Store,*/dist/*,*/node_modules/*,*/bower_components/*,*/dist_server/*
@@ -166,19 +204,13 @@ set listchars=tab:→·,eol:↵,trail:·,precedes:←,extends:→
 set showbreak=↪\
 
 " Auto change the directory to the current file I'm working on
-autocmd BufEnter * lcd %:p:h
+" autocmd BufEnter * lcd %:p:h
+" autocmd BufEnter * silent! lcd %:p:h
 
 " Allow mouse use in vim (💀)
 if has('mouse')
   set mouse=a
 endif
-
-" ZEN MODE.
-" 1. Goyo (narrow, centered writing area)
-" 2. limelight (dims text near focus)
-autocmd! User GoyoEnter Limelight
-autocmd! User GoyoLeave Limelight!
-command Zen Goyo
 
 """"""""""""""""""""""""""""""""""""
 """""""""""LEADER MAPPINGS""""""""""
@@ -202,40 +234,19 @@ cnoreabbrev <expr> Tabnew ((getcmdtype() is# ':' && getcmdline() is# 'Tabnew')?(
 """""""""""PLUGIN SETTINGS"""""""""""
 """""""""""""""""""""""""""""""""""""
 
-""""""""""" NERDTree """"""""""""""""
-
-" Minimal NERDTree UI
-let NERDTreeMinimalUI=1
-
-" Show hidden files by default
-let NERDTreeShowHidden=1
-
-" Adjust square brackets around devicons in NERDTree
-" https://github.com/ryanoasis/vim-devicons/wiki/FAQ-&-Troubleshooting#square-brackets-around-icons
-let g:WebDevIconsUnicodeDecorateFolderNodes = 1
-let g:webdevicons_conceal_nerdtree_brackets = 1
-let g:webdevicons_enable_nerdtree = 1
-
-"""""""""""" vim-flow """""""""""""""
-" Hide quickfix menu (since ALE is being used)
-let g:flow#showquickfix = 0
-
 
 """""""""""""" ALE """"""""""""""""""
 " Let ALE fix files using these fixers...
-let g:ale_fixers = {
-\   'javascript': ['eslint'],
-\   'jsx': ['eslint'],
-\}
-let g:ale_linters = {
-\   'javascript': ['eslint', 'flow'],
-\   'jsx': ['eslint', 'flow'],
-\}
+" let g:ale_fixers = {
+" \   'javascript': ['eslint'],
+" \   'jsx': ['eslint'],
+" \}
+" let g:ale_linters = {
+" \   'javascript': ['eslint', 'flow'],
+" \   'jsx': ['eslint', 'flow'],
+" \   'graphql': ['gqlint'],
+" \}
 
-
-""""""""""""" Completor """""""""""""
-" Tell completor/tern where node is
-let g:completor_node_binary = '~/.nvm/versions/node/v8.6.0/bin/node'
 
 
 """"""""""" fzf + ripgrep """""""""""
@@ -295,41 +306,23 @@ nmap ; :Buffers<CR>
 """""""""""""""""""""""""""""""""""""
 """""""""""STATUSLINE SETUP""""""""""
 """""""""""""""""""""""""""""""""""""
+source ~/.vim/settings/statusline.vimrc
 
-" Highlight colors for statusline.
-hi statusline guibg=White ctermfg=8 guifg=DarkSlateGray ctermbg=15
+""""""""""""""""""""""""
+"""" TYPESCRIPT COLORING
+""""""""""""""""""""""""
 
-" via https://www.reddit.com/r/vim/comments/6b7b08/my_custom_statusline/
-function! ActiveStatus()
-  let statusline=" " " blank space
+" dark red
+" hi tsxTagName guifg=#E06C75
+" hi tsxComponentName guifg=#E06C75
+" hi tsxCloseComponentName guifg=#E06C75
 
-  let statusline.="%{fugitive#head()!=''?'\ \ '.fugitive#head().'\ ':''}" " git branch
+" orange
+" hi tsxCloseString guifg=#F99575
+" hi tsxCloseTag guifg=#F99575
+" hi tsxCloseTagName guifg=#F99575
+" hi tsxAttributeBraces guifg=#F99575
+" hi tsxEqual guifg=#F99575
 
-  let statusline.="%2*" " highlight thing (TODO better explanation)
-
-  let statusline.=" " " blank space
-  let statusline.=" " " blank space
-  let statusline.="%f" " filename
-  let statusline.="@" " just an @ symbol lol
-  let statusline.="%l:%c" " line:column numbers.
-  let statusline.=" " " blank space
-
-  let statusline.="%{&modified?'+':''}" " show a little icon when modified (but not saved)
-  let statusline.="%{&readonly?'':''}" " show a little icon when readonly
-
-  let statusline.="%=" " Right-align shit after this line
-
-  let statusline.="\ %{''!=#&filetype?&filetype:'none'}" " display filetype if present
-  let statusline.=" " " blank space
-  let statusline.="[buffer#%n]" " buffer #
-  let statusline.=" "
-  return statusline
-endfunction
-
-set laststatus=2 " Always show the statusline
-set statusline=%!ActiveStatus()
-
-augroup status
-  autocmd!
-  autocmd WinEnter * setlocal statusline=%!ActiveStatus()
-augroup END
+" yellow
+" hi tsxAttrib guifg=#F8BD7F cterm=italic
