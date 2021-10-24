@@ -7,7 +7,7 @@ export KEYTIMEOUT=1
 ## history
 export HISTSIZE=20000 # history size
 export HISTFILE="$HOME/.zsh_history" # history file
-export SAVEHIST=$HISTSIZE # enable history
+export SAVEHIST=$HISTSIZE # lines of history to save to HISTFILE
 
 ## reverse history search
 bindkey '^R' history-incremental-search-backward
@@ -31,10 +31,10 @@ AUTOHASH=$'%#' # character that shows as % (normal user) or # (sudo user)
 PROMPT=%B${NEWLINE}${LOCATION}%b${NEWLINE}${AUTOHASH}" "
 
 # NPM
-export PATH="$PATH:$HOME/.npm/bin"
+# export PATH="$PATH:$HOME/.npm/bin"
 
 # Yarn
-export PATH="$(yarn global bin):$PATH"
+# export PATH="$(yarn global bin):$PATH"
 
 # NVM (NodeJS version manager)
 export NVM_DIR="/home/tyler/.nvm"
@@ -61,6 +61,7 @@ export FZF_DEFAULT_COMMAND='rg --files --no-ignore --hidden --follow --glob "!.g
 
 # 'ghost history' when typing commands.
 # https://github.com/zsh-users/zsh-autosuggestions
+# git clone https://github.com/zsh-users/zsh-autosuggestions ~/.zsh/zsh-autosuggestions
 source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
 ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=cyan" # ghost color
 
@@ -73,4 +74,5 @@ source ~/.zshrc_private
 # Configure pagers for better file inspection.
 export PAGER=less
 export LESS="-iMSx4 -FX"
+# npm install --global diff-so-fancy
 export GIT_PAGER="diff-so-fancy | less --tabs=2 -RFX"
