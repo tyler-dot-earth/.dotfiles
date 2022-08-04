@@ -148,9 +148,8 @@ Plug 'folke/which-key.nvim'
 " Initialize plugin system
 call plug#end()
 
-
 " --------------------------------------
-" LOOK AND FEEL ------------------------
+" MISC ---------------------------------
 " --------------------------------------
 set relativenumber " Relative line numbers on left
 set number " Current line number on left
@@ -166,6 +165,12 @@ set splitright " Preferred vsplit direction
 set scrolloff=5 " Always keep N number of lines from edge of screen
 set mouse=a " enable mouse support in (a)ll modes
 set timeoutlen=500
+
+" Special line characters
+set list
+set listchars=tab:🠊🠊,eol:↵,trail:·,extends:◣,precedes:◢,nbsp:␣ " precedes:←,extends:→
+" other fun symbols: 🡆 🠶 🠊 ⮞ ⮚ ▶ ⣿
+set showbreak=↪\
 
 " Leader key is space (instead of default \)
 " let mapleader = "\<Space>"
