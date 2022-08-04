@@ -40,5 +40,6 @@
     "rounded": true,
     "shadow": true,
     "borderhighlight": "FloatBorder"
-  }
+  },
+  "snippets.userSnippetsDirectory": "$HOME/.dotfiles/nvim/snippets/ultisnips"
 }
