@@ -159,16 +159,7 @@ set cursorline cursorcolumn " Highlight current column
 set noexpandtab " Don't turn tabs to space
 set tabstop=2 " how many columns a tab counts for
 set shiftwidth=2 " how many columns text is indented with the reindent operations
-
-" Special line characters
-set list
-set listchars=tab:🠊🠊,eol:↵,trail:·,extends:◣,precedes:◢,nbsp:␣ " precedes:←,extends:→
-" other fun symbols: 🡆 🠶 🠊 ⮞ ⮚ ▶ ⣿
-set showbreak=↪\
-
-" --------------------------------------
-" MISC ---------------------------------
-" --------------------------------------
+set termguicolors " Required by feline, i guess?
 set nowrap " Don't line wrap
 set splitbelow " Preferred split direction
 set splitright " Preferred vsplit direction
