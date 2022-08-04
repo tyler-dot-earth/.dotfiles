@@ -152,8 +152,6 @@ call plug#end()
 " --------------------------------------
 " LOOK AND FEEL ------------------------
 " --------------------------------------
-let g:catppuccin_flavour = "frappe" " latte, frappe, macchiato, mocha
-colorscheme catppuccin
 set relativenumber " Relative line numbers on left
 set number " Current line number on left
 set cursorline " Highlight current row
@@ -193,7 +191,11 @@ source $HOME/.dotfiles/nvim/winbar-statusbar.vim
 source $HOME/.dotfiles/nvim/git.vim
 source $HOME/.dotfiles/nvim/movement.vim
 source $HOME/.dotfiles/nvim/education.vim
+
+" Set catppuccin after sourcing the look-and-feel
 source $HOME/.dotfiles/nvim/theme-look-feel-etc.vim
+let g:catppuccin_flavour = "frappe" " latte, frappe, macchiato, mocha
+colorscheme catppuccin
 
 " --------------------------------------
 " TODO ---------------------------------
