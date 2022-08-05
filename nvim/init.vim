@@ -1,3 +1,11 @@
+" Pre-plugin dependencies
+"" For wilder.nvim
+function! UpdateRemotePlugins(...)
+	" Needed to refresh runtime files
+	let &rtp=&rtp
+	UpdateRemotePlugins
+endfunction
+
 " Plugin manager: vim-plug
 call plug#begin()
 " --------------------------------------
@@ -146,6 +154,9 @@ Plug 'm-demare/hlargs.nvim'
 " (tl;dr key mappings helper)
 Plug 'folke/which-key.nvim'
 
+" A cooler version of the :wildmenu (the command menu, via colon key)
+Plug 'gelguy/wilder.nvim', { 'do': function('UpdateRemotePlugins') }
+
 
 " Initialize plugin system
 call plug#end()
@@ -189,6 +200,7 @@ source $HOME/.dotfiles/nvim/winbar-statusbar.vim
 source $HOME/.dotfiles/nvim/git.vim
 source $HOME/.dotfiles/nvim/movement.vim
 source $HOME/.dotfiles/nvim/education.vim
+source $HOME/.dotfiles/nvim/wildmenu-commandbar-etc.vim
 
 " Set catppuccin after sourcing the look-and-feel
 source $HOME/.dotfiles/nvim/theme-look-feel-etc.vim
