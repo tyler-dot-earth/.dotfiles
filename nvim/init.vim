@@ -171,7 +171,7 @@ set timeoutlen=500
 " Special line characters
 set list
 set listchars=tab:⣿⣿,eol:↵,trail:·,extends:◣,precedes:◢,nbsp:⎵" precedes:←,extends:→
-" other fun symbols: 🡆 🠶 🠊 ⮞ ⮚ ▶ ⎵ ⣿
+" misc fun symbols: 🡆 🠶 🠊 ⮞ ⮚ ▶ ⎵ ⣿ ⠉ ⠈ ░ ▒ ▓ ► ◄ ↵ · ◣ ◢ ◥ ◤ ◐ ◑
 set showbreak=↪\
 
 " Leader key is space (instead of default \)
