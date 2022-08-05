@@ -9,6 +9,6 @@ lua << EOF
 		components = ctp_feline.get(),
 	})
 
-	require('feline').winbar.setup()
+	-- require('feline').winbar.setup()
 EOF
 
