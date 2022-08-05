@@ -1,11 +1,3 @@
-" Misc color tweaks
-
-"" Transparent background (use terminal emulator opacity)
-hi Normal guibg=NONE ctermbg=NONE
-
-"" Floating window stuff
-hi FloatBorder guifg=white
-hi NormalFloat guibg=black
 
 " Catppuccin theme configuration
 lua << EOF
