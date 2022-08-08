@@ -220,6 +220,15 @@ highlight NormalFloat guibg=black
 " Make filetypes of PostCSS = CSS
 autocmd BufEnter *.pcss :setlocal filetype=css
 
+" No background colors for nvim-ts-rainbow
+hi rainbowcol1 guibg=NONE
+hi rainbowcol2 guibg=NONE
+hi rainbowcol3 guibg=NONE
+hi rainbowcol4 guibg=NONE
+hi rainbowcol5 guibg=NONE
+hi rainbowcol6 guibg=NONE
+hi rainbowcol7 guibg=NONE
+
 "" Markdown-specific stuff
 " Wrap lines, use tabs
 autocmd FileType markdown setlocal wrap noexpandtab tabstop=2 softtabstop=2 shiftwidth=2
