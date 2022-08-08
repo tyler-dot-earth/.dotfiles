@@ -217,6 +217,9 @@ highlight NormalFloat guibg=black
 " TODO ---------------------------------
 " --------------------------------------
 
+" Make filetypes of PostCSS = CSS
+autocmd BufEnter *.pcss :setlocal filetype=css
+
 "" Markdown-specific stuff
 " Wrap lines, use tabs
 autocmd FileType markdown setlocal wrap noexpandtab tabstop=2 softtabstop=2 shiftwidth=2
