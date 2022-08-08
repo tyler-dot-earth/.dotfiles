@@ -208,10 +208,10 @@ let g:catppuccin_flavour = "frappe" " latte, frappe, macchiato, mocha
 colorscheme catppuccin
 " Misc color tweaks after colorscheme is set
 "" Transparent background (use terminal emulator opacity)
-hi Normal guibg=NONE ctermbg=NONE
+highlight Normal guibg=NONE ctermbg=NONE
 "" Floating window stuff
-hi FloatBorder guifg=white
-hi NormalFloat guibg=black
+highlight FloatBorder guifg=white
+highlight NormalFloat guibg=black
 
 " --------------------------------------
 " TODO ---------------------------------
