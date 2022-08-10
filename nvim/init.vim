@@ -187,6 +187,7 @@ set showbreak=↪\
 " --------------------------------------
 " various configurations to avoid cluttering the main file
 " --------------------------------------
+source $HOME/.dotfiles/nvim/lsp.vim
 source $HOME/.dotfiles/nvim/fzf-ctrlp-etc.vim
 source $HOME/.dotfiles/nvim/zen.vim
 source $HOME/.dotfiles/nvim/treesitter-stuff.vim
