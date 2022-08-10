@@ -60,21 +60,6 @@ Plug 'catppuccin/nvim', {'as': 'catppuccin'}
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 
-" Conquerer of Completion provides inline hints for ESLint, Flow, etc.
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
-" CoC extensions
-Plug 'neoclide/coc-tsserver', {'do': 'yarn install --frozen-lockfile'}
-Plug 'neoclide/coc-json', {'do': 'yarn install --frozen-lockfile'}
-Plug 'neoclide/coc-css', {'do': 'yarn install --frozen-lockfile'}
-Plug 'neoclide/coc-html', {'do': 'yarn install --frozen-lockfile'}
-" Plug 'weirongxu/coc-explorer', {'do': 'yarn install --frozen-lockfile'}
-Plug 'pantharshit00/coc-prisma', {'do': 'yarn install --frozen-lockfile'}
-Plug 'neoclide/coc-prettier', {'do': 'yarn install --frozen-lockfile'}
-Plug 'neoclide/coc-eslint', {'do': 'yarn install --frozen-lockfile'}
-Plug 'neoclide/coc-highlight', {'do': 'yarn install --frozen-lockfile'}
-Plug 'neoclide/coc-snippets', {'do': 'yarn install --frozen-lockfile'}
-"" NOTE: ^ snippets requires pythonx support in vim. check :checkhealth
-
 " File browser via :NERDTree
 Plug 'scrooloose/nerdtree'
 
@@ -157,6 +142,17 @@ Plug 'folke/which-key.nvim'
 " A cooler version of the :wildmenu (the command menu, via colon key)
 Plug 'gelguy/wilder.nvim', { 'do': function('UpdateRemotePlugins') }
 
+" LSP stuff
+Plug 'neovim/nvim-lspconfig'
+"" Fancy lines for LSP messages
+Plug 'https://git.sr.ht/~whynothugo/lsp_lines.nvim'
+"" Fast as FUCK completion
+Plug 'ms-jpq/coq_nvim', {'branch': 'coq'} " main one
+""" ^ run :COQdeps then :COQnow
+"" 9000+ Snippets
+Plug 'ms-jpq/coq.artifacts', {'branch': 'artifacts'}
+"" Lspsaga for improving LSP UI/UX (vague, i know)
+Plug 'glepnir/lspsaga.nvim', { 'branch': 'main' }
 
 " Initialize plugin system
 call plug#end()
@@ -191,7 +187,6 @@ set showbreak=↪\
 " --------------------------------------
 " various configurations to avoid cluttering the main file
 " --------------------------------------
-source $HOME/.dotfiles/nvim/coc.vim
 source $HOME/.dotfiles/nvim/fzf-ctrlp-etc.vim
 source $HOME/.dotfiles/nvim/zen.vim
 source $HOME/.dotfiles/nvim/treesitter-stuff.vim
