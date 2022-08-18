@@ -116,6 +116,15 @@ vim.keymap.set(
 vim.g.coq_settings = {
 	-- automatically start coq
 	auto_start = true,
+	clients = {
+		snippets = {
+			-- TODO how can I do a relative path to "./snippets" instead?
+			user_path = vim.fn.expand('$HOME/.dotfiles/nvim/snippets'),
+		}
+	},
+	keymap = {
+		eval_snips = '<leader>j',
+	}
 }
 local coq = require("coq")
 
