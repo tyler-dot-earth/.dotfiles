@@ -1,0 +1,48 @@
+# Links function for Remix
+# https://remix.run/docs/en/v1/api/conventions#links=
+snippet RemixLinksFunction
+alias links
+	export function links() {
+		return [
+			// ${2:...ExampleLinks()},
+			// { rel: "stylesheet", href: styles },
+			${1}
+		];
+	}
+
+# Error Boundary function for Remix
+# https://remix.run/docs/en/v1/api/conventions#errorboundary
+snippet RemixErrorBoundaryFunction
+alias errorBoundary
+	export function ErrorBoundary({ error }: { error: Error }) {
+		console.error(error);
+		return <div>An unexpected error occurred: {error.message}</div>;
+	}
+
+# Action function for Remix
+# https://remix.run/docs/en/v1/api/conventions#action
+snippet RemixActionFunction
+alias action
+	export const action = async ({ request }: ActionArgs) => {
+		return { ${0:foo} }
+	}
+
+# Remix loader function
+# https://remix.run/docs/en/v1/api/conventions#loader
+snippet RemixLoaderFunction
+alias loader
+	export ${1:const} ${2:loader} = ({ ${3:foo} }: LoaderArgs)=>{
+		$0
+	}
+
+# Remix useLoaderData
+# https://remix.run/docs/en/v1/api/remix#useloaderdata=
+snippet RemixUseLoaderData
+alias useLoaderData
+	const { ${0:foo} } = useLoaderData<typeof loader>();
+
+# Remix + SuperJSON example:
+# https://github.com/kiliman/remix-superjson/tree/d6593dd2e15c5349274d02a7b9fecc993f03867d
+snippet RemixUseSuperJSON LoaderData
+alias useSuperLoaderData
+	const { ${0:foo} } = useSuperLoaderData<typeof loader>();
