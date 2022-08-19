@@ -153,6 +153,8 @@ Plug 'ms-jpq/coq_nvim', {'branch': 'coq'} " main one
 Plug 'ms-jpq/coq.artifacts', {'branch': 'artifacts'}
 "" Lspsaga for improving LSP UI/UX (vague, i know)
 Plug 'glepnir/lspsaga.nvim', { 'branch': 'main' }
+"" Lua language server
+Plug 'sumneko/lua-language-server'
 
 " Initialize plugin system
 call plug#end()
@@ -187,7 +189,7 @@ set showbreak=↪\
 " --------------------------------------
 " various configurations to avoid cluttering the main file
 " --------------------------------------
-source $HOME/.dotfiles/nvim/lsp.vim
+lua require('lsp')
 source $HOME/.dotfiles/nvim/fzf-ctrlp-etc.vim
 source $HOME/.dotfiles/nvim/zen.vim
 source $HOME/.dotfiles/nvim/treesitter-stuff.vim

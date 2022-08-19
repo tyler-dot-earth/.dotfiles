@@ -1,7 +1,6 @@
-" LSP configuration
-"" TypeScript config
-""" requirement: npm install -g typescript typescript-language-server
-lua << EOF
+-- LSP configuration
+-- TypeScript config
+-- requirement: npm install -g typescript typescript-language-server
 local lsp = require "lspconfig"
 
 -- rename a symbol
@@ -11,6 +10,19 @@ local lsp = require "lspconfig"
 lsp.tsserver.setup {
 	filetypes = { "javascript", "javascriptreact", "javascript.jsx", "typescript", "typescriptreact", "typescript.tsx" },
 	-- root_dir = root_pattern("package.json", "tsconfig.json", "jsconfig.json", ".git"),
+}
+
+-- Configure LSP for Lua
+require'lspconfig'.sumneko_lua.setup {
+		settings = {
+			Lua = {
+				diagnostics = {
+					globals = {
+						'vim',
+					},
+				},
+			},
+		},
 }
 
 -- lsp_lines config
@@ -140,7 +152,3 @@ lsp.tsserver.setup(coq.lsp_ensure_capabilities())
 --     -- on_attach = my_custom_on_attach,
 --   }))
 -- end
-EOF
-
-" Enable coq_nvim snippet REPL
-let g:coq_settings = { 'keymap.eval_snips': '<leader>j' }
