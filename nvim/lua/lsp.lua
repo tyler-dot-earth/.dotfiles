@@ -13,9 +13,17 @@ lsp.tsserver.setup {
 }
 
 -- Configure LSP for Lua
-require'lspconfig'.sumneko_lua.setup {
+lsp.sumneko_lua.setup {
 		settings = {
 			Lua = {
+				runtime = {
+					-- Tell the language server which version of Lua you're using (most likely LuaJIT in the case of Neovim)
+					version = "LuaJIT",
+
+					-- Setup your lua path
+					-- path = runtime_path,
+				},
+
 				diagnostics = {
 					globals = {
 						'vim',
@@ -145,6 +153,8 @@ local coq = require("coq")
 ---- Compile snippets after changing: :COQsnips compile
 ---- jump to next spots in snippet via: CTRL h
 lsp.tsserver.setup(coq.lsp_ensure_capabilities())
+
+-- TODO bulk enable servers
 -- Enable some language servers with the additional completion capabilities offered by nvim-cmp
 -- local servers = { 'tsserver' }
 -- for _, lsp in ipairs(servers) do
