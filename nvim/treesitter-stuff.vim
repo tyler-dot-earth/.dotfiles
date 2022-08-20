@@ -15,7 +15,8 @@ lua << EOF
 			"html",
 			"markdown",
 			"yaml",
-			"regex"
+			"regex",
+			"lua"
 		},
 
 		-- for nvim-ts-rainbow
