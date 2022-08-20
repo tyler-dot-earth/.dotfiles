@@ -190,9 +190,9 @@ set showbreak=↪\
 " various configurations to avoid cluttering the main file
 " --------------------------------------
 lua require('lsp')
+lua require('treesitter-stuff')
 source $HOME/.dotfiles/nvim/fzf-ctrlp-etc.vim
 source $HOME/.dotfiles/nvim/zen.vim
-source $HOME/.dotfiles/nvim/treesitter-stuff.vim
 source $HOME/.dotfiles/nvim/twilight-dimming-etc.vim
 source $HOME/.dotfiles/nvim/winbar-statusbar.vim
 source $HOME/.dotfiles/nvim/git.vim
