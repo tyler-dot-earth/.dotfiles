@@ -161,6 +161,9 @@ Plug 'glepnir/lspsaga.nvim', { 'branch': 'main' }
 "" Lua language server
 Plug 'sumneko/lua-language-server'
 
+" Markdown preview via :MarkdownPreview
+Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install' }
+" ... ^ assumes nodejs and yarn are installed
 " Initialize plugin system
 call plug#end()
 
