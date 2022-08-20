@@ -40,6 +40,9 @@ call plug#begin()
 " Co-pilot to do my work for me
 Plug 'github/copilot.vim'
 
+" UI component library for Neovim used by some plugins
+Plug 'MunifTanjim/nui.nvim'
+
 " Theme: Dracula
 Plug 'dracula/vim'
 
@@ -115,6 +118,8 @@ Plug 'windwp/nvim-ts-autotag'
 Plug 'p00f/nvim-ts-rainbow'
 " Regex explainer. Requires :TSInstall regex
 Plug 'bennypowers/nvim-regexplainer'
+" Syntax aware text-objects, select, move, swap, and peek support
+Plug 'nvim-treesitter/nvim-treesitter-textobjects'
 
 
 " Opens the current buffer in a new full-screen floating window,

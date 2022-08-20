@@ -62,6 +62,74 @@ require'nvim-treesitter.configs'.setup {
 		-- Instead of true it can also be a list of languages
 		additional_vim_regex_highlighting = false,
 	},
+
+	-- nvim-ts-context-commentstring stuff
+	-- NOTE: some config in Comment.nvim relevant as well;
+	-- see https://github.com/JoosepAlviste/nvim-ts-context-commentstring#commentnvim=
+	context_commentstring = {
+		enable = true,
+	},
+
+	-- nvim-treesitter-textobjects config
+	-- mostly lets me jump around using treesitter awareness
+	textobjects = {
+		select = {
+			enable = true,
+
+			-- Automatically jump forward to textobj, similar to targets.vim
+			lookahead = true,
+
+			keymaps = {
+				-- You can use the capture groups defined in textobjects.scm
+				["af"] = "@function.outer",
+				["if"] = "@function.inner",
+				["ac"] = "@class.outer",
+				["ic"] = "@class.inner",
+			},
+			-- You can choose the select mode (default is charwise 'v')
+			selection_modes = {
+				['@parameter.outer'] = 'v', -- charwise
+				['@function.outer'] = 'V', -- linewise
+				['@class.outer'] = '<c-v>', -- blockwise
+			},
+			-- If you set this to `true` (default is `false`) then any textobject is
+			-- extended to include preceding xor succeeding whitespace. Succeeding
+			-- whitespace has priority in order to act similarly to eg the built-in
+			-- `ap`.
+			include_surrounding_whitespace = true,
+		},
+
+		swap = {
+			enable = true,
+			swap_next = {
+				["<leader>a"] = "@parameter.inner",
+			},
+			swap_previous = {
+				["<leader>A"] = "@parameter.inner",
+			},
+		},
+
+		move = {
+			enable = true,
+			set_jumps = true, -- whether to set jumps in the jumplist
+			goto_next_start = {
+				["]m"] = "@function.outer",
+				["]]"] = "@class.outer",
+			},
+			goto_next_end = {
+				["]M"] = "@function.outer",
+				["]["] = "@class.outer",
+			},
+			goto_previous_start = {
+				["[m"] = "@function.outer",
+				["[["] = "@class.outer",
+			},
+			goto_previous_end = {
+				["[M"] = "@function.outer",
+				["[]"] = "@class.outer",
+			},
+		},
+	}
 }
 
 require'treesitter-context'.setup{
@@ -103,15 +171,6 @@ require'treesitter-context'.setup{
 
 	zindex = 20, -- The Z-index of the context window
 	mode = 'cursor',  -- Line used to calculate context. Choices: 'cursor', 'topline'
-}
-
--- nvim-ts-context-commentstring stuff
--- NOTE: some config in Comment.nvim relevant as well;
--- see https://github.com/JoosepAlviste/nvim-ts-context-commentstring#commentnvim=
-require'nvim-treesitter.configs'.setup {
-	context_commentstring = {
-		enable = true,
-	}
 }
 
 -- Comment.nvim stuff
