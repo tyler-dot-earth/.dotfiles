@@ -102,8 +102,6 @@ Plug 'numToStr/Comment.nvim'
 
 " Treesitter highlighting
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
-" ... don't forget to install language parsers like, eg:
-" :TSInstall typescript tsx javascript json json5 css html markdown yaml
 " Treesitter-based context as you scroll through code
 Plug 'nvim-treesitter/nvim-treesitter-context'
 " Treesitter-based local code dimming
@@ -115,6 +113,8 @@ Plug 'JoosepAlviste/nvim-ts-context-commentstring'
 Plug 'windwp/nvim-ts-autotag'
 " Treesitter-based rainbow parenthesis
 Plug 'p00f/nvim-ts-rainbow'
+" Regex explainer. Requires :TSInstall regex
+Plug 'bennypowers/nvim-regexplainer'
 
 
 " Opens the current buffer in a new full-screen floating window,
