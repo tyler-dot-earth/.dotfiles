@@ -164,6 +164,19 @@ Plug 'sumneko/lua-language-server'
 " Markdown preview via :MarkdownPreview
 Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install' }
 " ... ^ assumes nodejs and yarn are installed
+
+" Lua functions that some plugins use
+Plug 'nvim-lua/plenary.nvim'
+
+" A fix for Neovim's `CursorHold` event. Used by some plugins (neotest, ...)
+Plug 'antoinemadec/FixCursorHold.nvim'
+
+" Extensible framework for interacting with tests within Neovim
+Plug 'nvim-neotest/neotest'
+" Vitest runner for neotest
+Plug 'marilari88/neotest-vitest'
+" Jest runner for neotest
+" Plug 'haydenmeade/neotest-jest'
 " Initialize plugin system
 call plug#end()
 
@@ -199,6 +212,7 @@ set showbreak=↪\
 " --------------------------------------
 lua require('lsp')
 lua require('treesitter-stuff')
+lua require('tests-etc')
 source $HOME/.dotfiles/nvim/fzf-ctrlp-etc.vim
 source $HOME/.dotfiles/nvim/zen.vim
 source $HOME/.dotfiles/nvim/twilight-dimming-etc.vim
