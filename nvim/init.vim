@@ -207,6 +207,9 @@ set showbreak=↪\
 " Leader key is space (instead of default \)
 " let mapleader = "\<Space>"
 
+" <LocalLeader>
+let maplocalleader = ","
+
 " --------------------------------------
 " various configurations to avoid cluttering the main file
 " --------------------------------------
