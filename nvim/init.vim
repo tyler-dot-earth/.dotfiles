@@ -249,13 +249,7 @@ hi rainbowcol5 guibg=NONE
 hi rainbowcol6 guibg=NONE
 hi rainbowcol7 guibg=NONE
 
-"" Markdown-specific stuff
-" Wrap lines, use tabs
-autocmd FileType markdown setlocal wrap noexpandtab tabstop=2 softtabstop=2 shiftwidth=2
-" Navigate wrapped lines as if they were unwrapped
-autocmd FileType markdown noremap <buffer> j gj
-autocmd FileType markdown noremap <buffer> k gk
-""" ^ Would these be better as ftplugins?
+
 
 
 " Always use the current buffer's directory as the relative location for
