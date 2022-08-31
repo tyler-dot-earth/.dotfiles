@@ -145,8 +145,9 @@ local coq = require("coq")
 ---- Compile snippets after changing: :COQsnips compile
 ---- jump to next spots in snippet via: CTRL h
 
--- Configure LSP for various servers
+-- Configure LSP for ESLint
 lsp['eslint'].setup(coq.lsp_ensure_capabilities())
+-- Configure LSP for various servers via vscode-langservers-extracted
 lsp['html'].setup(coq.lsp_ensure_capabilities())
 lsp['cssls'].setup(coq.lsp_ensure_capabilities())
 lsp['jsonls'].setup(coq.lsp_ensure_capabilities())
