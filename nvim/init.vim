@@ -235,6 +235,14 @@ highlight Normal guibg=NONE ctermbg=NONE
 "" Floating window stuff
 highlight FloatBorder guifg=white
 highlight NormalFloat guibg=black
+"" Match cursorcolumn bg to cursorline (TODO dont manually type color hex)
+highlight cursorcolumn guibg=#3B3F52
+"" Tweak incline.nvim colors
+highlight InclineNormal guifg=#363A4F guibg=#C6A0F6 gui=bold
+highlight InclineNormalNC guifg=#737994 guibg=#414559 gui=reverse
+
+" 1 statusline per neovim instance
+set laststatus=3
 
 " --------------------------------------
 " TODO ---------------------------------
