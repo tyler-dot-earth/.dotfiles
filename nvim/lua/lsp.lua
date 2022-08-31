@@ -1,6 +1,5 @@
 -- LSP configuration
--- TypeScript config
--- requirement: npm install -g typescript typescript-language-server
+
 local lsp = require "lspconfig"
 
 vim.keymap.set(
@@ -280,7 +279,7 @@ lsp['eslint'].setup(coq.lsp_ensure_capabilities())
 lsp['html'].setup(coq.lsp_ensure_capabilities())
 lsp['cssls'].setup(coq.lsp_ensure_capabilities())
 lsp['jsonls'].setup(coq.lsp_ensure_capabilities())
--- Configure LSP for TypeScript
+-- Configure LSP for TypeScript (via `npm install -g typescript typescript-language-server`)
 lsp['tsserver'].setup(coq.lsp_ensure_capabilities({
 	filetypes = { "javascript", "javascriptreact", "javascript.jsx", "typescript", "typescriptreact", "typescript.tsx" },
 	-- root_dir = root_pattern("package.json", "tsconfig.json", "jsconfig.json", ".git"),
