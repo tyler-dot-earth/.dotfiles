@@ -102,10 +102,7 @@ vim.keymap.set(
 		desc = 'LSP: Code action',
 	}
 )
--- vim.keymap.set("v", "<leader>ca", function()
--- 	vim.fn.feedkeys(vim.api.nvim_replace_termcodes("<C-U>", true, false, true))
--- 	action.range_code_action()
--- end, { silent = true })
+
 -- Rename symbol/variable
 vim.keymap.set(
 	"n",
