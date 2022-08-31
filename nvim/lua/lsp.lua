@@ -47,7 +47,7 @@ vim.keymap.set(
 )
 
 
--- saga config
+-- lspsaga config for prettier LSP UI
 local saga = require 'lspsaga'
 
 -- saga.init_lsp_saga() -- use default config
