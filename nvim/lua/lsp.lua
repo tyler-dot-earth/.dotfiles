@@ -42,9 +42,22 @@ vim.diagnostic.config({
 vim.keymap.set(
 	"",
 	"<Leader>l",
-	require("lsp_lines").toggle,
+	"<cmd>lua require('lsp_lines').toggle()<CR>",
 	{ desc = "Toggle lsp_lines" }
 )
+--[[ -- hide diagnostics on entering Insert mode ]]
+--[[ vim.api.nvim_create_autocmd('InsertEnter', { ]]
+--[[ 	callback = function() ]]
+--[[ 			vim.diagnostic.hide() ]]
+--[[ 	end, ]]
+--[[ }) ]]
+--[[ -- show diagnostics when exiting Insert mode ]]
+--[[ vim.api.nvim_create_autocmd('ModeChanged', { ]]
+--[[ 	pattern = 'i:*', ]]
+--[[ 	callback = function() ]]
+--[[ 			vim.diagnostic.show() ]]
+--[[ 	end, ]]
+--[[ }) ]]
 
 
 -- lspsaga config for prettier LSP UI
