@@ -147,7 +147,7 @@ local coq = require("coq")
 
 -- Configure LSP for ESLint
 lsp['eslint'].setup(coq.lsp_ensure_capabilities())
--- Configure LSP for various servers via vscode-langservers-extracted
+-- Configure LSP for various servers via vscode-langservers-extracted (via `npm i -g vscode-langservers-extracted`)
 lsp['html'].setup(coq.lsp_ensure_capabilities())
 lsp['cssls'].setup(coq.lsp_ensure_capabilities())
 lsp['jsonls'].setup(coq.lsp_ensure_capabilities())
