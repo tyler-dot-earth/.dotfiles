@@ -110,7 +110,7 @@ vim.keymap.set(
 	"<cmd>Lspsaga rename<CR>",
 	{
 		silent = true,
-		desc = 'Rename',
+		desc = 'LSP: Rename',
 	}
 )
 -- Preview definition
@@ -120,7 +120,7 @@ vim.keymap.set(
 	"<cmd>Lspsaga preview_definition<CR>",
 	{
 		silent = true,
-		desc = 'Preview definition'
+		desc = 'LSP: Preview definition'
 	}
 )
 
@@ -131,6 +131,7 @@ vim.keymap.set(
 	"<cmd>Lspsaga open_floaterm zsh<CR>",
 	{
 		silent = true,
+		desc = 'Float term: open'
 	}
 )
 vim.keymap.set(
@@ -139,6 +140,7 @@ vim.keymap.set(
 	"<C-\\><C-n><cmd>Lspsaga close_floaterm<CR>",
 	{
 		silent = true,
+		desc = 'Float term: close',
 	}
 )
 
