@@ -92,16 +92,16 @@ vim.keymap.set(
 		desc = 'Finder (definitions, refs)'
 	}
 )
----- code action
-local action = require("lspsaga.codeaction")
+---- Code action
 vim.keymap.set(
 	"n",
 	"<leader>ca",
-	action.code_action,
+	'<cmd>Lspsaga code_action<CR>',
 	{
 		silent = true,
-		desc = 'Code action',
-	})
+		desc = 'LSP: Code action',
+	}
+)
 -- vim.keymap.set("v", "<leader>ca", function()
 -- 	vim.fn.feedkeys(vim.api.nvim_replace_termcodes("<C-U>", true, false, true))
 -- 	action.range_code_action()
