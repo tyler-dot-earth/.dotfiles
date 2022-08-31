@@ -3,35 +3,15 @@
 -- requirement: npm install -g typescript typescript-language-server
 local lsp = require "lspconfig"
 
--- rename a symbol
--- vim.api.nvim_set_keymap("n", "<leader>rn", "<cmd>lua vim.lsp.buf.rename()<CR>", { noremap = true })
-
--- Configure LSP for TypeScript
-lsp.tsserver.setup {
-	filetypes = { "javascript", "javascriptreact", "javascript.jsx", "typescript", "typescriptreact", "typescript.tsx" },
-	-- root_dir = root_pattern("package.json", "tsconfig.json", "jsconfig.json", ".git"),
-}
-
--- Configure LSP for Lua
-lsp.sumneko_lua.setup {
-		settings = {
-			Lua = {
-				runtime = {
-					-- Tell the language server which version of Lua you're using (most likely LuaJIT in the case of Neovim)
-					version = "LuaJIT",
-
-					-- Setup your lua path
-					-- path = runtime_path,
-				},
-
-				diagnostics = {
-					globals = {
-						'vim',
-					},
-				},
-			},
-		},
-}
+vim.keymap.set(
+	"n",
+	"<leader>f",
+	"<cmd>lua vim.lsp.buf.format({ async = true })<CR>",
+	{
+		desc = 'LSP: format',
+		silent = true,
+	}
+)
 
 -- lsp_lines config
 require("lsp_lines").setup()
@@ -164,7 +144,37 @@ local coq = require("coq")
 ---- Edit snippets for current filetype: :COQsnips edit
 ---- Compile snippets after changing: :COQsnips compile
 ---- jump to next spots in snippet via: CTRL h
-lsp.tsserver.setup(coq.lsp_ensure_capabilities())
+
+-- Configure LSP for various servers
+lsp['eslint'].setup(coq.lsp_ensure_capabilities())
+lsp['html'].setup(coq.lsp_ensure_capabilities())
+lsp['cssls'].setup(coq.lsp_ensure_capabilities())
+lsp['jsonls'].setup(coq.lsp_ensure_capabilities())
+-- Configure LSP for TypeScript
+lsp['tsserver'].setup(coq.lsp_ensure_capabilities({
+	filetypes = { "javascript", "javascriptreact", "javascript.jsx", "typescript", "typescriptreact", "typescript.tsx" },
+	-- root_dir = root_pattern("package.json", "tsconfig.json", "jsconfig.json", ".git"),
+}))
+-- Configure LSP for Lua
+lsp['sumneko_lua'].setup(coq.lsp_ensure_capabilities({
+	settings = {
+		Lua = {
+			runtime = {
+				-- Tell the language server which version of Lua you're using (most likely LuaJIT in the case of Neovim)
+				version = "LuaJIT",
+
+				-- Setup your lua path
+				-- path = runtime_path,
+			},
+
+			diagnostics = {
+				globals = {
+					'vim',
+				},
+			},
+		},
+	},
+}))
 
 -- TODO bulk enable servers
 -- Enable some language servers with the additional completion capabilities offered by nvim-cmp
