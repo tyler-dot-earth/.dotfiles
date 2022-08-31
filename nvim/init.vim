@@ -186,7 +186,7 @@ call plug#end()
 set relativenumber " Relative line numbers on left
 set number " Current line number on left
 set cursorline " Highlight current row
-set cursorline cursorcolumn " Highlight current column
+set cursorcolumn " Highlight current column
 set noexpandtab " Don't turn tabs to space
 set tabstop=2 " how many columns a tab counts for
 set shiftwidth=2 " how many columns text is indented with the reindent operations
