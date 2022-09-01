@@ -260,6 +260,11 @@ highlight rainbowcol5 guibg=NONE
 highlight rainbowcol6 guibg=NONE
 highlight rainbowcol7 guibg=NONE
 
+" Customzie LSP diagnostic displays (gutter sign, highlight group, etc)
+sign define DiagnosticSignError text= texthl=TextError linehl=TSDanger numhl=TSDanger
+sign define DiagnosticSignWarn  text= texthl=TextWarn linehl=TSWarning numhl=TSWarning
+sign define DiagnosticSignInfo  text= texthl=TextInfo linehl=TSNote numhl=TSNote
+sign define DiagnosticSignHint  text= texthl=TextHint linehl=TSNote numhl=TSNote
 
 
 
