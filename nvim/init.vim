@@ -252,13 +252,13 @@ set laststatus=3
 autocmd BufEnter *.pcss :setlocal filetype=css
 
 " No background colors for nvim-ts-rainbow
-hi rainbowcol1 guibg=NONE
-hi rainbowcol2 guibg=NONE
-hi rainbowcol3 guibg=NONE
-hi rainbowcol4 guibg=NONE
-hi rainbowcol5 guibg=NONE
-hi rainbowcol6 guibg=NONE
-hi rainbowcol7 guibg=NONE
+highlight rainbowcol1 guibg=NONE
+highlight rainbowcol2 guibg=NONE
+highlight rainbowcol3 guibg=NONE
+highlight rainbowcol4 guibg=NONE
+highlight rainbowcol5 guibg=NONE
+highlight rainbowcol6 guibg=NONE
+highlight rainbowcol7 guibg=NONE
 
 
 
