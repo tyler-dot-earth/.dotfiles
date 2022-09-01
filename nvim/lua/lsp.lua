@@ -51,7 +51,7 @@ saga.init_lsp_saga({
 
 	--the range of 0 for fully opaque window (disabled) to 100 for fully
 	--transparent background. Values between 0-30 are typically most useful.
-	saga_winblend = 20,
+	saga_winblend = 30,
 
 	-- when cursor in saga window you config these to move
 	move_in_saga = {
