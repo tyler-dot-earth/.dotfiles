@@ -252,6 +252,17 @@ vim.keymap.set(
 	}
 )
 
+-- ESLint fix all in buffer
+vim.keymap.set(
+	"n",
+	"<leader>L",
+	"<cmd>EslintFixAll<CR>",
+	{
+		silent = true,
+		desc = 'LSP: Lint auto-fix buffer'
+	}
+)
+
 -- coq_nvim config
 vim.g.coq_settings = {
 	-- automatically start coq
