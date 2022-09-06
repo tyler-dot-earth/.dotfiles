@@ -177,6 +177,9 @@ Plug 'nvim-neotest/neotest'
 Plug 'marilari88/neotest-vitest'
 " Jest runner for neotest
 " Plug 'haydenmeade/neotest-jest'
+
+" Floating winbar statuslines (pairs well with laststatus=3)
+Plug 'b0o/incline.nvim'
 " Initialize plugin system
 call plug#end()
 
