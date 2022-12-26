@@ -14,6 +14,11 @@ require'nvim-treesitter.configs'.setup {
 		"lua"
 	},
 
+	-- For indenting
+	indent = {
+		enable = true
+	},
+
 	-- for nvim-ts-rainbow
 	rainbow = {
 		enable = true,
