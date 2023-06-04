@@ -36,7 +36,8 @@ require("lazy").setup({
 		end,
 	},
 
-	-- indent guidelines
+	-- Guide lines for indents
+	-- :help indent_blankline.txt
 	{
 		"lukas-reineke/indent-blankline.nvim",
 		name = "indent_blankline.nvim",
@@ -59,10 +60,26 @@ require("lazy").setup({
 				"IndentBlanklineIndent6",
 				"IndentBlanklineIndent7",
 			},
-			space_char_blankline = " ",
+			--[[ space_char_blankline = " ", ]]
 			show_current_context = true,
 			show_current_context_start = true,
 			show_end_of_line = true,
+			char = "",
+			-- space_char_blankline = "⎵", -- prob only use if you set char
+			char_blankline = "┊",
+			context_char = "█",
+			context_char_blankline = "║",
+			-- char = "", -- default: │
+			--[[ char_list = { "|", "¦", "┆", "┊" }, ]]
+			--[[ char_list_blankline = { "|", "¦", "┆", "┊" }, ]]
+			--[[ space_char_blankline = ' ' ]]
+			--[[ space_char_blankline = "·", ]]
+			-- use_treesitter = true, -- TODO: is this ideal? -> ehhh, seems like it causes errors a lot when enabled
+			--[[ show_first_indent_level = v:false ]]
+			--[[ context_char = '┃' -- ignored if g:indent_blankline_context_char_list is not empty ]]
+			--[[ context_char_blankline = '┆' ]]
+			--[[ context_char_list =           { '┃', '║', '╬', '█' }, ]]
+			--[[ context_char_list_blankline = { '┃', '║', '╬', '█' }, ]]
 		},
 	},
 
@@ -221,16 +238,32 @@ require("lazy").setup({
 							IndentBlanklineIndent5 = colors.rainbow5,
 							IndentBlanklineIndent6 = colors.rainbow6,
 							IndentBlanklineIndent7 = colors.rainbow7,
+							-- IndentBlanklineContextChar = { fg = "#ff0000", bg = "#ff0000" },
+							--[[ IndentBlanklineContextStart = { ]]
+							--[[ 	fg = "#ff0000", ]]
+							--[[ 	bg = "#ff0000", ]]
+							--[[ 	-- guisp = "#ff0000", ]]
+							--[[ 	-- gui = "undercurl", ]]
+							--[[ }, ]]
 						}
 					end,
 				},
 
 				--[[ custom_highlights = function(colors) ]]
 				--[[ 	return { ]]
-				--[[ 		Comment = { fg = colors.flamingo }, ]]
-				--[[ 		TabLineSel = { bg = C.pink }, ]]
-				--[[ 		CmpBorder = { fg = C.surface2 }, ]]
-				--[[ 		Pmenu = { bg = C.none }, ]]
+				--[[ 		-- Comment = { fg = colors.flamingo }, ]]
+				--[[ 		-- TabLineSel = { bg = colors.pink }, ]]
+				--[[ 		-- CmpBorder = { fg = colors.surface2 }, ]]
+				--[[ 		-- Pmenu = { bg = colors.none }, ]]
+				--[[]]
+				--[[ 		-- TODO ]]
+				--[[ 		-- IndentBlanklineContextChar = { fg = "#ff0000", bg = "#ff0000" }, ]]
+				--[[ 		IndentBlanklineContextStart = { ]]
+				--[[ 			fg = "#ff0000", ]]
+				--[[ 			bg = "#ff0000", ]]
+				--[[ 			-- guisp = "#ff0000", ]]
+				--[[ 			-- gui = "undercurl", ]]
+				--[[ 		}, ]]
 				--[[ 	} ]]
 				--[[ end, ]]
 			})
@@ -791,12 +824,7 @@ require("lazy").setup({
 		name = "Comment.nvim",
 	},
 
-	-- Guide lines for indents
-	{
-		"lukas-reineke/indent-blankline.nvim",
-		name = "indent-blankline.nvim",
-	},
-
+	-- TODO is this working? lol
 	-- Git integration for buffers
 	{
 		"lewis6991/gitsigns.nvim",
@@ -804,17 +832,32 @@ require("lazy").setup({
 	},
 
 	-- Jump anywhere in the file.
-	-- eg: gw <- this will let you jump to any word
 	{
 		"phaazon/hop.nvim",
 		name = "hop.nvim",
 		branch = "v2", -- optional but strongly recommended
+		keys = {
+			{
+				"gw", -- key map
+				nil, -- for LazyKey, use nil + assign via vim.api.nvim_set_keymap in config()
+				mode = "n",
+				desc = "Hop word",
+			},
+		},
 		config = function()
-			-- you can configure Hop the way you like here; see :h hop-config
 			require("hop").setup({
-				-- keys = 'etovxqpdygfblzhckisuran'
+				keys = "wasdfjk", -- only prompt for these characters
 			})
+			vim.api.nvim_set_keymap(
+				"n", -- mode
+				"gw", -- key map
+				'<cmd>lua require("hop").hint_words()<cr>', -- cmd
+				{}
+			)
 		end,
+		-- TODO replace default movements with hop
+		-- eg -> https://github.com/phaazon/hop.nvim/wiki/Advanced-Hop#building-advanced-hop-motions
+		-- eg -> https://dev.to/kquirapas/neovim-on-steroids-vim-sneak-easymotion-hopnvim-4k17
 	},
 
 	-- {

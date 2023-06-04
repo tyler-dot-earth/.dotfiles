@@ -35,8 +35,8 @@ vim.opt.listchars = {
 	tab = "⣿⣿",
 	eol = "↵",
 	trail = "·",
-	precedes = "⦚",
-	extends = "⦚",
+	--[[ precedes = "⦚", ]]
+	--[[ extends = "⦚", ]]
 	nbsp = "⎵",
 }
 vim.opt.showbreak = "↪\\"
