@@ -1,48 +1,9 @@
--- Lazy.nvim notes: **Make sure to set `mapleader` before lazy so your mappings are correct**
+-- Lazy.nvim notes:
+-- > Make sure to set `mapleader` before lazy so your mappings are correct
 vim.g.mapleader = " " -- Leader key is space (instead of default \)
 vim.g.maplocalleader = "," -- <LocalLeader>
 
--- Relative line numbers on left
-vim.opt.relativenumber = true
--- Current line number on left
-vim.opt.number = true
--- Highlight current row
-vim.opt.cursorline = true
--- Highlight current column
-vim.opt.cursorcolumn = true
--- Don't turn tabs to space
-vim.opt.expandtab = false
--- How many columns a tab counts for
-vim.opt.tabstop = 4
--- How many columns text is indented with the reindent operations
-vim.opt.shiftwidth = 2
--- Required by feline, i guess?
-vim.opt.termguicolors = true
--- Don't line wrap
-vim.opt.wrap = false
--- Preferred split direction
-vim.opt.splitbelow = true
--- Preferred vsplit direction
-vim.opt.splitright = true
--- Always keep N number of lines from edge of screen
-vim.opt.scrolloff = 5
--- Enable mouse support in (a)ll modes
-vim.opt.mouse = "a"
--- Set the time in milliseconds to wait for a mapped sequence to complete
-vim.opt.timeoutlen = 500
-
--- Special line characters
-vim.opt.list = true
-vim.opt.listchars = {
-	tab = "⣿⣿",
-	eol = "↵",
-	trail = "·",
-	precedes = "⦚",
-	extends = "⦚",
-	nbsp = "⎵",
-}
-vim.opt.showbreak = "↪\\"
--- misc fun symbols: 🡆 🠶 🠊 ⮞ ⮚ ▶ ⎵ ⣿ ⠉ ⠈ ░ ▒ ▓ ► ◄ ↵ · ◣ ◢ ◥ ◤ ◐ ◑ ⯺  ⯼ ☉ ⁞ ⦙ ┊ ⦚ ×
+require("main-settings")
 
 -- bootstrap lazy.nvim plugin manager
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
@@ -1214,29 +1175,6 @@ require("lazy").setup({
 	-- }
 })
 
--- --
--- --
--- --
--- --
--- MOVED ALL THE GENERIC CONFIG THAT WAS HERE
--- TOO ABOVE LAZY STUFF ^^^^
--- --
--- --
--- --
--- --
--- --
-
--- TODO
--- TODO
--- TODO
--- TODO
--- Set catppuccin after sourcing the look-and-feel
--- source $HOME/.dotfiles/nvim/theme-look-feel-etc.vim
--- let g:catppuccin_flavour = "frappe" " latte, frappe, macchiato, mocha
--- colorscheme catppuccin
--- vim.cmd.colorscheme("catppuccin")
--- TODO commented out ^ to try to do it in the Lazy config
-
 -- Misc color tweaks after colorscheme is set
 -- Transparent background (use terminal emulator opacity)
 vim.cmd("highlight Normal guibg=NONE ctermbg=NONE")
@@ -1254,15 +1192,6 @@ vim.opt.laststatus = 3
 
 -- Make filetypes of PostCSS = CSS
 vim.cmd("autocmd BufEnter *.pcss :setlocal filetype=css")
-
--- No background colors for nvim-ts-rainbow
---[[ vim.cmd("highlight rainbowcol1 guibg=NONE") ]]
---[[ vim.cmd("highlight rainbowcol2 guibg=NONE") ]]
---[[ vim.cmd("highlight rainbowcol3 guibg=NONE") ]]
---[[ vim.cmd("highlight rainbowcol4 guibg=NONE") ]]
---[[ vim.cmd("highlight rainbowcol5 guibg=NONE") ]]
---[[ vim.cmd("highlight rainbowcol6 guibg=NONE") ]]
---[[ vim.cmd("highlight rainbowcol7 guibg=NONE") ]]
 
 -- Customize LSP diagnostic displays (gutter sign, highlight group, etc)
 vim.fn.sign_define(
