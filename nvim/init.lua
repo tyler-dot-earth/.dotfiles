@@ -975,7 +975,16 @@ require("lazy").setup({
 				end,
 				dependencies = {
 					{ "nvim-tree/nvim-web-devicons" },
-					{ "nvim-treesitter/nvim-treesitter" },
+					{ "nvim-treesitter/nvim-treesitter" }, --Please make sure you install markdown and markdown_inline parser
+				},
+				opts = {
+					lightbulb = {
+						enable = true,
+						enable_in_insert = true,
+						sign = true,
+						sign_priority = 40,
+						virtual_text = false,
+					},
 				},
 			},
 
