@@ -1050,6 +1050,35 @@ require("lazy").setup({
 						mode = "n",
 						desc = "Toggle outline",
 					},
+
+					-- Call hierarchy
+					{
+						"<Leader>ci", -- key map
+						"<cmd>Lspsaga incoming_calls<CR>", -- command
+						mode = "n",
+						desc = "Incoming calls (call hierarchy)",
+					},
+					{
+						"<Leader>co", -- key map
+						"<cmd>Lspsaga outgoing_calls<CR>", -- command
+						mode = "n",
+						desc = "Outgoing calls (call hierarchy)",
+					},
+
+					-- Diagnostic jump
+					-- You can use <C-o> to jump back to your previous location
+					{
+						"[e", -- key map
+						"<cmd>Lspsaga diagnostic_jump_prev<CR>", -- command
+						mode = "n",
+						desc = "Diagnostic jump prev",
+					},
+					{
+						"]e", -- key map
+						"<cmd>Lspsaga diagnostic_jump_next<CR>", -- command
+						mode = "n",
+						desc = "Diagnostic jump next",
+					},
 				},
 			},
 
