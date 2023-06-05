@@ -986,6 +986,71 @@ require("lazy").setup({
 						virtual_text = false,
 					},
 				},
+				keys = {
+					-- Hover docs
+					{
+						"K", -- key map
+						"<cmd>Lspsaga hover_doc<CR>", -- command
+						mode = "n",
+						desc = "Hover docs",
+					},
+
+					-- Finder (see definition, references)
+					{
+						"gh", -- key map
+						"<cmd>Lspsaga lsp_finder<CR>", -- command
+						mode = "n",
+						desc = "Finder (definitions, refs)",
+					},
+
+					-- Code actions
+					{
+						"<leader>ca", -- key map
+						"<cmd>Lspsaga code_action<CR>", -- command
+						mode = "n",
+						desc = "Code actions",
+					},
+
+					-- Rename symbol/variable
+					{
+						"<leader>rn", -- key map
+						"<cmd>Lspsaga rename<CR>", -- command
+						mode = "n",
+						desc = "Rename symbol/variable",
+					},
+
+					-- Peek definition
+					{
+						"gp", -- key map
+						"<cmd>Lspsaga preview_definition<CR>", -- command
+						mode = "n",
+						desc = "Peek definition",
+					},
+
+					-- Go to definition
+					{
+						"gd", -- key map
+						"<cmd>LspSaga goto_definition<CR>", -- command
+						mode = "n",
+						desc = "Go to definition",
+					},
+
+					-- Show line diagnostics
+					{
+						"<leader>cd", -- key map
+						"<cmd>Lspsaga show_line_diagnostics<CR>", -- command
+						mode = "n",
+						desc = "Show line diagnostics",
+					},
+
+					-- Toggle outline
+					{
+						"<leader>to", -- key map
+						"<cmd>Lspsaga toggle_outline<CR>", -- command
+						mode = "n",
+						desc = "Toggle outline",
+					},
+				},
 			},
 
 			-- Fast as FUCK completion
@@ -1135,54 +1200,6 @@ require("lazy").setup({
 			--[[ 			vim.diagnostic.show() ]]
 			--[[ 	end, ]]
 			--[[ }) ]]
-
-			-- Hover docs
-			vim.keymap.set("n", "K", "<cmd>Lspsaga hover_doc<CR>", {
-				silent = true,
-				desc = "Hover docs",
-			})
-
-			-- Finder (see definition, references)
-			vim.keymap.set("n", "gh", "<cmd>Lspsaga lsp_finder<CR>", {
-				silent = true,
-				desc = "Finder (definitions, refs)",
-			})
-
-			-- Code actions
-			vim.keymap.set("n", "<leader>ca", "<cmd>Lspsaga code_action<CR>", {
-				silent = true,
-				desc = "LSP: Code action",
-			})
-
-			-- Rename symbol/variable
-			vim.keymap.set("n", "gr", "<cmd>Lspsaga rename<CR>", {
-				silent = true,
-				desc = "LSP: Rename",
-			})
-
-			-- Peek definition
-			vim.keymap.set("n", "gp", "<cmd>Lspsaga peek_definition<CR>", {
-				silent = true,
-				desc = "LSP: Peek definition",
-			})
-
-			-- Go to definition
-			vim.keymap.set("n", "gd", "<cmd>Lspsaga goto_definition<CR>", {
-				silent = true,
-				desc = "LSP: Go to definition",
-			})
-
-			-- Show line diagnostics
-			vim.keymap.set("n", "<leader>sl", "<cmd>Lspsaga show_line_diagnostics<CR>", {
-				silent = true,
-				desc = "LSP: Show line diagnostics",
-			})
-
-			-- Toggle outline
-			vim.keymap.set("n", "<leader>o", "<cmd>Lspsaga outline<CR>", {
-				silent = true,
-				desc = "LSP: Outline toggle",
-			})
 
 			-- -- Floating terminal
 			-- vim.keymap.set(
