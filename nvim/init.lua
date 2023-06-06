@@ -249,6 +249,10 @@ require("lazy").setup({
 
 							-- Improved "go to definition" highlighting
 							SagaBeacon = { bg = catppuccin_flavour.yellow },
+
+							-- the default greay isn't very visible
+							CursorLine = { bg = catppuccin_flavour.surface0 }, -- row highlight
+							CursorColumn = { bg = catppuccin_flavour.surface0 }, -- col highlight
 						}
 					end,
 				},
@@ -1309,8 +1313,6 @@ vim.cmd("highlight Normal guibg=NONE ctermbg=NONE")
 -- Floating window stuff
 vim.cmd("highlight FloatBorder guifg=white")
 vim.cmd("highlight NormalFloat guibg=black")
--- Match cursorcolumn bg to cursorline (TODO dont manually type color hex)
-vim.cmd("highlight cursorcolumn guibg=#3B3F52")
 -- Tweak incline.nvim colors
 vim.cmd("highlight InclineNormal guifg=#363A4F guibg=#C6A0F6 gui=bold")
 vim.cmd("highlight InclineNormalNC guifg=#737994 guibg=#414559 gui=reverse")
