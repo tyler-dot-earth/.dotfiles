@@ -3,6 +3,18 @@
 vim.g.mapleader = " " -- Leader key is space (instead of default \)
 vim.g.maplocalleader = "," -- <LocalLeader>
 
+-- Make .env its own filetype.
+-- (it's mostly so i can disable copilot in .env files)
+vim.cmd([[
+  autocmd BufRead,BufNewFile *.env set filetype=env
+  autocmd FileType env set syntax=sh
+]])
+
+vim.g.copilot_filetypes = {
+	-- defaults: https://github.com/github/copilot.vim/blob/1358e8e45ecedc53daf971924a0541ddf6224faf/autoload/copilot.vim#L131-L140
+	env = false, -- ft=sh is what .env uses for syntax by defaeult
+}
+
 require("main-settings")
 
 -- bootstrap lazy.nvim plugin manager
