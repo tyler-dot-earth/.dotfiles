@@ -246,6 +246,9 @@ require("lazy").setup({
 							--[[ 	-- guisp = "#ff0000", ]]
 							--[[ 	-- gui = "undercurl", ]]
 							--[[ }, ]]
+
+							-- Improved "go to definition" highlighting
+							SagaBeacon = { bg = catppuccin_flavour.yellow },
 						}
 					end,
 				},
