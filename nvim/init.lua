@@ -289,7 +289,19 @@ require("lazy").setup({
 	{ "github/copilot.vim", name = "copilot" },
 
 	-- File browser
-	{ "scrooloose/nerdtree", name = "nerdtree" },
+	{
+		"scrooloose/nerdtree",
+		name = "nerdtree",
+		keys = {
+			-- NERDTree in current buffer's directory
+			{
+				"<Leader>n", -- key map
+				"<cmd>NERDTreeToggle %:p:h<CR>", -- command
+				mode = "n",
+				desc = "NERDTree % (cwd)",
+			},
+		},
+	},
 
 	-- Find, filter, preview, pick
 	{
