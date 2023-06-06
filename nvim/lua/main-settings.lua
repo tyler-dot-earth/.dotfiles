@@ -29,15 +29,19 @@ vim.opt.mouse = "a"
 -- Set the time in milliseconds to wait for a mapped sequence to complete
 vim.opt.timeoutlen = 500
 
+-- Always show the sign column
+vim.opt.signcolumn = "yes"
+
 -- Special line characters
 vim.opt.list = true
 vim.opt.listchars = {
 	tab = "⣿⣿",
 	eol = "↵",
-	trail = "·",
+	--[[ trail = "·", ]]
 	--[[ precedes = "⦚", ]]
 	--[[ extends = "⦚", ]]
 	nbsp = "⎵",
+	space = "░",
 }
 vim.opt.showbreak = "↪\\"
 -- misc fun symbols: 🡆 🠶 🠊 ⮞ ⮚ ▶ ⎵ ⣿ ⠉ ⠈ ░ ▒ ▓ ► ◄ ↵ · ◣ ◢ ◥ ◤ ◐ ◑ ⯺  ⯼ ☉ ⁞ ⦙ ┊ ⦚ ×

@@ -63,23 +63,12 @@ require("lazy").setup({
 			--[[ space_char_blankline = " ", ]]
 			show_current_context = true,
 			show_current_context_start = true,
-			show_end_of_line = true,
-			char = "",
-			-- space_char_blankline = "⎵", -- prob only use if you set char
+			show_end_of_line = false, -- hide EOL listchar on blanklines
+			char = "┃",
+			space_char_blankline = "·", -- prob only use if you set char
 			char_blankline = "┊",
 			context_char = "█",
 			context_char_blankline = "║",
-			-- char = "", -- default: │
-			--[[ char_list = { "|", "¦", "┆", "┊" }, ]]
-			--[[ char_list_blankline = { "|", "¦", "┆", "┊" }, ]]
-			--[[ space_char_blankline = ' ' ]]
-			--[[ space_char_blankline = "·", ]]
-			-- use_treesitter = true, -- TODO: is this ideal? -> ehhh, seems like it causes errors a lot when enabled
-			--[[ show_first_indent_level = v:false ]]
-			--[[ context_char = '┃' -- ignored if g:indent_blankline_context_char_list is not empty ]]
-			--[[ context_char_blankline = '┆' ]]
-			--[[ context_char_list =           { '┃', '║', '╬', '█' }, ]]
-			--[[ context_char_list_blankline = { '┃', '║', '╬', '█' }, ]]
 		},
 	},
 
