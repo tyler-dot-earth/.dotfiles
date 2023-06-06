@@ -253,6 +253,11 @@ require("lazy").setup({
 							-- the default greay isn't very visible
 							CursorLine = { bg = catppuccin_flavour.surface0 }, -- row highlight
 							CursorColumn = { bg = catppuccin_flavour.surface0 }, -- col highlight
+							-- TODO styling Cursor doesn't seem to work for me. not sure why.
+							--[[ Cursor = { ]]
+							--[[ 	bg = catppuccin_flavour.yellow, ]]
+							--[[ 	fg = catppuccin_flavour.surface3, ]]
+							--[[ }, ]]
 						}
 					end,
 				},
