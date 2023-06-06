@@ -833,6 +833,16 @@ require("lazy").setup({
 	{
 		"lewis6991/gitsigns.nvim",
 		name = "gitsigns.nvim",
+		opts = {
+			signs = {
+				add = { text = "🌱" }, -- sprout symbolizes something new (added line)
+				change = { text = "🌀" }, -- cyclone as things are changing
+				delete = { text = "🔥" }, -- fire as the line has been deleted
+				topdelete = { text = "💥" }, -- collision symbolizing the start of a deletion
+				changedelete = { text = "🌪" }, -- tornado, as the change has been deleted
+				untracked = { text = "👣" }, -- footprints, as these are untracked changes
+			},
+		},
 	},
 
 	-- Jump anywhere in the file.
@@ -982,6 +992,22 @@ require("lazy").setup({
 					{ "nvim-treesitter/nvim-treesitter" }, --Please make sure you install markdown and markdown_inline parser
 				},
 				opts = {
+					ui = {
+						-- This option only works in Neovim 0.9
+						title = true,
+						-- Border type can be single, double, rounded, solid, shadow.
+						border = "single",
+						winblend = 0,
+						expand = "",
+						collapse = "",
+						code_action = "🔧",
+						incoming = "",
+						outgoing = "",
+						hover = " ",
+						-- kind = {}, -- defined in https://github.com/nvimdev/lspsaga.nvim/blob/main/lua/lspsaga/lspkind.lua
+					},
+
+					-- may not *actually* be a lightbulb, that's just whawt the setting is called
 					lightbulb = {
 						enable = true,
 						enable_in_insert = true,
@@ -1296,16 +1322,30 @@ vim.opt.laststatus = 3
 vim.cmd("autocmd BufEnter *.pcss :setlocal filetype=css")
 
 -- Customize LSP diagnostic displays (gutter sign, highlight group, etc)
-vim.fn.sign_define(
-	"DiagnosticSignError",
-	{ text = "", texthl = "TextError", linehl = "TSDanger", numhl = "TSDanger" }
-)
-vim.fn.sign_define(
-	"DiagnosticSignWarn",
-	{ text = "", texthl = "TextWarn", linehl = "TSWarning", numhl = "TSWarning" }
-)
-vim.fn.sign_define("DiagnosticSignInfo", { text = "", texthl = "TextInfo", linehl = "TSNote", numhl = "TSNote" })
-vim.fn.sign_define("DiagnosticSignHint", { text = "", texthl = "TextHint", linehl = "TSNote", numhl = "TSNote" })
+vim.fn.sign_define("DiagnosticSignError", {
+	text = "🔺", -- red triangle pointing up for errors
+	texthl = "TextError",
+	linehl = "TSDanger",
+	numhl = "TSDanger",
+})
+vim.fn.sign_define("DiagnosticSignWarn", {
+	text = "⚠️", -- warning sign for warnings
+	texthl = "TextWarn",
+	linehl = "TSWarning",
+	numhl = "TSWarning",
+})
+vim.fn.sign_define("DiagnosticSignInfo", {
+	text = "💡", -- lightbulb for information
+	texthl = "TextInfo",
+	linehl = "TSNote",
+	numhl = "TSNote",
+})
+vim.fn.sign_define("DiagnosticSignHint", {
+	text = "🔍", -- magnifying glass for hints
+	texthl = "TextHint",
+	linehl = "TSNote",
+	numhl = "TSNote",
+})
 
 -- Always use the current buffer's directory as the relative location for
 -- commands and such. Mostly so I can :NERDTree and :sp/vsp anywhere.
