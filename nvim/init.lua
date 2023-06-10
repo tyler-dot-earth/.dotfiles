@@ -332,9 +332,18 @@ require("lazy").setup({
 		config = function()
 			local telescope = require("telescope")
 			local builtin = require("telescope.builtin") -- builtin pickers: https://github.com/nvim-telescope/telescope.nvim#pickers
+			local actions = require("telescope.actions")
 
 			telescope.setup({
 				defaults = {
+					mappings = {
+						n = {
+							["<c-d>"] = actions.delete_buffer,
+						},
+						i = {
+							["<c-d>"] = actions.delete_buffer,
+						},
+					},
 					theme = "dropdown",
 					previewer = true,
 					file_ignore_patterns = { "node_modules", "package-lock.json" },
