@@ -322,7 +322,12 @@ require("lazy").setup({
 				end,
 			},
 
-			"nvim-telescope/telescope-ui-select.nvim",
+			-- nvim-telescope/telescope-ui-select.nvim
+			-- 📺 A UI for the telescope fuzzy finder over lists (like code actions)
+			{
+				"nvim-telescope/telescope-ui-select.nvim",
+				name = "telescope-ui-select.nvim",
+			},
 		},
 		config = function()
 			local telescope = require("telescope")
@@ -1038,6 +1043,10 @@ require("lazy").setup({
 					},
 				},
 				keys = {
+					-- Most borrowed from the example config:
+					-- https://github.com/nvimdev/lspsaga.nvim#example-configuration
+					-- TODO add more mappings from example config?
+
 					-- Hover docs
 					{
 						"K", -- key map
@@ -1057,9 +1066,17 @@ require("lazy").setup({
 					-- Code actions
 					{
 						"<leader>ca", -- key map
+						-- use Lspsaga for code actions
 						"<cmd>Lspsaga code_action<CR>", -- command
 						mode = "n",
 						desc = "Code actions",
+					},
+					{
+						"<leader>cA", -- key map
+						-- use native LSP's vim.ui.select for code actions
+						"<cmd>lua vim.lsp.buf.code_action()<CR>", -- command
+						mode = "n",
+						desc = "Code actions 🔭",
 					},
 
 					-- Rename symbol/variable
