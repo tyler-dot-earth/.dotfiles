@@ -938,15 +938,8 @@ require("lazy").setup({
 		lazy = false,
 		dependencies = {
 			"nvim-lua/plenary.nvim",
-			-- 'jose-elias-alvarez/typescript.nvim',
+			"jose-elias-alvarez/typescript.nvim",
 		},
-		--[[ opts = { ]]
-		--[[ 	sources = { ]]
-		--[[ 		null_ls.builtins.formatting.stylua, ]]
-		--[[ 		null_ls.builtins.diagnostics.eslint, ]]
-		--[[ 		null_ls.builtins.completion.spell, ]]
-		--[[ 	}, ]]
-		--[[ } ]]
 
 		-- npm install -g @fsouza/prettierd
 		-- null_ls.builtins.formatting.prettierd
@@ -971,29 +964,33 @@ require("lazy").setup({
 			local diagnostics = null_ls.builtins.diagnostics
 			local code_actions = null_ls.builtins.code_actions
 			local completion = null_ls.builtins.completion
+			local typescript_code_actions = require("typescript.extensions.null-ls.code-actions")
+
 			return {
+				root_dir = require("null-ls.utils").root_pattern(".null-ls-root", "Makefile", ".git"),
+
 				sources = {
 					formatting.stylua, -- TODO auto install stylua
-					-- formatting.prettier,
-					-- formatting.eslint,
-					-- formatting.fish_indent,
-					-- formatting.prettierd,
-					-- diagnostics.eslint,
-					-- diagnostics.fish,
-					-- diagnostics.tsc,
-					code_actions.eslint,
-					-- code_actions.gitsigns, -- TODO seems interesting
-					-- completion.spell, -- TODO seems interesting
-					--[[ null_ls.builtins.diagnostics.trail_space, ]]
-					--[[ null_ls.builtins.formatting.trim_newlines, ]]
-					--[[ null_ls.builtins.formatting.trim_whitespace, ]]
-					null_ls.builtins.formatting.prettierd.with({
-						condition = function(utils)
-							-- TODO support other prettier config like .prettierrc, etc ?
-							return utils.has_file({ ".prettierrc.js" })
-						end,
-					}),
-					-- require("typescript.extensions.null-ls.code-actions"),
+					typescript_code_actions, -- typescript.nvim
+					code_actions.gitsigns, -- provide code actions from Gitsigns
+					-- code_actions.eslint,
+					-- TODO TODO TODO
+					-- TODO using prettierd as such seems to cause a new Node process to spawn after each format... so, i'm not really sure what the right approach is here.
+					-- Maybe I will try formatting with https://github.com/mhartington/formatter.nvim ?
+					-- TODO TODO TODO
+					-- TODO maybe try https://www.reddit.com/r/neovim/comments/12er016/configuring_autoformatting_using_nullls_and/
+					-- TODO maybe see if Telescope has completion?
+					-- TODO maybe investigate switching to cmp?
+					--[[ formatting.prettierd.with({ ]]
+					--[[ 	condition = function(utils) ]]
+					--[[ 		-- TODO support other prettier config like .prettierrc, etc ? ]]
+					--[[ 		-- return utils.has_file({ ".prettierrc.js" }) ]]
+					--[[]]
+					--[[ 		local has_prettierrcjson = utils.root_has_file(".prettierrc.json") ]]
+					--[[ 		local has_prettierrc = utils.root_has_file(".prettierrc") ]]
+					--[[ 		return has_prettierrcjson or has_prettierrc ]]
+					--[[ 	end, ]]
+					--[[ }), ]]
 				},
 				on_attach = function(client)
 					if client.server_capabilities.documentFormattingProvider then
@@ -1196,46 +1193,26 @@ require("lazy").setup({
 					lsp["cssls"].setup(coq.lsp_ensure_capabilities())
 					lsp["jsonls"].setup(coq.lsp_ensure_capabilities())
 					-- Configure LSP for TypeScript (via `npm install -g typescript typescript-language-server`)
-					lsp["tsserver"].setup(coq.lsp_ensure_capabilities({
-						filetypes = {
-							"javascript",
-							"javascriptreact",
-							"javascript.jsx",
-							"typescript",
-							"typescriptreact",
-							"typescript.tsx",
+					-- TODO maybe using mason.nvim to install language servers
+					-- Configure LSP for typescript + coq via typescript.nvim
+					require("typescript").setup(coq.lsp_ensure_capabilities({
+						disable_commands = false, -- prevent the plugin from creating Vim commands
+						debug = false, -- enable debug logging for commands
+						go_to_source_definition = {
+							fallback = true, -- fall back to standard LSP definition on failure
 						},
-						-- root_dir = root_pattern("package.json", "tsconfig.json", "jsconfig.json", ".git"),
+						server = {
+							-- root_dir = root_pattern("package.json", "tsconfig.json", "jsconfig.json", ".git"),
+							filetypes = {
+								"javascript",
+								"javascriptreact",
+								"javascript.jsx",
+								"typescript",
+								"typescriptreact",
+								"typescript.tsx",
+							},
+						},
 					}))
-					-- Configure LSP for Lua
-					-- lsp['sumneko_lua'].setup(coq.lsp_ensure_capabilities({
-					-- 	settings = {
-					-- 		Lua = {
-					-- 			runtime = {
-					-- 				-- Tell the language server which version of Lua you're using (most likely LuaJIT in the case of Neovim)
-					-- 				version = "LuaJIT",
-
-					-- 				-- Setup your lua path
-					-- 				-- path = runtime_path,
-					-- 			},
-
-					-- 			diagnostics = {
-					-- 				globals = {
-					-- 					'vim',
-					-- 				},
-					-- 			},
-					-- 		},
-					-- 	},
-					-- }))
-
-					-- TODO bulk enable servers
-					-- Enable some language servers with the additional completion capabilities offered by nvim-cmp
-					-- local servers = { 'tsserver' }
-					-- for _, lsp in ipairs(servers) do
-					--   lspconfig[lsp].setup(require('coq').lsp_ensure_capabilities({
-					--     -- on_attach = my_custom_on_attach,
-					--   }))
-					-- end
 				end,
 				dependencies = {
 					-- 9000+ Snippets
@@ -1261,6 +1238,23 @@ require("lazy").setup({
 				},
 			},
 			-- TODO: how to run :COQdeps then :COQnow auto after ^that^ ?
+
+			-- adds non-LSP commands like Add missing imports, Fix all, Organize imports, Remove unused,
+			{
+				"jose-elias-alvarez/typescript.nvim",
+				name = "typescript.nvim",
+				-- setup in coq's config()
+				keys = {
+					-- TODO make this mapping only work when tsserver (typescript) LSP is used
+					-- ... or maybe move this to an ftplugin?
+					{
+						"<Leader>cR", -- key map
+						"<cmd>TypescriptRenameFile<CR>", -- command
+						mode = "n",
+						desc = "TypeScript: Rename file",
+					},
+				},
+			},
 		},
 		config = function()
 			-- LSP configuration
