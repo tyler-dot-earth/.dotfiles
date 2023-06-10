@@ -1322,6 +1322,30 @@ require("lazy").setup({
 	-- {
 	-- 	https://github.com/folke/lazy.nvim#%EF%B8%8F-configuration
 	-- }
+
+	-- b0o/incline.nvim
+	-- 🎈 Floating statuslines for Neovim
+	--[[ { ]]
+	--[[ 	"b0o/incline.nvim", ]]
+	--[[ 	name = "incline.nvim", ]]
+	--[[ 	config = function() ]]
+	--[[ 		require("incline").setup({ ]]
+	--[[ 			-- https://github.com/b0o/incline.nvim#configuration ]]
+	--[[ 		}) ]]
+	--[[ 	end, ]]
+	--[[ }, ]]
+
+	-- edluffy/hologram.nvim
+	-- 📸 A neovim plugin for making animated GIFs
+	{
+		"edluffy/hologram.nvim",
+		name = "hologram.nvim",
+		config = function()
+			require("hologram").setup({
+				auto_display = true, -- WIP automatic markdown image display, may be prone to breaking
+			})
+		end,
+	},
 })
 
 -- Misc color tweaks after colorscheme is set
