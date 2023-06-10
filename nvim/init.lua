@@ -1318,12 +1318,6 @@ require("lazy").setup({
 		end,
 	},
 
-	-- editorconfig
-	{
-		"gpanders/editorconfig.nvim",
-		name = "editorconfig-vim",
-	},
-
 	-- opts
 	-- {
 	-- 	https://github.com/folke/lazy.nvim#%EF%B8%8F-configuration

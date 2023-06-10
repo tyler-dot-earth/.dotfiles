@@ -1,5 +1,8 @@
 -- GOTO init.lua for mapleader and maplocalleader
 
+-- use .editorconfig
+vim.g.editorconfig = true
+
 -- Relative line numbers on left
 vim.opt.relativenumber = true
 -- Current line number on left
