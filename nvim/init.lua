@@ -417,11 +417,12 @@ require("lazy").setup({
 					},
 					buffers = {
 						-- initial_mode = "normal",
+						sort_lastused = true,
 						previewer = false,
 						layout_config = {
 							horizontal = {
-								width = 0.5,
-								height = 0.4,
+								width = 0.8,
+								height = 0.6,
 								preview_width = 0.6,
 							},
 						},
