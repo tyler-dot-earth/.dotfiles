@@ -546,307 +546,282 @@ require("lazy").setup({
 		name = "treesitter",
 		run = ":TSUpdate",
 		dependencies = {
-			-- Treesitter-based context as you scroll through code
-			"nvim-treesitter/nvim-treesitter-context",
-
-			-- Treesitter-based contextual comments (eg do {/* these */} in jsx depending on cursor location)
-			"JoosepAlviste/nvim-ts-context-commentstring",
-
-			-- Treesitter-based autoclose and autorename HTML tags
-			"windwp/nvim-ts-autotag",
-
-			-- Treesitter-based rainbow parenthesis
-			-- "p00f/nvim-ts-rainbow",
-			-- ^ TODO: DEPRECATED
-
-			-- Regex explainer. Requires :TSInstall regex
-			"bennypowers/nvim-regexplainer",
-
-			-- Syntax aware text-objects, select, move, swap, and peek support
-			"nvim-treesitter/nvim-treesitter-textobjects",
-
-			-- Highlight function arguments
-			"m-demare/hlargs.nvim",
-
-			-- Treesitter-based local code dimming
-			"folke/twilight.nvim",
-		},
-		config = function()
-			require("nvim-treesitter.configs").setup({
-				-- A list of parser names, or "all"
-				ensure_installed = {
-					"typescript",
-					"tsx",
-					"javascript",
-					"json",
-					"json5",
-					"css",
-					"html",
-					"markdown",
-					"markdown_inline",
-					"yaml",
-					"regex",
-					"lua",
-					"vim",
+			{
+				"numToStr/Comment.nvim",
+				name = "Comment.nvim",
+				dependencies = {
+					"JoosepAlviste/nvim-ts-context-commentstring",
 				},
+				config = function()
+					-- Note: 'opts' does not work here because of the pre_hook for ts_context_commentstring
+					-- Unclear why ^ that is the case, but here we are.
+					require("Comment").setup({
+						pre_hook = require("ts_context_commentstring.integrations.comment_nvim").create_pre_hook(),
 
-				highlight = {
-					enable = true,
-					disable = { "" }, -- list of language that will be disabled
-					-- Setting this to true will run `:h syntax` and tree-sitter at the same time.
-					-- Set this to `true` if you depend on 'syntax' being enabled (like for indentation).
-					-- Using this option may slow down your editor, and you may see some duplicate highlights.
-					-- Instead of true it can also be a list of languages
-					additional_vim_regex_highlighting = true,
-				},
+						---Add a space b/w comment and the line
+						---@type boolean|fun():boolean
+						padding = true,
 
-				-- for nvim-ts-rainbow
-				--[[ rainbow = { ]]
-				--[[ 	enable = true, ]]
-				--[[ 	-- disable = { "jsx", "cpp" }, list of languages you want to disable the plugin for ]]
-				--[[ 	extended_mode = true, -- Also highlight non-bracket delimiters like html tags, boolean or table: lang -> boolean ]]
-				--[[ 	max_file_lines = nil, -- Do not enable for files with more than n lines, int ]]
-				--[[ 	-- colors = {}, -- table of hex strings ]]
-				--[[ 	-- termcolors = {} -- table of colour name strings ]]
-				--[[ }, ]]
+						---Whether the cursor should stay at its position
+						---NOTE: This only affects NORMAL mode mappings and doesn't work with dot-repeat
+						---@type boolean
+						sticky = true,
 
-				-- nvim-ts-context-commentstring stuff
-				-- NOTE: some config in Comment.nvim relevant as well;
-				-- see https://github.com/JoosepAlviste/nvim-ts-context-commentstring#commentnvim=
-				context_commentstring = {
-					enable = true,
-				},
+						---Lines to be ignored while comment/uncomment.
+						---Could be a regex string or a function that returns a regex string.
+						---Example: Use '^$' to ignore empty lines
+						---@type string|fun():string
+						ignore = nil,
 
-				-- nvim-treesitter-textobjects config
-				-- mostly lets me jump around using treesitter awareness
-				textobjects = {
-					select = {
-						enable = true,
-
-						-- Automatically jump forward to textobj, similar to targets.vim
-						lookahead = true,
-
-						keymaps = {
-							-- You can use the capture groups defined in textobjects.scm
-							["af"] = "@function.outer",
-							["if"] = "@function.inner",
-							["ac"] = "@class.outer",
-							["ic"] = "@class.inner",
+						---LHS of toggle mappings in NORMAL + VISUAL mode
+						---@type table
+						toggler = {
+							---Line-comment toggle keymap
+							line = "gcc",
+							---Block-comment toggle keymap
+							block = "gbc",
 						},
-						-- You can choose the select mode (default is charwise 'v')
-						selection_modes = {
-							["@parameter.outer"] = "v", -- charwise
-							["@function.outer"] = "V", -- linewise
-							["@class.outer"] = "<c-v>", -- blockwise
+
+						---LHS of operator-pending mappings in NORMAL + VISUAL mode
+						---@type table
+						opleader = {
+							---Line-comment keymap
+							line = "gc",
+							---Block-comment keymap
+							block = "gb",
 						},
-						-- If you set this to `true` (default is `false`) then any textobject is
-						-- extended to include preceding xor succeeding whitespace. Succeeding
-						-- whitespace has priority in order to act similarly to eg the built-in
-						-- `ap`.
-						include_surrounding_whitespace = true,
-					},
 
-					swap = {
-						enable = true,
-						swap_next = {
-							["<leader>a"] = "@parameter.inner",
+						---LHS of extra mappings
+						---@type table
+						extra = {
+							---Add comment on the line above
+							above = "gcO",
+							---Add comment on the line below
+							below = "gco",
+							---Add comment at the end of line
+							eol = "gcA",
 						},
-						swap_previous = {
-							["<leader>A"] = "@parameter.inner",
+
+						---Create basic (operator-pending) and extended mappings for NORMAL + VISUAL mode
+						---NOTE: If `mappings = false` then the plugin won't create any mappings
+						---@type boolean|table
+						mappings = {
+							---Operator-pending mapping
+							---Includes `gcc`, `gbc`, `gc[count]{motion}` and `gb[count]{motion}`
+							---NOTE: These mappings can be changed individually by `opleader` and `toggler` config
+							basic = true,
+							---Extra mapping
+							---Includes `gco`, `gcO`, `gcA`
+							extra = true,
+							---Extended mapping
+							---Includes `g>`, `g<`, `g>[count]{motion}` and `g<[count]{motion}`
+							extended = false,
 						},
-					},
-
-					move = {
-						enable = true,
-						set_jumps = true, -- whether to set jumps in the jumplist
-						goto_next_start = {
-							["]m"] = "@function.outer",
-							["]]"] = "@class.outer",
-						},
-						goto_next_end = {
-							["]M"] = "@function.outer",
-							["]["] = "@class.outer",
-						},
-						goto_previous_start = {
-							["[m"] = "@function.outer",
-							["[["] = "@class.outer",
-						},
-						goto_previous_end = {
-							["[M"] = "@function.outer",
-							["[]"] = "@class.outer",
-						},
-					},
-				},
-			})
-
-			require("treesitter-context").setup({
-				enable = true, -- Enable this plugin (Can be enabled/disabled later via commands)
-				separator = "⠉", -- Separator between context and content. Should be a single character string, like '-'.
-				max_lines = 0, -- How many lines the window should span. Values <= 0 mean no limit.
-				trim_scope = "outer", -- Which context lines to discard if `max_lines` is exceeded. Choices: 'inner', 'outer'
-				patterns = {
-					-- Match patterns for TS nodes. These get wrapped to match at word boundaries.
-					-- For all filetypes
-					-- Note that setting an entry here replaces all other patterns for this entry.
-					-- By setting the 'default' entry below, you can control which nodes you want to
-					-- appear in the context window.
-					default = {
-						"class",
-						"function",
-						"method",
-						"for",
-						"while",
-						"if",
-						"switch",
-						"case",
-					},
-					-- Example for a specific filetype.
-					-- If a pattern is missing, *open a PR* so everyone can benefit.
-					--   rust = {
-					--       'impl_item',
-					--   },
-				},
-				exact_patterns = {
-					-- Example for a specific filetype with Lua patterns
-					-- Treat patterns.rust as a Lua pattern (i.e "^impl_item$" will
-					-- exactly match "impl_item" only)
-					-- rust = true,
-				},
-
-				-- [!] The options below are exposed but shouldn't require your attention,
-				--     you can safely ignore them.
-
-				zindex = 20, -- The Z-index of the context window
-				mode = "cursor", -- Line used to calculate context. Choices: 'cursor', 'topline'
-			})
-
-			-- Comment.nvim stuff
-			require("Comment").setup({
-				---Add a space b/w comment and the line
-				---@type boolean|fun():boolean
-				padding = true,
-
-				---Whether the cursor should stay at its position
-				---NOTE: This only affects NORMAL mode mappings and doesn't work with dot-repeat
-				---@type boolean
-				sticky = true,
-
-				---Lines to be ignored while comment/uncomment.
-				---Could be a regex string or a function that returns a regex string.
-				---Example: Use '^$' to ignore empty lines
-				---@type string|fun():string
-				ignore = nil,
-
-				---LHS of toggle mappings in NORMAL + VISUAL mode
-				---@type table
-				toggler = {
-					---Line-comment toggle keymap
-					line = "gcc",
-					---Block-comment toggle keymap
-					block = "gbc",
-				},
-
-				---LHS of operator-pending mappings in NORMAL + VISUAL mode
-				---@type table
-				opleader = {
-					---Line-comment keymap
-					line = "gc",
-					---Block-comment keymap
-					block = "gb",
-				},
-
-				---LHS of extra mappings
-				---@type table
-				extra = {
-					---Add comment on the line above
-					above = "gcO",
-					---Add comment on the line below
-					below = "gco",
-					---Add comment at the end of line
-					eol = "gcA",
-				},
-
-				---Create basic (operator-pending) and extended mappings for NORMAL + VISUAL mode
-				---NOTE: If `mappings = false` then the plugin won't create any mappings
-				---@type boolean|table
-				mappings = {
-					---Operator-pending mapping
-					---Includes `gcc`, `gbc`, `gc[count]{motion}` and `gb[count]{motion}`
-					---NOTE: These mappings can be changed individually by `opleader` and `toggler` config
-					basic = true,
-					---Extra mapping
-					---Includes `gco`, `gcO`, `gcA`
-					extra = true,
-					---Extended mapping
-					---Includes `g>`, `g<`, `g>[count]{motion}` and `g<[count]{motion}`
-					extended = false,
-				},
-
-				---Pre-hook, called before commenting the line
-				---@type fun(ctx: CommentCtx):string
-				pre_hook = function(ctx)
-					-- BEGIN pre-hook for nvim-ts-context-commentstring
-					local U = require("Comment.utils")
-					local location = nil
-					if ctx.ctype == U.ctype.block then
-						location = require("ts_context_commentstring.utils").get_cursor_location()
-					elseif ctx.cmotion == U.cmotion.v or ctx.cmotion == U.cmotion.V then
-						location = require("ts_context_commentstring.utils").get_visual_start_location()
-					end
-					return require("ts_context_commentstring.internal").calculate_commentstring({
-						key = ctx.ctype == U.ctype.line and "__default" or "__multiline",
-						location = location,
 					})
 				end,
-				-- END pre-hook for nvim-ts-context-commentstring
+			},
 
-				---Post-hook, called after commenting is done
-				---@type fun(ctx: CommentCtx)
-				post_hook = nil,
-			})
+			-- Treesitter-based context as you scroll through code
+			{
+				"nvim-treesitter/nvim-treesitter-context",
+				opts = {
+					enable = true, -- Enable this plugin (Can be enabled/disabled later via commands)
+					separator = "⠉", -- Separator between context and content. Should be a single character string, like '-'.
+					max_lines = 0, -- How many lines the window should span. Values <= 0 mean no limit.
+					trim_scope = "outer", -- Which context lines to discard if `max_lines` is exceeded. Choices: 'inner', 'outer'
+					patterns = {
+						-- Match patterns for TS nodes. These get wrapped to match at word boundaries.
+						-- For all filetypes
+						-- Note that setting an entry here replaces all other patterns for this entry.
+						-- By setting the 'default' entry below, you can control which nodes you want to
+						-- appear in the context window.
+						default = {
+							"class",
+							"function",
+							"method",
+							"for",
+							"while",
+							"if",
+							"switch",
+							"case",
+						},
+						-- Example for a specific filetype.
+						-- If a pattern is missing, *open a PR* so everyone can benefit.
+						--   rust = {
+						--       'impl_item',
+						--   },
+					},
+					exact_patterns = {
+						-- Example for a specific filetype with Lua patterns
+						-- Treat patterns.rust as a Lua pattern (i.e "^impl_item$" will
+						-- exactly match "impl_item" only)
+						-- rust = true,
+					},
 
-			require("hlargs").setup()
+					-- [!] The options below are exposed but shouldn't require your attention,
+					--     you can safely ignore them.
 
-			require("regexplainer").setup({
-				-- 'narrative'
-				mode = "narrative", -- TODO: 'ascii', 'graphical'
+					zindex = 20, -- The Z-index of the context window
+					mode = "cursor", -- Line used to calculate context. Choices: 'cursor', 'topline'
+				},
+			},
 
-				-- automatically show the explainer when the cursor enters a regexp
-				auto = true,
+			-- Treesitter-based contextual comments (eg do {/* these */} in jsx depending on cursor location)
+			{
+				"JoosepAlviste/nvim-ts-context-commentstring",
+				config = function()
+					require("nvim-treesitter.configs").setup({
+						ensure_installed = {
+							"css",
+							"graphql",
+							"html",
+							"javascript",
+							"lua",
+							"python",
+							"scss",
+							"tsx",
+							"typescript",
+							"vim",
+						},
 
-				-- filetypes (i.e. extensions) in which to run the autocommand
-				filetypes = {
-					"html",
-					"js",
-					"cjs",
-					"mjs",
-					"ts",
-					"jsx",
-					"tsx",
-					"cjsx",
-					"mjsx",
+						context_commentstring = {
+							enable = true,
+						},
+					})
+				end,
+			},
+
+			-- Treesitter-based autoclose and autorename HTML tags
+			{
+				"windwp/nvim-ts-autotag",
+				config = function()
+					require("nvim-treesitter.configs").setup({ autotag = { enable = true } })
+				end,
+			},
+
+			-- Autopair
+			{
+				"windwp/nvim-autopairs",
+				opts = {
+					check_ts = true,
+				},
+			},
+
+			-- Syntax aware text-objects, select, move, swap, and peek support
+			{
+				"nvim-treesitter/nvim-treesitter-textobjects",
+			},
+
+			-- Highlight function arguments
+			{
+				"m-demare/hlargs.nvim",
+			},
+
+			-- Treesitter-based local code dimming
+			{
+				"folke/twilight.nvim",
+			},
+		},
+		opts = {
+			-- A list of parser names, or "all"
+			ensure_installed = {
+				"typescript",
+				"tsx",
+				"javascript",
+				"json",
+				"json5",
+				"css",
+				"html",
+				"markdown",
+				"markdown_inline",
+				"yaml",
+				"regex",
+				"lua",
+				"vim",
+			},
+
+			highlight = {
+				enable = true,
+				disable = { "" }, -- list of language that will be disabled
+				-- Setting this to true will run `:h syntax` and tree-sitter at the same time.
+				-- Set this to `true` if you depend on 'syntax' being enabled (like for indentation).
+				-- Using this option may slow down your editor, and you may see some duplicate highlights.
+				-- Instead of true it can also be a list of languages
+				additional_vim_regex_highlighting = true,
+			},
+
+			-- nvim-ts-context-commentstring stuff
+			-- NOTE: some config in Comment.nvim relevant as well;
+			-- see https://github.com/JoosepAlviste/nvim-ts-context-commentstring#commentnvim=
+			context_commentstring = {
+				enable = true,
+				enable_autocmd = false, -- for Comment.nvim, per https://github.com/JoosepAlviste/nvim-ts-context-commentstring/wiki/Integrations#commentnvim
+			},
+
+			-- TODO unsure if works, saw it somewhere
+			-- indent = { enable = true },
+
+			-- nvim-treesitter-textobjects config
+			-- mostly lets me jump around using treesitter awareness
+			textobjects = {
+				select = {
+					enable = true,
+
+					-- Automatically jump forward to textobj, similar to targets.vim
+					lookahead = true,
+
+					keymaps = {
+						-- You can use the capture groups defined in textobjects.scm
+						["af"] = "@function.outer",
+						["if"] = "@function.inner",
+						["ac"] = "@class.outer",
+						["ic"] = "@class.inner",
+					},
+					-- You can choose the select mode (default is charwise 'v')
+					selection_modes = {
+						["@parameter.outer"] = "v", -- charwise
+						["@function.outer"] = "V", -- linewise
+						["@class.outer"] = "<c-v>", -- blockwise
+					},
+					-- If you set this to `true` (default is `false`) then any textobject is
+					-- extended to include preceding xor succeeding whitespace. Succeeding
+					-- whitespace has priority in order to act similarly to eg the built-in
+					-- `ap`.
+					include_surrounding_whitespace = true,
 				},
 
-				-- Whether to log debug messages
-				debug = false,
-
-				-- 'split', 'popup', 'pasteboard'
-				display = "popup",
-
-				mappings = {
-					toggle = "gR",
-					-- examples, not defaults:
-					-- show = 'gS',
-					-- hide = 'gH',
-					-- show_split = 'gP',
-					-- show_popup = 'gU',
+				swap = {
+					enable = true,
+					swap_next = {
+						["<leader>a"] = "@parameter.inner",
+					},
+					swap_previous = {
+						["<leader>A"] = "@parameter.inner",
+					},
 				},
 
-				narrative = {
-					separator = "\n",
+				move = {
+					enable = true,
+					set_jumps = true, -- whether to set jumps in the jumplist
+					goto_next_start = {
+						["]m"] = "@function.outer",
+						["]]"] = "@class.outer",
+					},
+					goto_next_end = {
+						["]M"] = "@function.outer",
+						["]["] = "@class.outer",
+					},
+					goto_previous_start = {
+						["[m"] = "@function.outer",
+						["[["] = "@class.outer",
+					},
+					goto_previous_end = {
+						["[M"] = "@function.outer",
+						["[]"] = "@class.outer",
+					},
 				},
-			})
-		end,
+			},
+		},
 	},
 
 	-- Substitute variants (like case differences),
@@ -856,12 +831,6 @@ require("lazy").setup({
 	-- It can do a lot more though, but that's 99% of what i do with it.
 	{
 		"tpope/vim-abolish",
-	},
-
-	-- Comment stuff out.
-	{
-		"numToStr/Comment.nvim",
-		name = "Comment.nvim",
 	},
 
 	-- TODO is this working? lol
@@ -909,21 +878,6 @@ require("lazy").setup({
 		-- eg -> https://github.com/phaazon/hop.nvim/wiki/Advanced-Hop#building-advanced-hop-motions
 		-- eg -> https://dev.to/kquirapas/neovim-on-steroids-vim-sneak-easymotion-hopnvim-4k17
 	},
-
-	-- {
-	-- 	'jose-elias-alvarez/typescript.nvim',
-	-- 	name = 'typescript.nvim',
-	-- 	opts = {
-	-- 		disable_commands = false, -- prevent the plugin from creating Vim commands
-	-- 		debug = false, -- enable debug logging for commands
-	-- 		go_to_source_definition = {
-	-- 			fallback = true, -- fall back to standard LSP definition on failure
-	-- 		},
-	-- 		--[[ server = { -- pass options to lspconfig's setup method ]]
-	-- 		--[[ 	on_attach = ..., ]]
-	-- 		--[[ }, ]]
-	-- 	},
-	-- },
 
 	-- not sure if i need this here since other
 	-- plugins just use it as a dependency?
@@ -1244,6 +1198,7 @@ require("lazy").setup({
 				"jose-elias-alvarez/typescript.nvim",
 				name = "typescript.nvim",
 				-- setup in coq's config()
+				ft = "typescript",
 				keys = {
 					-- TODO make this mapping only work when tsserver (typescript) LSP is used
 					-- ... or maybe move this to an ftplugin?
