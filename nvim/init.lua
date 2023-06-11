@@ -108,7 +108,7 @@ require("lazy").setup({
 					shade = "dark",
 					percentage = 0.15,
 				},
-				transparent_background = false, -- TODO ???
+				transparent_background = true, -- or else some things (vague, i know) aren't transparent
 				term_colors = true, -- TODO wtf this do? trying this
 				compile = {
 					enabled = true, -- true = faster startup
@@ -258,6 +258,14 @@ require("lazy").setup({
 							--[[ 	bg = catppuccin_flavour.yellow, ]]
 							--[[ 	fg = catppuccin_flavour.surface3, ]]
 							--[[ }, ]]
+
+							-- fidget.nvim overrides
+							FidgetTitle = {
+								fg = catppuccin_flavour.blue,
+							},
+							FidgetTask = {
+								fg = catppuccin_flavour.teal,
+							},
 						}
 					end,
 				},
@@ -1292,9 +1300,27 @@ require("lazy").setup({
 		"j-hui/fidget.nvim",
 		name = "fidget.nvim",
 		tag = "legacy",
-		config = function()
-			require("fidget").setup()
-		end,
+		lazy = false,
+		opts = {
+			-- https://github.com/j-hui/fidget.nvim/blob/main/doc/fidget.md
+			text = {
+				-- animation shown when tasks are ongoing
+				-- Premade spinners @ https://github.com/j-hui/fidget.nvim/blob/main/doc/fidget.md#spinners
+				spinner = require("custom-fidgets").bouncing_satellite,
+				done = "🚀", -- character shown when all tasks are complete
+				commenced = "Started", -- message shown when task starts
+				completed = "Completed", -- message shown when task completes
+			},
+
+			window = {
+				-- NOTE: changing this from 0 only makes it black. Not sure why.
+				blend = 0,
+			},
+
+			time = {
+				fidget_decay = 1000,
+			},
+		},
 	},
 
 	-- opts
