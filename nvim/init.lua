@@ -953,6 +953,7 @@ require("lazy").setup({
 
 	-- LSP (Language Server Protocol) integration
 	-- TODO how do i install stuff so i dont have to do `npm install -g typescript-language-server` or whatever?
+	-- TODO maybe using mason.nvim ? or something?
 	{
 		"neovim/nvim-lspconfig",
 		name = "nvim-lspconfig",
@@ -967,9 +968,6 @@ require("lazy").setup({
 			{
 				"glepnir/lspsaga.nvim",
 				event = "LspAttach",
-				config = function()
-					require("lspsaga").setup({})
-				end,
 				dependencies = {
 					{ "nvim-tree/nvim-web-devicons" },
 					{ "nvim-treesitter/nvim-treesitter" }, --Please make sure you install markdown and markdown_inline parser
@@ -996,7 +994,7 @@ require("lazy").setup({
 						enable_in_insert = true,
 						sign = true,
 						sign_priority = 40,
-						virtual_text = false,
+						virtual_text = false, -- for some reason, it's enabled in both the signcol AND virtualtext by default
 					},
 				},
 				keys = {
@@ -1055,7 +1053,8 @@ require("lazy").setup({
 					-- Go to definition
 					{
 						"gd", -- key map
-						"<cmd>LspSaga goto_definition<CR>", -- command
+						-- Note that this opens in a split.. TODO do this with <mod> per https://github.com/prabirshrestha/vim-lsp/issues/169#issuecomment-619449593
+						"<cmd>vsplit<cr><cmd>Lspsaga goto_definition<CR>", -- command
 						mode = "n",
 						desc = "Go to definition",
 					},
@@ -1104,6 +1103,26 @@ require("lazy").setup({
 						mode = "n",
 						desc = "Diagnostic jump next",
 					},
+
+					-- -- Floating terminal
+					-- vim.keymap.set(
+					-- "n",
+					-- "<A-d>",
+					-- "<cmd>Lspsaga open_floaterm zsh<CR>",
+					-- {
+					-- 	silent = true,
+					-- 	desc = 'Float term: open'
+					-- }
+					-- )
+					-- vim.keymap.set(
+					-- "t",
+					-- "<A-d>",
+					-- "<C-\\><C-n><cmd>Lspsaga close_floaterm<CR>",
+					-- {
+					-- 	silent = true,
+					-- 	desc = 'Float term: close',
+					-- }
+					-- )
 				},
 			},
 
@@ -1122,9 +1141,19 @@ require("lazy").setup({
 								-- TODO how can I do a relative path to "./snippets" instead?
 								user_path = vim.fn.expand("$HOME/.dotfiles/nvim/snippets"),
 							},
+
+							lsp = {
+								-- LSP not importing when autocomplete used? increase timeout
+								resolve_timeout = 6000,
+							},
 						},
 						keymap = {
 							eval_snips = "<leader>j",
+						},
+
+						limits = {
+							-- LSP too slow to show up on keystroke? increase timeout
+							completion_manual_timeout = 6000,
 						},
 					}
 					local coq = require("coq")
@@ -1166,12 +1195,9 @@ require("lazy").setup({
 				end,
 				dependencies = {
 					-- 9000+ Snippets
-					-- 'ms-jpq/coq.artifacts', {'branch': 'artifacts'}
 					{
 						"ms-jpq/coq.artifacts",
 						branch = "artifacts",
-						--[[ config = function() ]]
-						--[[ end, ]]
 					},
 
 					{
@@ -1253,27 +1279,7 @@ require("lazy").setup({
 			--[[ 	end, ]]
 			--[[ }) ]]
 
-			-- -- Floating terminal
-			-- vim.keymap.set(
-			-- "n",
-			-- "<A-d>",
-			-- "<cmd>Lspsaga open_floaterm zsh<CR>",
-			-- {
-			-- 	silent = true,
-			-- 	desc = 'Float term: open'
-			-- }
-			-- )
-			-- vim.keymap.set(
-			-- "t",
-			-- "<A-d>",
-			-- "<C-\\><C-n><cmd>Lspsaga close_floaterm<CR>",
-			-- {
-			-- 	silent = true,
-			-- 	desc = 'Float term: close',
-			-- }
-			-- )
-
-			-- -- ESLint fix all in buffer
+			-- ESLint fix all in buffer
 			vim.keymap.set("n", "<leader>L", "<cmd>EslintFixAll<CR>", {
 				silent = true,
 				desc = "LSP: Lint auto-fix buffer",
