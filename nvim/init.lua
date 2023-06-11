@@ -367,7 +367,7 @@ require("lazy").setup({
 						preview_cutoff = 120,
 					},
 					path_display = { "smart" },
-					winblend = 0,
+					winblend = 20,
 					border = {},
 					borderchars = nil,
 					color_devicons = true,
@@ -986,7 +986,7 @@ require("lazy").setup({
 						title = true,
 						-- Border type can be single, double, rounded, solid, shadow.
 						border = "single",
-						winblend = 0,
+						winblend = 20,
 						expand = "",
 						collapse = "",
 						code_action = "🔧",
