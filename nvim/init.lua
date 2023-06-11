@@ -989,7 +989,7 @@ require("lazy").setup({
 						winblend = 20,
 						expand = "",
 						collapse = "",
-						code_action = "🔧",
+						code_action = "💡",
 						incoming = "",
 						outgoing = "",
 						hover = " ",
@@ -1383,7 +1383,7 @@ vim.fn.sign_define("DiagnosticSignWarn", {
 	numhl = "TSWarning",
 })
 vim.fn.sign_define("DiagnosticSignInfo", {
-	text = "💡", -- lightbulb for information
+	text = "ℹ️", -- lightbulb for information
 	texthl = "TextInfo",
 	linehl = "TSNote",
 	numhl = "TSNote",
