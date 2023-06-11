@@ -238,6 +238,12 @@ require("lazy").setup({
 							FidgetTask = {
 								fg = catppuccin_flavour.teal,
 							},
+
+							-- nvim-treesitter-context
+							TreesitterContext = {
+								bg = catppuccin_flavour.surface0,
+								blend = 20,
+							},
 						}
 					end,
 				},
@@ -637,6 +643,14 @@ require("lazy").setup({
 
 					zindex = 20, -- The Z-index of the context window
 					mode = "cursor", -- Line used to calculate context. Choices: 'cursor', 'topline'
+				},
+				keys = {
+					{
+						"]c", -- key map
+						"<cmd>lua require('treesitter-context').go_to_context() <cr>", -- cmd
+						mode = "n",
+						desc = "Go to context",
+					},
 				},
 			},
 
