@@ -318,6 +318,7 @@ require("lazy").setup({
 				-- after = "telescope.nvim",
 				build = "make",
 				init = function()
+					-- TODO i'm loading extensions elsewhere too... DRY?
 					require("telescope").load_extension("fzf")
 				end,
 			},
@@ -364,6 +365,7 @@ require("lazy").setup({
 					color_devicons = true,
 					set_env = { ["COLORTERM"] = "truecolor" },
 
+					-- TODO it would be nice to have fzf too.
 					vimgrep_arguments = {
 						"rg", -- TODO: automate ripgrep install
 						"--color=never",
@@ -490,8 +492,8 @@ require("lazy").setup({
 							layout_strategy = "horizontal",
 							layout_config = {
 								horizontal = {
-									width = 0.5,
-									height = 0.4,
+									width = 0.6,
+									height = 0.6,
 									preview_width = 0.6,
 								},
 							},
@@ -500,18 +502,10 @@ require("lazy").setup({
 				},
 			})
 
-			telescope.load_extension("fzf")
+			-- Note: fzf extension is loaded in init for whatever reason.
 			telescope.load_extension("ui-select")
 
-			--[[ local find_files_opts = { ]]
-			--[[ 	hidden = true, ]]
-			--[[ 	file_ignore_patterns = { ]]
-			--[[ 		"node_modules/.*", ]]
-			--[[ 		".next", ]]
-			--[[ 		".git", ]]
-			--[[ 	} ]]
-			--[[ } ]]
-
+			-- TODO move keymaps below to lazy's `keys` ?
 			-- vim.keymap.set('n', '<leader>ff', builtin.find_files, {})
 			--[[ vim.keymap.set('n', '<leader>f', builtin.find_files(), {}) ]]
 			--[[ vim.keymap.set('n', '<leader>f', function() builtin.find_files() end, {}) ]]
