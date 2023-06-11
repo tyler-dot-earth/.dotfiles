@@ -16,7 +16,7 @@ vim.opt.expandtab = false
 -- How many columns a tab counts for
 vim.opt.tabstop = 4
 -- How many columns text is indented with the reindent operations
-vim.opt.shiftwidth = 2
+vim.opt.shiftwidth = 4
 -- Required by feline, i guess?
 vim.opt.termguicolors = true
 -- Don't line wrap
@@ -38,7 +38,9 @@ vim.opt.signcolumn = "yes"
 -- Special line characters
 vim.opt.list = true
 vim.opt.listchars = {
-	tab = "⣿⣿",
+	-- tab = "⣿⣿",
+	tab = "••",
+	-- tab = "◆◆",
 	eol = "↵",
 	--[[ trail = "·", ]]
 	--[[ precedes = "⦚", ]]
@@ -47,4 +49,4 @@ vim.opt.listchars = {
 	space = "░",
 }
 vim.opt.showbreak = "↪\\"
--- misc fun symbols: 🡆 🠶 🠊 ⮞ ⮚ ▶ ⎵ ⣿ ⠉ ⠈ ░ ▒ ▓ ► ◄ ↵ · ◣ ◢ ◥ ◤ ◐ ◑ ⯺  ⯼ ☉ ⁞ ⦙ ┊ ⦚ ×
+-- misc fun symbols: 🡆 🠶 🠊 ⮞ ⮚ ▶ ⎵ ⣿ ⠉ ⠈ ░ ▒ ▓ ► ◄ ↵ · • ◣ ◢ ◥ ◤ ◐ ◑ ⯺  ⯼ ☉ ⁞ ⦙ ┊ ⦚ × ▢
