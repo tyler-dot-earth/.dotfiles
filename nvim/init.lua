@@ -1395,8 +1395,4 @@ vim.fn.sign_define("DiagnosticSignHint", {
 	numhl = "TSNote",
 })
 
--- Always use the current buffer's directory as the relative location for
--- commands and such. Mostly so I can :NERDTree and :sp/vsp anywhere.
-vim.cmd("autocmd BufEnter * silent! lcd %:p:h")
-
 -- TODO how to get strikethrough on @deprecated in tsx/jsdocs?
