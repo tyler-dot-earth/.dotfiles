@@ -827,11 +827,11 @@ require("lazy").setup({
 		"tpope/vim-abolish",
 	},
 
-	-- TODO is this working? lol
 	-- Git integration for buffers
 	{
 		"lewis6991/gitsigns.nvim",
 		name = "gitsigns.nvim",
+		lazy = false, -- show signs asap
 		opts = {
 			signs = {
 				add = { text = "🌱" }, -- sprout symbolizes something new (added line)
@@ -840,6 +840,20 @@ require("lazy").setup({
 				topdelete = { text = "💥" }, -- collision symbolizing the start of a deletion
 				changedelete = { text = "🌪" }, -- tornado, as the change has been deleted
 				untracked = { text = "👣" }, -- footprints, as these are untracked changes
+			},
+		},
+		keys = {
+			{
+				"]h", -- key map
+				"<cmd>lua require('gitsigns').next_hunk()<cr>", -- cmd
+				mode = "n",
+				desc = "Next hunk",
+			},
+			{
+				"[h", -- key map
+				"<cmd>lua require('gitsigns').prev_hunk()<cr>", -- cmd
+				mode = "n",
+				desc = "Previous hunk",
 			},
 		},
 	},
