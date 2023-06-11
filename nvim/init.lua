@@ -903,30 +903,18 @@ require("lazy").setup({
 			"jose-elias-alvarez/typescript.nvim",
 		},
 
+		-- TODO automate this install
 		-- npm install -g @fsouza/prettierd
-		-- null_ls.builtins.formatting.prettierd
+		-- TODO maybe using mason.nvim ? or something?
 
 		event = { "BufReadPre", "BufNewFile" },
 		opts = function()
-			-- TODO: use eslint language server for better experience than null-ls' builtin eslint
-			--[[ require 'lspconfig'.eslint.setup({ ]]
-			--[[ 	settings = { ]]
-			--[[ 		packageManager = 'yarn' ]]
-			--[[ 	}, ]]
-			--[[ 	on_attach = function(client, bufnr) ]]
-			--[[ 		vim.api.nvim_create_autocmd("BufWritePre", { ]]
-			--[[ 			buffer = bufnr, ]]
-			--[[ 			command = "EslintFixAll", ]]
-			--[[ 		}) ]]
-			--[[ 	end, ]]
-			--[[ }) ]]
-
 			local null_ls = require("null-ls")
 			local formatting = null_ls.builtins.formatting
-			local diagnostics = null_ls.builtins.diagnostics
 			local code_actions = null_ls.builtins.code_actions
-			local completion = null_ls.builtins.completion
 			local typescript_code_actions = require("typescript.extensions.null-ls.code-actions")
+			-- local diagnostics = null_ls.builtins.diagnostics
+			-- local completion = null_ls.builtins.completion
 
 			return {
 				root_dir = require("null-ls.utils").root_pattern(".null-ls-root", "Makefile", ".git"),
@@ -941,16 +929,16 @@ require("lazy").setup({
 					-- Maybe I will try formatting with https://github.com/mhartington/formatter.nvim ?
 					-- TODO TODO TODO
 					-- TODO maybe try https://www.reddit.com/r/neovim/comments/12er016/configuring_autoformatting_using_nullls_and/
-					-- TODO maybe see if Telescope has completion?
-					-- TODO maybe investigate switching to cmp?
+					-- TODO maybe try https://www.reddit.com/r/neovim/comments/118txk8/how_do_i_get_eslint_to_work_with_prettier/
 					--[[ formatting.prettierd.with({ ]]
 					--[[ 	condition = function(utils) ]]
 					--[[ 		-- TODO support other prettier config like .prettierrc, etc ? ]]
 					--[[ 		-- return utils.has_file({ ".prettierrc.js" }) ]]
 					--[[]]
-					--[[ 		local has_prettierrcjson = utils.root_has_file(".prettierrc.json") ]]
+					--[[ 		local has_prettierrc_json = utils.root_has_file(".prettierrc.json") ]]
 					--[[ 		local has_prettierrc = utils.root_has_file(".prettierrc") ]]
-					--[[ 		return has_prettierrcjson or has_prettierrc ]]
+					--[[ 		local has_prettierrc_js = utils.root_has_file(".prettierrc.js") ]]
+					--[[ 		return has_prettierrc_json or has_prettierrc_js or has_prettierrc ]]
 					--[[ 	end, ]]
 					--[[ }), ]]
 				},
