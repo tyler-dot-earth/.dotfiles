@@ -13,3 +13,10 @@ foo('')
 // These won't error in Coc.nvim unless tsconfig has strict:true
 foo(null)
 foo(undefined)
+
+const unused = null;
+
+// TODO you should be able to :TypescriptAddMissingImports
+TestImportsWithMe();
+AndTestImportsWithMeToo();
+

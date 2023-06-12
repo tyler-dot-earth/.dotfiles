@@ -10,11 +10,6 @@ vim.cmd([[
   autocmd FileType env set syntax=sh
 ]])
 
-vim.g.copilot_filetypes = {
-	-- defaults: https://github.com/github/copilot.vim/blob/1358e8e45ecedc53daf971924a0541ddf6224faf/autoload/copilot.vim#L131-L140
-	env = false, -- ft=sh is what .env uses for syntax by defaeult
-}
-
 require("main-settings")
 
 -- bootstrap lazy.nvim plugin manager
@@ -272,7 +267,16 @@ require("lazy").setup({
 	},
 
 	-- Copilot AI assistant
-	{ "github/copilot.vim", name = "copilot" },
+	{
+		"github/copilot.vim",
+		name = "copilot",
+		init = function()
+			vim.g.copilot_filetypes = {
+				-- defaults: https://github.com/github/copilot.vim/blob/1358e8e45ecedc53daf971924a0541ddf6224faf/autoload/copilot.vim#L131-L140
+				env = false, -- ft=sh is what .env uses for syntax by defaeult
+			}
+		end,
+	},
 
 	-- File browser
 	{
