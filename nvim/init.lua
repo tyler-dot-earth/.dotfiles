@@ -355,6 +355,11 @@ require("lazy").setup({
 					color_devicons = true,
 					set_env = { ["COLORTERM"] = "truecolor" },
 
+					-- Show full file paths
+					-- find_command = { "fd", "-t=f", "-a" },
+					-- path_display = { "absolute" },
+					-- wrap_results = true,
+
 					-- TODO it would be nice to have fzf too.
 					vimgrep_arguments = {
 						"rg", -- TODO: automate ripgrep install
@@ -610,8 +615,8 @@ require("lazy").setup({
 				"nvim-treesitter/nvim-treesitter-context",
 				opts = {
 					enable = true, -- Enable this plugin (Can be enabled/disabled later via commands)
-					separator = "⠉", -- Separator between context and content. Should be a single character string, like '-'.
-					max_lines = 0, -- How many lines the window should span. Values <= 0 mean no limit.
+					-- separator = "░", -- Separator between context and content. Should be a single character string, like '-'.
+					max_lines = 5, -- How many lines the window should span. Values <= 0 mean no limit.
 					trim_scope = "outer", -- Which context lines to discard if `max_lines` is exceeded. Choices: 'inner', 'outer'
 					patterns = {
 						-- Match patterns for TS nodes. These get wrapped to match at word boundaries.
@@ -684,20 +689,21 @@ require("lazy").setup({
 			},
 
 			-- Treesitter-based autoclose and autorename HTML tags
-			{
-				"windwp/nvim-ts-autotag",
-				config = function()
-					require("nvim-treesitter.configs").setup({ autotag = { enable = true } })
-				end,
-			},
+			-- {
+			-- 	"windwp/nvim-ts-autotag",
+			-- 	config = function()
+			-- 		require("nvim-treesitter.configs").setup({ autotag = { enable = true } })
+			-- 	end,
+			-- },
 
 			-- Autopair
-			{
-				"windwp/nvim-autopairs",
-				opts = {
-					check_ts = true,
-				},
-			},
+			-- TODO coq adjustment needed, apparently? https://github.com/windwp/nvim-autopairs#:~:text=nvim%2Dcmp-,coq_nvim,-local%20remap%20%3D
+			-- {
+			-- 	"windwp/nvim-autopairs",
+			-- 	opts = {
+			-- 		check_ts = true,
+			-- 	},
+			-- },
 
 			-- Syntax aware text-objects, select, move, swap, and peek support
 			{
@@ -712,6 +718,11 @@ require("lazy").setup({
 			-- Treesitter-based local code dimming
 			{
 				"folke/twilight.nvim",
+				opts = {
+					-- https://github.com/folke/twilight.nvim#%EF%B8%8F-configuration
+					--
+					treesitter = true,
+				},
 			},
 		},
 		opts = {
@@ -813,7 +824,150 @@ require("lazy").setup({
 					},
 				},
 			},
+
+			-- Incremental selection based on the named nodes from the grammar.
+			incremental_selection = {
+				enable = true,
+				keymaps = {
+					init_selection = "gnn", -- set to `false` to disable one of the mappings
+					node_incremental = "grn",
+					scope_incremental = "grc",
+					node_decremental = "grm",
+					-- init_selection = "<Enter>",
+					-- node_incremental = "<Enter>",
+					-- node_decremental = "<BS>",
+				},
+			},
+
+			-- Indentation based on treesitter for the = operator. NOTE: This is an experimental feature.
+			-- indent = {
+			-- 	enable = true,
+			-- },
 		},
+		-- ^^ TODO those opts aren't being used.
+		-- -- TODO using config (below) works...
+		-- -- TODO what am i doing wrong?
+		-- config = function()
+		-- 	require("nvim-treesitter.configs").setup({
+		-- 		-- A list of parser names, or "all"
+		-- 		ensure_installed = {
+		-- 			"typescript",
+		-- 			"tsx",
+		-- 			"javascript",
+		-- 			"json",
+		-- 			"json5",
+		-- 			"css",
+		-- 			"html",
+		-- 			"markdown",
+		-- 			"markdown_inline",
+		-- 			"yaml",
+		-- 			"regex",
+		-- 			"lua",
+		-- 			"vim",
+		-- 		},
+		--
+		-- 		highlight = {
+		-- 			enable = true,
+		-- 			disable = { "" }, -- list of language that will be disabled
+		-- 			-- Setting this to true will run `:h syntax` and tree-sitter at the same time.
+		-- 			-- Set this to `true` if you depend on 'syntax' being enabled (like for indentation).
+		-- 			-- Using this option may slow down your editor, and you may see some duplicate highlights.
+		-- 			-- Instead of true it can also be a list of languages
+		-- 			additional_vim_regex_highlighting = true,
+		-- 		},
+		--
+		-- 		-- nvim-ts-context-commentstring stuff
+		-- 		-- NOTE: some config in Comment.nvim relevant as well;
+		-- 		-- see https://github.com/JoosepAlviste/nvim-ts-context-commentstring#commentnvim=
+		-- 		context_commentstring = {
+		-- 			enable = true,
+		-- 			enable_autocmd = false, -- for Comment.nvim, per https://github.com/JoosepAlviste/nvim-ts-context-commentstring/wiki/Integrations#commentnvim
+		-- 		},
+		--
+		-- 		-- TODO unsure if works, saw it somewhere
+		-- 		-- indent = { enable = true },
+		--
+		-- 		-- nvim-treesitter-textobjects config
+		-- 		-- mostly lets me jump around using treesitter awareness
+		-- 		textobjects = {
+		-- 			select = {
+		-- 				enable = true,
+		--
+		-- 				-- Automatically jump forward to textobj, similar to targets.vim
+		-- 				lookahead = true,
+		--
+		-- 				keymaps = {
+		-- 					-- You can use the capture groups defined in textobjects.scm
+		-- 					["af"] = "@function.outer",
+		-- 					["if"] = "@function.inner",
+		-- 					["ac"] = "@class.outer",
+		-- 					["ic"] = "@class.inner",
+		-- 				},
+		-- 				-- You can choose the select mode (default is charwise 'v')
+		-- 				selection_modes = {
+		-- 					["@parameter.outer"] = "v", -- charwise
+		-- 					["@function.outer"] = "V", -- linewise
+		-- 					["@class.outer"] = "<c-v>", -- blockwise
+		-- 				},
+		-- 				-- If you set this to `true` (default is `false`) then any textobject is
+		-- 				-- extended to include preceding xor succeeding whitespace. Succeeding
+		-- 				-- whitespace has priority in order to act similarly to eg the built-in
+		-- 				-- `ap`.
+		-- 				include_surrounding_whitespace = true,
+		-- 			},
+		--
+		-- 			swap = {
+		-- 				enable = true,
+		-- 				swap_next = {
+		-- 					["<leader>a"] = "@parameter.inner",
+		-- 				},
+		-- 				swap_previous = {
+		-- 					["<leader>A"] = "@parameter.inner",
+		-- 				},
+		-- 			},
+		--
+		-- 			move = {
+		-- 				enable = true,
+		-- 				set_jumps = true, -- whether to set jumps in the jumplist
+		-- 				goto_next_start = {
+		-- 					["]m"] = "@function.outer",
+		-- 					["]]"] = "@class.outer",
+		-- 				},
+		-- 				goto_next_end = {
+		-- 					["]M"] = "@function.outer",
+		-- 					["]["] = "@class.outer",
+		-- 				},
+		-- 				goto_previous_start = {
+		-- 					["[m"] = "@function.outer",
+		-- 					["[["] = "@class.outer",
+		-- 				},
+		-- 				goto_previous_end = {
+		-- 					["[M"] = "@function.outer",
+		-- 					["[]"] = "@class.outer",
+		-- 				},
+		-- 			},
+		-- 		},
+		--
+		-- 		-- Incremental selection based on the named nodes from the grammar.
+		-- 		incremental_selection = {
+		-- 			enable = true,
+		-- 			keymaps = {
+		-- 				init_selection = "gnn", -- set to `false` to disable one of the mappings
+		-- 				node_incremental = "grn",
+		-- 				scope_incremental = "grc",
+		-- 				node_decremental = "grm",
+		-- 				-- init_selection = "<Enter>",
+		-- 				-- node_incremental = "<Enter>",
+		-- 				-- node_decremental = "<BS>",
+		-- 			},
+		-- 		},
+		--
+		-- 		-- Indentation based on treesitter for the = operator. NOTE: This is an experimental feature.
+		-- 		-- indent = {
+		-- 		-- 	enable = true,
+		-- 		-- },
+		-- 	})
+		-- end,
 	},
 
 	-- Substitute variants (like case differences),
@@ -821,6 +975,7 @@ require("lazy").setup({
 	-- eg: (visual selection) Subvert/foo/bar/g
 	-- ... would replace all foo/Foo/FOO with bar/Bar/BAR
 	-- It can do a lot more though, but that's 99% of what i do with it.
+	-- TODO learn more stuff that it can do — https://github.com/tpope/vim-abolish
 	{
 		"tpope/vim-abolish",
 	},
@@ -914,6 +1069,9 @@ require("lazy").setup({
 			-- local diagnostics = null_ls.builtins.diagnostics
 			-- local completion = null_ls.builtins.completion
 
+			-- TODO Try this suggestion for eslint_d + buf formatting
+			-- https://github.com/jose-elias-alvarez/typescript.nvim/issues/57#issuecomment-1387148837
+
 			return {
 				root_dir = require("null-ls.utils").root_pattern(".null-ls-root", "Makefile", ".git"),
 
@@ -921,24 +1079,8 @@ require("lazy").setup({
 					formatting.stylua, -- TODO auto install stylua
 					typescript_code_actions, -- typescript.nvim
 					code_actions.gitsigns, -- provide code actions from Gitsigns
-					-- code_actions.eslint,
-					-- TODO TODO TODO
-					-- TODO using prettierd as such seems to cause a new Node process to spawn after each format... so, i'm not really sure what the right approach is here.
-					-- Maybe I will try formatting with https://github.com/mhartington/formatter.nvim ?
-					-- TODO TODO TODO
-					-- TODO maybe try https://www.reddit.com/r/neovim/comments/12er016/configuring_autoformatting_using_nullls_and/
-					-- TODO maybe try https://www.reddit.com/r/neovim/comments/118txk8/how_do_i_get_eslint_to_work_with_prettier/
-					--[[ formatting.prettierd.with({ ]]
-					--[[ 	condition = function(utils) ]]
-					--[[ 		-- TODO support other prettier config like .prettierrc, etc ? ]]
-					--[[ 		-- return utils.has_file({ ".prettierrc.js" }) ]]
-					--[[]]
-					--[[ 		local has_prettierrc_json = utils.root_has_file(".prettierrc.json") ]]
-					--[[ 		local has_prettierrc = utils.root_has_file(".prettierrc") ]]
-					--[[ 		local has_prettierrc_js = utils.root_has_file(".prettierrc.js") ]]
-					--[[ 		return has_prettierrc_json or has_prettierrc_js or has_prettierrc ]]
-					--[[ 	end, ]]
-					--[[ }), ]]
+					formatting.prettierd,
+					-- formatting.prettier_eslint, -- TODO investigate this
 				},
 				on_attach = function(client)
 					if client.server_capabilities.documentFormattingProvider then
@@ -1017,13 +1159,13 @@ require("lazy").setup({
 					},
 
 					-- Code actions
-					{
-						"<leader>ca", -- key map
-						-- use Lspsaga for code actions
-						"<cmd>Lspsaga code_action<CR>", -- command
-						mode = "n",
-						desc = "Code actions",
-					},
+					-- {
+					-- 	"<leader>ca", -- key map
+					-- 	-- use Lspsaga for code actions
+					-- 	"<cmd>Lspsaga code_action<CR>", -- command
+					-- 	mode = "n",
+					-- 	desc = "Code actions",
+					-- },
 					{
 						"<leader>cA", -- key map
 						-- use native LSP's vim.ui.select for code actions
@@ -1050,11 +1192,28 @@ require("lazy").setup({
 
 					-- Go to definition
 					{
-						"gd", -- key map
+						"gdd", -- key map
+						"<cmd>Lspsaga goto_definition<CR>", -- command
+						mode = "n",
+						desc = "Go to definition",
+					},
+
+					-- Go to definition in vsplit
+					{
+						"gdv", -- key map
 						-- Note that this opens in a split.. TODO do this with <mod> per https://github.com/prabirshrestha/vim-lsp/issues/169#issuecomment-619449593
 						"<cmd>vsplit<cr><cmd>Lspsaga goto_definition<CR>", -- command
 						mode = "n",
-						desc = "Go to definition",
+						desc = "Go to definition vsplit",
+					},
+
+					-- Go to definition in split
+					{
+						"gds", -- key map
+						-- Note that this opens in a split.. TODO do this with <mod> per ^^^
+						"<cmd>split<cr><cmd>Lspsaga goto_definition<CR>", -- command
+						mode = "n",
+						desc = "Go to definition hsplit",
 					},
 
 					-- Show line diagnostics
@@ -1169,6 +1328,7 @@ require("lazy").setup({
 					lsp["html"].setup(coq.lsp_ensure_capabilities())
 					lsp["cssls"].setup(coq.lsp_ensure_capabilities())
 					lsp["jsonls"].setup(coq.lsp_ensure_capabilities())
+					lsp["prismals"].setup(coq.lsp_ensure_capabilities())
 					-- Configure LSP for TypeScript (via `npm install -g typescript typescript-language-server`)
 					-- TODO maybe using mason.nvim to install language servers
 					-- Configure LSP for typescript + coq via typescript.nvim
@@ -1187,6 +1347,14 @@ require("lazy").setup({
 								"typescript",
 								"typescriptreact",
 								"typescript.tsx",
+							},
+
+							init_options = {
+								preferences = { -- https://github.com/typescript-language-server/typescript-language-server#initializationoptions:~:text=interface%20UserPreferences
+									-- TODO not sure that this is working... took from.
+									-- https://github.com/jose-elias-alvarez/typescript.nvim/issues/23#issuecomment-1205284644
+									importModuleSpecifierPreference = "non-relative", -- can't be set in tsconfig, has to be per editor?
+								},
 							},
 						},
 					}))
@@ -1292,6 +1460,12 @@ require("lazy").setup({
 		tag = "legacy",
 		lazy = false,
 		opts = {
+			sources = {
+				-- mostly used for formatting and such
+				["null-ls"] = {
+					ignore = true,
+				},
+			},
 			-- https://github.com/j-hui/fidget.nvim/blob/main/doc/fidget.md
 			text = {
 				-- animation shown when tasks are ongoing
@@ -1313,10 +1487,52 @@ require("lazy").setup({
 		},
 	},
 
-	-- opts
+	{
+		"stevearc/oil.nvim",
+		opts = {},
+		-- Optional dependencies
+		dependencies = { "nvim-tree/nvim-web-devicons" },
+	},
+
+	-- auto-expand splits
+	-- TODO try focus.nvim instead?
 	-- {
-	-- 	https://github.com/folke/lazy.nvim#%EF%B8%8F-configuration
-	-- }
+	-- 	"camspiers/lens.vim",
+	-- 	dependencies = {
+	-- 		"camspiers/animate.vim",
+	-- 	},
+	-- 	init = function()
+	-- 		-- TODO not sure how to set the settings since this isn't a lua plugin lol
+	-- 		-- vim.g.lens.disabled_filetypes = { "nerdtree", "fzf" }
+	-- 	end,
+	-- 	-- keymap = {
+	-- 	-- 	-- TODO toggle on and off?
+	-- 	-- },
+	-- },
+	{
+		"nvim-focus/focus.nvim",
+		lazy = false,
+		config = function()
+			require("focus").setup()
+		end,
+	},
+
+	-- TODO compare to https://github.com/Pocco81/true-zen.nvim
+	{
+		"folke/zen-mode.nvim",
+		opts = {
+			-- https://github.com/folke/zen-mode.nvim#%EF%B8%8F-configuration
+			kitty = {
+				enabled = true,
+				font = "+4", -- font size increment
+			},
+		},
+	},
+
+	-- TODO prisma support ?
+	{
+		"prisma/vim-prisma",
+	},
 
 	-- b0o/incline.nvim
 	-- 🎈 Floating statuslines for Neovim
@@ -1330,17 +1546,41 @@ require("lazy").setup({
 	--[[ 	end, ]]
 	--[[ }, ]]
 
-	-- edluffy/hologram.nvim
-	-- 📸 A neovim plugin for making animated GIFs
-	{
-		"edluffy/hologram.nvim",
-		name = "hologram.nvim",
-		config = function()
-			require("hologram").setup({
-				auto_display = true, -- WIP automatic markdown image display, may be prone to breaking
-			})
-		end,
-	},
+	-- folke/trouble.nvim
+	-- 🚦 A pretty diagnostics, references, telescope results, quickfix and location list to help you solve all the trouble your code is causing.
+	-- Particularly useful for cross-file diagnostics.
+	-- {
+	-- 	"folke/trouble.nvim",
+	-- 	name = "trouble.nvim",
+	-- 	dependencies = { "nvim-tree/nvim-web-devicons" },
+	-- 	opts = {
+	-- 		-- your configuration comes here
+	-- 		-- or leave it empty to use the default settings
+	-- 		-- refer to the configuration section below
+	-- 	},
+	-- },
+
+	-- sindrets/diffview.nvim
+	-- 🦥 Single tabpage interface for easily cycling through diffs for all modified files for any git rev.
+	--[[ { ]]
+	--[[ 	"sindrets/diffview.nvim", ]]
+	--[[ 	opts = { ]]
+	--[[ 		diff_binaries = false, -- Show diffs for binaries ]]
+	--[[ 		file_panel = { ]]
+	--[[ 			width = 35, ]]
+	--[[ 			use_icons = true, -- Requires nvim-web-devicons ]]
+	--[[ 		}, ]]
+	--[[ 	}, ]]
+	--[[ }, ]]
+}, {
+	-- 	https://github.com/folke/lazy.nvim#%EF%B8%8F-configuration
+	--
+	-- Default lockfile location:
+	-- lockfile = vim.fn.stdpath("config") .. "/lazy-lock.json",
+	-- instead, we store it in the repo @ ~/Projects/dotfiles/nvim
+	lockfile = "~/Projects/dotfiles/nvim/lazy-lock.json",
+	-- TODO ^ not ideal that this seems to be how this works.
+	-- I could probably use symlinking or something to avoid this?
 })
 
 -- Misc color tweaks after colorscheme is set

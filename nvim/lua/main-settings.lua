@@ -3,6 +3,8 @@
 -- use .editorconfig
 vim.g.editorconfig = true
 
+vim.opt.winblend = 30
+
 -- Relative line numbers on left
 vim.opt.relativenumber = true
 -- Current line number on left
