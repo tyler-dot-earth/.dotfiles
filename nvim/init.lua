@@ -98,168 +98,168 @@ require("lazy").setup({
 			-- TODO ^ how the fuck do i get lsp autocompletion on this variable?
 
 			require("catppuccin").setup({
-				dim_inactive = {
-					enabled = false,
-					shade = "dark",
-					percentage = 0.15,
-				},
-				transparent_background = true, -- or else some things (vague, i know) aren't transparent
-				term_colors = true, -- TODO wtf this do? trying this
-				compile = {
-					enabled = true, -- true = faster startup
-					path = vim.fn.stdpath("cache") .. "/catppuccin",
-				},
-				styles = {
-					comments = { "italic" },
-					conditionals = { "italic" },
-					loops = {},
-					functions = {},
-					keywords = {},
-					strings = {},
-					variables = {},
-					numbers = {},
-					booleans = {},
-					properties = {},
-					types = {},
-					operators = {},
-				},
-				integrations = {
-					treesitter = true,
-					native_lsp = {
-						enabled = true,
-						virtual_text = {
-							errors = { "italic" },
-							hints = { "italic" },
-							warnings = { "italic" },
-							information = { "italic" },
-						},
-						underlines = {
-							errors = { "underline" },
-							hints = { "underline" },
-							warnings = { "underline" },
-							information = { "underline" },
-						},
-					},
-					lsp_trouble = false,
-					cmp = true,
-					lsp_saga = true,
-					gitsigns = true,
-					leap = false,
-					telescope = true,
-					dap = {
-						enabled = false,
-						enable_ui = false,
-					},
-					which_key = true,
-					indent_blankline = {
-						-- i set these colors manually elsewhere, without using these settings...
-						-- which TODO makes me feel like i did it wrong since here we are
-						enabled = false,
-						colored_indent_levels = false,
-					},
-					hop = true,
-					fidget = true,
-				},
-				color_overrides = {
-					-- Related reading
-					-- -> Catppuccin styleguide: https://github.com/catppuccin/catppuccin/blob/d7a1918a23fb28e912bfd721eedef0ff452db872/docs/style-guide.md
-
-					-- TODO
-					all = {
-						-- the default rainbow is too red,
-						-- i like this rainbow better:
-						--[[ rainbow1 = { fg = catppuccin_flavour.blue }, ]]
-						--[[ rainbow2 = { fg = catppuccin_flavour.teal }, ]]
-						--[[ rainbow3 = { fg = catppuccin_flavour.green }, ]]
-						--[[ rainbow4 = { fg = catppuccin_flavour.yellow }, ]]
-						--[[ rainbow5 = { fg = catppuccin_flavour.peach }, ]]
-						--[[ rainbow6 = { fg = catppuccin_flavour.red }, ]]
-						--[[ rainbow7 = { fg = catppuccin_flavour.pink }, ]]
-						rainbow1 = { fg = catppuccin_flavour.lavender },
-						rainbow2 = { fg = catppuccin_flavour.blue },
-						rainbow3 = { fg = catppuccin_flavour.teal },
-						rainbow4 = { fg = catppuccin_flavour.green },
-						rainbow5 = { fg = catppuccin_flavour.yellow },
-						rainbow6 = { fg = catppuccin_flavour.peach },
-						rainbow7 = { fg = catppuccin_flavour.pink },
-
-						-- example
-						--[[ 	text = "#ffffff", ]]
-					},
-					-- theme-specific tweaks
-					--[[ latte = { ]]
-					--[[ 	base = "#ff0000", ]]
-					--[[ 	mantle = "#242424", ]]
-					--[[ 	crust = "#474747", ]]
-					--[[ }, ]]
-				},
-
-				highlight_overrides = {
-					-- TODO
-					all = function(colors)
-						return {
-							-- alias catpuccin's `rainbowX` to indent_blankline's expected colors
-							IndentBlanklineIndent1 = colors.rainbow1,
-							IndentBlanklineIndent2 = colors.rainbow2,
-							IndentBlanklineIndent3 = colors.rainbow3,
-							IndentBlanklineIndent4 = colors.rainbow4,
-							IndentBlanklineIndent5 = colors.rainbow5,
-							IndentBlanklineIndent6 = colors.rainbow6,
-							IndentBlanklineIndent7 = colors.rainbow7,
-							-- IndentBlanklineContextChar = { fg = "#ff0000", bg = "#ff0000" },
-							--[[ IndentBlanklineContextStart = { ]]
-							--[[ 	fg = "#ff0000", ]]
-							--[[ 	bg = "#ff0000", ]]
-							--[[ 	-- guisp = "#ff0000", ]]
-							--[[ 	-- gui = "undercurl", ]]
-							--[[ }, ]]
-
-							-- Improved "go to definition" highlighting
-							SagaBeacon = { bg = catppuccin_flavour.yellow },
-
-							-- the default greay isn't very visible
-							CursorLine = { bg = catppuccin_flavour.surface0 }, -- row highlight
-							CursorColumn = { bg = catppuccin_flavour.surface0 }, -- col highlight
-							-- TODO styling Cursor doesn't seem to work for me. not sure why.
-							--[[ Cursor = { ]]
-							--[[ 	bg = catppuccin_flavour.yellow, ]]
-							--[[ 	fg = catppuccin_flavour.surface3, ]]
-							--[[ }, ]]
-
-							-- fidget.nvim overrides
-							FidgetTitle = {
-								fg = catppuccin_flavour.blue,
-							},
-							FidgetTask = {
-								fg = catppuccin_flavour.teal,
-							},
-
-							-- nvim-treesitter-context
-							TreesitterContext = {
-								bg = catppuccin_flavour.surface0,
-								blend = 20,
-							},
-						}
-					end,
-				},
-
-				--[[ custom_highlights = function(colors) ]]
-				--[[ 	return { ]]
-				--[[ 		-- Comment = { fg = colors.flamingo }, ]]
-				--[[ 		-- TabLineSel = { bg = colors.pink }, ]]
-				--[[ 		-- CmpBorder = { fg = colors.surface2 }, ]]
-				--[[ 		-- Pmenu = { bg = colors.none }, ]]
-				--[[]]
-				--[[ 		-- TODO ]]
-				--[[ 		-- IndentBlanklineContextChar = { fg = "#ff0000", bg = "#ff0000" }, ]]
-				--[[ 		IndentBlanklineContextStart = { ]]
-				--[[ 			fg = "#ff0000", ]]
-				--[[ 			bg = "#ff0000", ]]
-				--[[ 			-- guisp = "#ff0000", ]]
-				--[[ 			-- gui = "undercurl", ]]
-				--[[ 		}, ]]
-				--[[ 	} ]]
-				--[[ end, ]]
+				-- dim_inactive = {
+				-- 	enabled = false,
+				-- 	shade = "dark",
+				-- 	percentage = 0.15,
+				-- },
+				-- transparent_background = true, -- or else some things (vague, i know) aren't transparent
+				-- term_colors = true, -- TODO wtf this do? trying this
+				-- compile = {
+				-- 	enabled = true, -- true = faster startup
+				-- 	path = vim.fn.stdpath("cache") .. "/catppuccin",
+				-- },
+				-- styles = {
+				-- 	comments = { "italic" },
+				-- 	conditionals = { "italic" },
+				-- 	loops = {},
+				-- 	functions = {},
+				-- 	keywords = {},
+				-- 	strings = {},
+				-- 	variables = {},
+				-- 	numbers = {},
+				-- 	booleans = {},
+				-- 	properties = {},
+				-- 	types = {},
+				-- 	operators = {},
+				-- },
+				-- integrations = {
+				-- 	treesitter = true,
+				-- 	native_lsp = {
+				-- 		enabled = true,
+				-- 		virtual_text = {
+				-- 			errors = { "italic" },
+				-- 			hints = { "italic" },
+				-- 			warnings = { "italic" },
+				-- 			information = { "italic" },
+				-- 		},
+				-- 		underlines = {
+				-- 			errors = { "underline" },
+				-- 			hints = { "underline" },
+				-- 			warnings = { "underline" },
+				-- 			information = { "underline" },
+				-- 		},
+				-- 	},
+				-- 	lsp_trouble = false,
+				-- 	cmp = true,
+				-- 	lsp_saga = true,
+				-- 	gitsigns = true,
+				-- 	leap = false,
+				-- 	telescope = true,
+				-- 	dap = {
+				-- 		enabled = false,
+				-- 		enable_ui = false,
+				-- 	},
+				-- 	which_key = true,
+				-- 	indent_blankline = {
+				-- 		-- i set these colors manually elsewhere, without using these settings...
+				-- 		-- which TODO makes me feel like i did it wrong since here we are
+				-- 		enabled = false,
+				-- 		colored_indent_levels = false,
+				-- 	},
+				-- 	hop = true,
+				-- 	fidget = true,
+				-- },
+				-- color_overrides = {
+				-- 	-- Related reading
+				-- 	-- -> Catppuccin styleguide: https://github.com/catppuccin/catppuccin/blob/d7a1918a23fb28e912bfd721eedef0ff452db872/docs/style-guide.md
+				--
+				-- 	-- TODO
+				-- 	all = {
+				-- 		-- the default rainbow is too red,
+				-- 		-- i like this rainbow better:
+				-- 		--[[ rainbow1 = { fg = catppuccin_flavour.blue }, ]]
+				-- 		--[[ rainbow2 = { fg = catppuccin_flavour.teal }, ]]
+				-- 		--[[ rainbow3 = { fg = catppuccin_flavour.green }, ]]
+				-- 		--[[ rainbow4 = { fg = catppuccin_flavour.yellow }, ]]
+				-- 		--[[ rainbow5 = { fg = catppuccin_flavour.peach }, ]]
+				-- 		--[[ rainbow6 = { fg = catppuccin_flavour.red }, ]]
+				-- 		--[[ rainbow7 = { fg = catppuccin_flavour.pink }, ]]
+				-- 		rainbow1 = { fg = catppuccin_flavour.lavender },
+				-- 		rainbow2 = { fg = catppuccin_flavour.blue },
+				-- 		rainbow3 = { fg = catppuccin_flavour.teal },
+				-- 		rainbow4 = { fg = catppuccin_flavour.green },
+				-- 		rainbow5 = { fg = catppuccin_flavour.yellow },
+				-- 		rainbow6 = { fg = catppuccin_flavour.peach },
+				-- 		rainbow7 = { fg = catppuccin_flavour.pink },
+				--
+				-- 		-- example
+				-- 		--[[ 	text = "#ffffff", ]]
+				-- 	},
+				-- 	-- theme-specific tweaks
+				-- 	--[[ latte = { ]]
+				-- 	--[[ 	base = "#ff0000", ]]
+				-- 	--[[ 	mantle = "#242424", ]]
+				-- 	--[[ 	crust = "#474747", ]]
+				-- 	--[[ }, ]]
+				-- },
+				--
+				-- highlight_overrides = {
+				-- 	-- TODO
+				-- 	all = function(colors)
+				-- 		return {
+				-- 			-- alias catpuccin's `rainbowX` to indent_blankline's expected colors
+				-- 			IndentBlanklineIndent1 = colors.rainbow1,
+				-- 			IndentBlanklineIndent2 = colors.rainbow2,
+				-- 			IndentBlanklineIndent3 = colors.rainbow3,
+				-- 			IndentBlanklineIndent4 = colors.rainbow4,
+				-- 			IndentBlanklineIndent5 = colors.rainbow5,
+				-- 			IndentBlanklineIndent6 = colors.rainbow6,
+				-- 			IndentBlanklineIndent7 = colors.rainbow7,
+				-- 			-- IndentBlanklineContextChar = { fg = "#ff0000", bg = "#ff0000" },
+				-- 			--[[ IndentBlanklineContextStart = { ]]
+				-- 			--[[ 	fg = "#ff0000", ]]
+				-- 			--[[ 	bg = "#ff0000", ]]
+				-- 			--[[ 	-- guisp = "#ff0000", ]]
+				-- 			--[[ 	-- gui = "undercurl", ]]
+				-- 			--[[ }, ]]
+				--
+				-- 			-- Improved "go to definition" highlighting
+				-- 			SagaBeacon = { bg = catppuccin_flavour.yellow },
+				--
+				-- 			-- the default greay isn't very visible
+				-- 			CursorLine = { bg = catppuccin_flavour.surface0 }, -- row highlight
+				-- 			CursorColumn = { bg = catppuccin_flavour.surface0 }, -- col highlight
+				-- 			-- TODO styling Cursor doesn't seem to work for me. not sure why.
+				-- 			--[[ Cursor = { ]]
+				-- 			--[[ 	bg = catppuccin_flavour.yellow, ]]
+				-- 			--[[ 	fg = catppuccin_flavour.surface3, ]]
+				-- 			--[[ }, ]]
+				--
+				-- 			-- fidget.nvim overrides
+				-- 			FidgetTitle = {
+				-- 				fg = catppuccin_flavour.blue,
+				-- 			},
+				-- 			FidgetTask = {
+				-- 				fg = catppuccin_flavour.teal,
+				-- 			},
+				--
+				-- 			-- nvim-treesitter-context
+				-- 			TreesitterContext = {
+				-- 				bg = catppuccin_flavour.surface0,
+				-- 				blend = 20,
+				-- 			},
+				-- 		}
+				-- 	end,
+				-- },
+				--
+				-- --[[ custom_highlights = function(colors) ]]
+				-- --[[ 	return { ]]
+				-- --[[ 		-- Comment = { fg = colors.flamingo }, ]]
+				-- --[[ 		-- TabLineSel = { bg = colors.pink }, ]]
+				-- --[[ 		-- CmpBorder = { fg = colors.surface2 }, ]]
+				-- --[[ 		-- Pmenu = { bg = colors.none }, ]]
+				-- --[[]]
+				-- --[[ 		-- TODO ]]
+				-- --[[ 		-- IndentBlanklineContextChar = { fg = "#ff0000", bg = "#ff0000" }, ]]
+				-- --[[ 		IndentBlanklineContextStart = { ]]
+				-- --[[ 			fg = "#ff0000", ]]
+				-- --[[ 			bg = "#ff0000", ]]
+				-- --[[ 			-- guisp = "#ff0000", ]]
+				-- --[[ 			-- gui = "undercurl", ]]
+				-- --[[ 		}, ]]
+				-- --[[ 	} ]]
+				-- --[[ end, ]]
 			})
 
 			vim.cmd.colorscheme("catppuccin")
@@ -697,7 +697,6 @@ require("lazy").setup({
 			-- },
 
 			-- Autopair
-			-- TODO coq adjustment needed, apparently? https://github.com/windwp/nvim-autopairs#:~:text=nvim%2Dcmp-,coq_nvim,-local%20remap%20%3D
 			-- {
 			-- 	"windwp/nvim-autopairs",
 			-- 	opts = {
@@ -1053,7 +1052,6 @@ require("lazy").setup({
 		lazy = false,
 		dependencies = {
 			"nvim-lua/plenary.nvim",
-			"jose-elias-alvarez/typescript.nvim",
 		},
 
 		-- TODO automate this install
@@ -1065,7 +1063,7 @@ require("lazy").setup({
 			local null_ls = require("null-ls")
 			local formatting = null_ls.builtins.formatting
 			local code_actions = null_ls.builtins.code_actions
-			local typescript_code_actions = require("typescript.extensions.null-ls.code-actions")
+			-- local typescript_code_actions = require("typescript.extensions.null-ls.code-actions")
 			-- local diagnostics = null_ls.builtins.diagnostics
 			-- local completion = null_ls.builtins.completion
 
@@ -1077,7 +1075,7 @@ require("lazy").setup({
 
 				sources = {
 					formatting.stylua, -- TODO auto install stylua
-					typescript_code_actions, -- typescript.nvim
+					-- typescript_code_actions, -- typescript.nvim
 					code_actions.gitsigns, -- provide code actions from Gitsigns
 					formatting.prettierd,
 					-- formatting.prettier_eslint, -- TODO investigate this
@@ -1088,368 +1086,6 @@ require("lazy").setup({
 					end
 				end,
 			}
-		end,
-	},
-
-	-- LSP (Language Server Protocol) integration
-	-- TODO how do i install stuff so i dont have to do `npm install -g typescript-language-server` or whatever?
-	-- TODO maybe using mason.nvim ? or something?
-	{
-		"neovim/nvim-lspconfig",
-		name = "nvim-lspconfig",
-		dependencies = {
-			-- LSP server for Lua
-			"sumneko/lua-language-server",
-
-			-- " Fancy lines for LSP messages
-			"https://git.sr.ht/~whynothugo/lsp_lines.nvim",
-
-			-- Lspsaga for improving LSP UI/UX (vague, i know)
-			{
-				"glepnir/lspsaga.nvim",
-				event = "LspAttach",
-				dependencies = {
-					{ "nvim-tree/nvim-web-devicons" },
-					{ "nvim-treesitter/nvim-treesitter" }, --Please make sure you install markdown and markdown_inline parser
-				},
-				opts = {
-					ui = {
-						-- This option only works in Neovim 0.9
-						title = true,
-						-- Border type can be single, double, rounded, solid, shadow.
-						border = "single",
-						winblend = 20,
-						expand = "",
-						collapse = "",
-						code_action = "💡",
-						incoming = "",
-						outgoing = "",
-						hover = " ",
-						-- kind = {}, -- defined in https://github.com/nvimdev/lspsaga.nvim/blob/main/lua/lspsaga/lspkind.lua
-					},
-
-					-- may not *actually* be a lightbulb, that's just whawt the setting is called
-					lightbulb = {
-						enable = true,
-						enable_in_insert = true,
-						sign = true,
-						sign_priority = 40,
-						virtual_text = false, -- for some reason, it's enabled in both the signcol AND virtualtext by default
-					},
-				},
-				keys = {
-					-- Most borrowed from the example config:
-					-- https://github.com/nvimdev/lspsaga.nvim#example-configuration
-					-- TODO add more mappings from example config?
-
-					-- Hover docs
-					{
-						"K", -- key map
-						"<cmd>Lspsaga hover_doc<CR>", -- command
-						mode = "n",
-						desc = "Hover docs",
-					},
-
-					-- Finder (see definition, references)
-					{
-						"gh", -- key map
-						"<cmd>Lspsaga lsp_finder<CR>", -- command
-						mode = "n",
-						desc = "Finder (definitions, refs)",
-					},
-
-					-- Code actions
-					-- {
-					-- 	"<leader>ca", -- key map
-					-- 	-- use Lspsaga for code actions
-					-- 	"<cmd>Lspsaga code_action<CR>", -- command
-					-- 	mode = "n",
-					-- 	desc = "Code actions",
-					-- },
-					{
-						"<leader>cA", -- key map
-						-- use native LSP's vim.ui.select for code actions
-						"<cmd>lua vim.lsp.buf.code_action()<CR>", -- command
-						mode = "n",
-						desc = "Code actions 🔭",
-					},
-
-					-- Rename symbol/variable
-					{
-						"<leader>rn", -- key map
-						"<cmd>Lspsaga rename<CR>", -- command
-						mode = "n",
-						desc = "Rename symbol/variable",
-					},
-
-					-- Peek definition
-					{
-						"gp", -- key map
-						"<cmd>Lspsaga preview_definition<CR>", -- command
-						mode = "n",
-						desc = "Peek definition",
-					},
-
-					-- Go to definition
-					{
-						"gdd", -- key map
-						"<cmd>Lspsaga goto_definition<CR>", -- command
-						mode = "n",
-						desc = "Go to definition",
-					},
-
-					-- Go to definition in vsplit
-					{
-						"gdv", -- key map
-						-- Note that this opens in a split.. TODO do this with <mod> per https://github.com/prabirshrestha/vim-lsp/issues/169#issuecomment-619449593
-						"<cmd>vsplit<cr><cmd>Lspsaga goto_definition<CR>", -- command
-						mode = "n",
-						desc = "Go to definition vsplit",
-					},
-
-					-- Go to definition in split
-					{
-						"gds", -- key map
-						-- Note that this opens in a split.. TODO do this with <mod> per ^^^
-						"<cmd>split<cr><cmd>Lspsaga goto_definition<CR>", -- command
-						mode = "n",
-						desc = "Go to definition hsplit",
-					},
-
-					-- Show line diagnostics
-					{
-						"<leader>cd", -- key map
-						"<cmd>Lspsaga show_line_diagnostics<CR>", -- command
-						mode = "n",
-						desc = "Show line diagnostics",
-					},
-
-					-- Toggle outline
-					{
-						"<leader>to", -- key map
-						"<cmd>Lspsaga toggle_outline<CR>", -- command
-						mode = "n",
-						desc = "Toggle outline",
-					},
-
-					-- Call hierarchy
-					{
-						"<Leader>ci", -- key map
-						"<cmd>Lspsaga incoming_calls<CR>", -- command
-						mode = "n",
-						desc = "Incoming calls (call hierarchy)",
-					},
-					{
-						"<Leader>co", -- key map
-						"<cmd>Lspsaga outgoing_calls<CR>", -- command
-						mode = "n",
-						desc = "Outgoing calls (call hierarchy)",
-					},
-
-					-- Diagnostic jump
-					-- You can use <C-o> to jump back to your previous location
-					{
-						"[e", -- key map
-						"<cmd>Lspsaga diagnostic_jump_prev<CR>", -- command
-						mode = "n",
-						desc = "Diagnostic jump prev",
-					},
-					{
-						"]e", -- key map
-						"<cmd>Lspsaga diagnostic_jump_next<CR>", -- command
-						mode = "n",
-						desc = "Diagnostic jump next",
-					},
-
-					-- -- Floating terminal
-					-- vim.keymap.set(
-					-- "n",
-					-- "<A-d>",
-					-- "<cmd>Lspsaga open_floaterm zsh<CR>",
-					-- {
-					-- 	silent = true,
-					-- 	desc = 'Float term: open'
-					-- }
-					-- )
-					-- vim.keymap.set(
-					-- "t",
-					-- "<A-d>",
-					-- "<C-\\><C-n><cmd>Lspsaga close_floaterm<CR>",
-					-- {
-					-- 	silent = true,
-					-- 	desc = 'Float term: close',
-					-- }
-					-- )
-				},
-			},
-
-			-- Fast as FUCK completion
-			{
-				"ms-jpq/coq_nvim",
-				branch = "coq",
-				-- lazy = false,
-				init = function()
-					-- coq_nvim config
-					vim.g.coq_settings = {
-						-- automatically start coq
-						auto_start = true,
-						clients = {
-							snippets = {
-								-- TODO how can I do a relative path to "./snippets" instead?
-								user_path = vim.fn.expand("$HOME/.dotfiles/nvim/snippets"),
-							},
-
-							lsp = {
-								-- LSP not importing when autocomplete used? increase timeout
-								resolve_timeout = 6000,
-							},
-						},
-						keymap = {
-							eval_snips = "<leader>j",
-						},
-
-						limits = {
-							-- LSP too slow to show up on keystroke? increase timeout
-							completion_manual_timeout = 6000,
-						},
-					}
-					local coq = require("coq")
-
-					-- Snippets
-					---- Edit snippets for current filetype: :COQsnips edit
-					---- Compile snippets after changing: :COQsnips compile
-					---- jump to next spots in snippet via: CTRL h
-
-					local lsp = require("lspconfig")
-
-					-- Configure LSP for ESLint
-					lsp["eslint"].setup(coq.lsp_ensure_capabilities())
-					-- Configure LSP for various servers via vscode-langservers-extracted (via `npm i -g vscode-langservers-extracted`)
-					lsp["html"].setup(coq.lsp_ensure_capabilities())
-					lsp["cssls"].setup(coq.lsp_ensure_capabilities())
-					lsp["jsonls"].setup(coq.lsp_ensure_capabilities())
-					lsp["prismals"].setup(coq.lsp_ensure_capabilities())
-					-- Configure LSP for TypeScript (via `npm install -g typescript typescript-language-server`)
-					-- TODO maybe using mason.nvim to install language servers
-					-- Configure LSP for typescript + coq via typescript.nvim
-					require("typescript").setup(coq.lsp_ensure_capabilities({
-						disable_commands = false, -- prevent the plugin from creating Vim commands
-						debug = false, -- enable debug logging for commands
-						go_to_source_definition = {
-							fallback = true, -- fall back to standard LSP definition on failure
-						},
-						server = {
-							-- root_dir = root_pattern("package.json", "tsconfig.json", "jsconfig.json", ".git"),
-							filetypes = {
-								"javascript",
-								"javascriptreact",
-								"javascript.jsx",
-								"typescript",
-								"typescriptreact",
-								"typescript.tsx",
-							},
-
-							init_options = {
-								preferences = { -- https://github.com/typescript-language-server/typescript-language-server#initializationoptions:~:text=interface%20UserPreferences
-									-- TODO not sure that this is working... took from.
-									-- https://github.com/jose-elias-alvarez/typescript.nvim/issues/23#issuecomment-1205284644
-									importModuleSpecifierPreference = "non-relative", -- can't be set in tsconfig, has to be per editor?
-								},
-							},
-						},
-					}))
-				end,
-				dependencies = {
-					-- 9000+ Snippets
-					{
-						"ms-jpq/coq.artifacts",
-						branch = "artifacts",
-					},
-
-					{
-						"ms-jpq/coq.thirdparty",
-						-- branch = '3p',
-						config = function()
-							require("coq_3p")({
-								{ src = "copilot", short_name = "COP", accept_key = "<c-f>" },
-								{ src = "nvimlua", short_name = "nLUA" },
-								-- ... (other sources)
-							})
-						end,
-					},
-				},
-			},
-			-- TODO: how to run :COQdeps then :COQnow auto after ^that^ ?
-
-			-- adds non-LSP commands like Add missing imports, Fix all, Organize imports, Remove unused,
-			{
-				"jose-elias-alvarez/typescript.nvim",
-				name = "typescript.nvim",
-				-- setup in coq's config()
-				ft = "typescript",
-				keys = {
-					-- TODO make this mapping only work when tsserver (typescript) LSP is used
-					-- ... or maybe move this to an ftplugin?
-					{
-						"<Leader>cR", -- key map
-						"<cmd>TypescriptRenameFile<CR>", -- command
-						mode = "n",
-						desc = "TypeScript: Rename file",
-					},
-				},
-			},
-		},
-		config = function()
-			-- LSP configuration
-
-			local lsp = require("lspconfig")
-
-			-- TODO: WIP: Format config
-			-- TODO: use eslint language server for better experience than null-ls' builtin eslint
-			lsp.eslint.setup({
-				settings = {
-					packageManager = "yarn",
-				},
-				on_attach = function(client, bufnr)
-					vim.api.nvim_create_autocmd("BufWritePre", {
-						buffer = bufnr,
-						command = "EslintFixAll",
-					})
-				end,
-			})
-
-			-- Format keymap
-			vim.keymap.set("n", "<leader>F", "<cmd>lua vim.lsp.buf.format({ async = true })<CR>", {
-				desc = "LSP: format",
-				silent = true,
-			})
-
-			-- lsp_lines config
-			require("lsp_lines").setup()
-			vim.diagnostic.config({
-				virtual_text = false,
-				-- update_in_insert = true, -- aggressively real-time updates while in insert mode
-			}) -- disable regular virtual text diagnostic
-			vim.keymap.set("", "<Leader>l", "<cmd>lua require('lsp_lines').toggle()<CR>", { desc = "Toggle lsp_lines" })
-			--[[ -- hide diagnostics on entering Insert mode ]]
-			--[[ vim.api.nvim_create_autocmd('InsertEnter', { ]]
-			--[[ 	callback = function() ]]
-			--[[ 			vim.diagnostic.hide() ]]
-			--[[ 	end, ]]
-			--[[ }) ]]
-			--[[ -- show diagnostics when exiting Insert mode ]]
-			--[[ vim.api.nvim_create_autocmd('ModeChanged', { ]]
-			--[[ 	pattern = 'i:*', ]]
-			--[[ 	callback = function() ]]
-			--[[ 			vim.diagnostic.show() ]]
-			--[[ 	end, ]]
-			--[[ }) ]]
-
-			-- ESLint fix all in buffer
-			vim.keymap.set("n", "<leader>L", "<cmd>EslintFixAll<CR>", {
-				silent = true,
-				desc = "LSP: Lint auto-fix buffer",
-			})
 		end,
 	},
 
@@ -1534,44 +1170,442 @@ require("lazy").setup({
 		"prisma/vim-prisma",
 	},
 
-	-- b0o/incline.nvim
-	-- 🎈 Floating statuslines for Neovim
-	--[[ { ]]
-	--[[ 	"b0o/incline.nvim", ]]
-	--[[ 	name = "incline.nvim", ]]
-	--[[ 	config = function() ]]
-	--[[ 		require("incline").setup({ ]]
-	--[[ 			-- https://github.com/b0o/incline.nvim#configuration ]]
-	--[[ 		}) ]]
-	--[[ 	end, ]]
-	--[[ }, ]]
+	{
+		"pmizio/typescript-tools.nvim",
+		enable = true,
+		lazy = false,
+		-- dependencies = {
+		-- 	"nvim-lua/plenary.nvim",
+		-- 	"neovim/nvim-lspconfig",
+		-- },
+		-- opts = {
+		-- 	settings = {
+		-- 		-- spawn additional tsserver instance to calculate diagnostics on it
+		-- 		separate_diagnostic_server = true,
+		-- 		-- "change"|"insert_leave" determine when the client asks the server about diagnostic
+		-- 		publish_diagnostic_on = "insert_leave",
+		-- 		-- to include all supported code actions specify commands exposed as code_actions
+		-- 		-- expose_as_code_action = "all",
+		-- 		expose_as_code_action = {
+		-- 			"fix_all",
+		-- 			"add_missing_imports",
+		-- 			"remove_unused",
+		-- 			"remove_unused_imports",
+		-- 			"organize_imports",
+		-- 		},
+		-- 		-- string|nil - specify a custom path to `tsserver.js` file, if this is nil or file under path
+		-- 		-- not exists then standard path resolution strategy is applied
+		-- 		tsserver_path = nil,
+		-- 		-- specify a list of plugins to load by tsserver, e.g., for support `styled-components`
+		-- 		-- (see 💅 `styled-components` support section)
+		-- 		tsserver_plugins = {},
+		-- 		-- this value is passed to: https://nodejs.org/api/cli.html#--max-old-space-sizesize-in-megabytes
+		-- 		-- memory limit in megabytes or "auto"(basically no limit)
+		-- 		tsserver_max_memory = "auto",
+		-- 		-- described below
+		-- 		tsserver_format_options = {},
+		-- 		tsserver_file_preferences = {},
+		-- 		-- mirror of VSCode's `typescript.suggest.completeFunctionCalls`
+		-- 		complete_function_calls = false,
+		--
+		-- 		-- Note that handlers can be used to override certain LSP methods.
+		-- 		-- For example, you can use the filter_diagnostics helper to ignore specific errors:
+		-- 		-- handlers = {
+		-- 		-- 	["textDocument/publishDiagnostics"] = api.filter_diagnostics(
+		-- 		-- 	-- Ignore 'This may be converted to an async function' diagnostics.
+		-- 		-- 	{ 80006 }
+		-- 		-- 	),
+		-- 		-- },
+		--
+		-- 		-- tsserver_file_preferences = {
+		-- 		-- 	includeInlayParameterNameHints = "all",
+		-- 		-- 	includeCompletionsForModuleExports = true,
+		-- 		-- 	quotePreference = "auto",
+		-- 		-- 	-- ...,
+		-- 		-- },
+		-- 		-- tsserver_format_options = {
+		-- 		-- 	allowIncompleteCompletions = false,
+		-- 		-- 	allowRenameOfImportPath = false,
+		-- 		-- 	-- ...,
+		-- 		-- },
+		-- 	},
+		-- },
+		event = { "BufReadPre", "BufNewFile" },
+		ft = { "typescript", "typescriptreact" },
+		dependencies = {
+			"nvim-lua/plenary.nvim",
+			"neovim/nvim-lspconfig",
+		},
+		config = function()
+			require("typescript-tools").setup({
+				settings = {
+					-- spawn additional tsserver instance to calculate diagnostics on it
+					-- separate_diagnostic_server = true,
+					separate_diagnostic_server = true,
+					-- "change"|"insert_leave" determine when the client asks the server about diagnostic
+					publish_diagnostic_on = "insert_leave",
+					-- to include all supported code actions specify commands exposed as code_actions
+					-- expose_as_code_action = "all",
+					expose_as_code_action = {
+						"fix_all",
+						"add_missing_imports",
+						"remove_unused",
+						"remove_unused_imports",
+						"organize_imports",
+					},
+					-- string|nil - specify a custom path to `tsserver.js` file, if this is nil or file under path
+					-- not exists then standard path resolution strategy is applied
+					tsserver_path = nil,
+					-- specify a list of plugins to load by tsserver, e.g., for support `styled-components`
+					-- (see 💅 `styled-components` support section)
+					tsserver_plugins = {},
+					-- this value is passed to: https://nodejs.org/api/cli.html#--max-old-space-sizesize-in-megabytes
+					-- memory limit in megabytes or "auto"(basically no limit)
+					tsserver_max_memory = "auto",
+					-- described below
+					tsserver_format_options = {},
+					tsserver_file_preferences = {},
+					-- mirror of VSCode's `typescript.suggest.completeFunctionCalls`
+					complete_function_calls = false,
 
-	-- folke/trouble.nvim
-	-- 🚦 A pretty diagnostics, references, telescope results, quickfix and location list to help you solve all the trouble your code is causing.
-	-- Particularly useful for cross-file diagnostics.
-	-- {
-	-- 	"folke/trouble.nvim",
-	-- 	name = "trouble.nvim",
-	-- 	dependencies = { "nvim-tree/nvim-web-devicons" },
-	-- 	opts = {
-	-- 		-- your configuration comes here
-	-- 		-- or leave it empty to use the default settings
-	-- 		-- refer to the configuration section below
-	-- 	},
-	-- },
+					-- Note that handlers can be used to override certain LSP methods.
+					-- For example, you can use the filter_diagnostics helper to ignore specific errors:
+					-- handlers = {
+					-- 	["textDocument/publishDiagnostics"] = api.filter_diagnostics(
+					-- 	-- Ignore 'This may be converted to an async function' diagnostics.
+					-- 	{ 80006 }
+					-- 	),
+					-- },
 
-	-- sindrets/diffview.nvim
-	-- 🦥 Single tabpage interface for easily cycling through diffs for all modified files for any git rev.
-	--[[ { ]]
-	--[[ 	"sindrets/diffview.nvim", ]]
-	--[[ 	opts = { ]]
-	--[[ 		diff_binaries = false, -- Show diffs for binaries ]]
-	--[[ 		file_panel = { ]]
-	--[[ 			width = 35, ]]
-	--[[ 			use_icons = true, -- Requires nvim-web-devicons ]]
-	--[[ 		}, ]]
-	--[[ 	}, ]]
-	--[[ }, ]]
+					-- tsserver_file_preferences = {
+					-- 	includeInlayParameterNameHints = "all",
+					-- 	includeCompletionsForModuleExports = true,
+					-- 	quotePreference = "auto",
+					-- 	-- ...,
+					-- },
+					-- tsserver_format_options = {
+					-- 	allowIncompleteCompletions = false,
+					-- 	allowRenameOfImportPath = false,
+					-- 	-- ...,
+					-- },
+				},
+			})
+		end,
+	},
+
+	-- { "hrsh7th/cmp-nvim-lsp" },
+	{
+		"hrsh7th/nvim-cmp",
+		name = "nvim-cmp",
+		dependencies = {
+			{ "hrsh7th/cmp-nvim-lsp" },
+		},
+		-- opts = {
+		-- 	settings = {
+		-- 		window = {
+		-- 			-- completion = cmp.config.window.bordered(),
+		-- 			-- documentation = cmp.config.window.bordered(),
+		-- 		},
+		--
+		-- 		sources = cmp.config.sources({
+		-- 			{ name = "nvim_lsp" },
+		-- 		}, {
+		-- 			{ name = "buffer" },
+		-- 		}),
+		-- 	},
+		-- },
+		config = function()
+			local cmp = require("cmp")
+
+			cmp.setup({
+				window = {
+					-- completion = cmp.config.window.bordered(),
+					-- documentation = cmp.config.window.bordered(),
+				},
+
+				sources = cmp.config.sources({
+					{ name = "nvim_lsp" },
+				}, {
+					{ name = "buffer" },
+				}),
+			})
+		end,
+	},
+
+	-- LSP (Language Server Protocol) integration
+	-- TODO push some of this to individual ftplugin files?
+	-- TODO how do i install stuff so i dont have to do `npm install -g typescript-language-server` or whatever?
+	-- TODO maybe using mason.nvim ? or something?
+	-- NOTE: dont use typescript-language-server wtih typescript-tools.nvim
+	{
+		"neovim/nvim-lspconfig",
+		name = "nvim-lspconfig",
+		dependencies = {
+			-- LSP server for Lua
+			"sumneko/lua-language-server",
+
+			-- " Fancy lines for LSP messages
+			"https://git.sr.ht/~whynothugo/lsp_lines.nvim",
+		},
+		config = function()
+			-- LSP configuration
+
+			local lsp = require("lspconfig")
+			-- https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md
+			--
+			-- lsp["tsserver"].setup({}) -- DONT enable if using typescript-tools.nvim
+			--
+			-- Configure LSP for various servers via vscode-langservers-extracted (via `npm i -g vscode-langservers-extracted`)
+			-- lsp["html"].setup() -- npm i -g vscode-langservers-extracted
+			-- lsp["cssls"].setup() -- npm i -g vscode-langservers-extracted
+			-- lsp["eslint"].setup()
+			-- lsp["jsonls"].setup() -- npm i -g vscode-langservers-extracted
+			--
+			-- https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#prismals
+			-- lsp["prismals"].setup() -- npm install -g @prisma/language-server
+			--
+			-- https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#tailwindcss
+			-- lsp["tailwindcss"].setup({}) -- npm install -g @tailwindcss/language-server
+
+			-- Set up lspconfig.
+			-- local capabilities = require("cmp_nvim_lsp").default_capabilities()
+			-- Replace <YOUR_LSP_SERVER> with each lsp server you've enabled.
+			-- require("lspconfig")["typescript"].setup({
+			-- 	capabilities = capabilities,
+			-- })
+
+			--
+			--
+			--
+			--
+			-- Configure LSP for ESLint
+			-- lsp["eslint"].setup()
+			-- Configure LSP for various servers via vscode-langservers-extracted (via `npm i -g vscode-langservers-extracted`)
+			-- lsp["html"].setup(coq.lsp_ensure_capabilities())
+			-- lsp["cssls"].setup(coq.lsp_ensure_capabilities())
+			-- lsp["jsonls"].setup(coq.lsp_ensure_capabilities())
+			-- lsp["prismals"].setup(coq.lsp_ensure_capabilities())
+			-- Configure LSP for TypeScript (via `npm install -g typescript typescript-language-server`)
+			-- TODO maybe using mason.nvim to install language servers
+			-- Configure LSP for typescript + coq via typescript.nvim
+			-- require("typescript").setup(coq.lsp_ensure_capabilities({
+			-- 	disable_commands = false, -- prevent the plugin from creating Vim commands
+			-- 	debug = false, -- enable debug logging for commands
+			-- 	go_to_source_definition = {
+			-- 		fallback = true, -- fall back to standard LSP definition on failure
+			-- 	},
+			-- 	server = {
+			-- 		-- root_dir = root_pattern("package.json", "tsconfig.json", "jsconfig.json", ".git"),
+			-- 		filetypes = {
+			-- 			"javascript",
+			-- 			"javascriptreact",
+			-- 			"javascript.jsx",
+			-- 			"typescript",
+			-- 			"typescriptreact",
+			-- 			"typescript.tsx",
+			-- 		},
+			--
+			-- 		init_options = {
+			-- 			preferences = { -- https://github.com/typescript-language-server/typescript-language-server#initializationoptions:~:text=interface%20UserPreferences
+			-- 				-- TODO not sure that this is working... took from.
+			-- 				-- https://github.com/jose-elias-alvarez/typescript.nvim/issues/23#issuecomment-1205284644
+			-- 				importModuleSpecifierPreference = "non-relative", -- can't be set in tsconfig, has to be per editor?
+			-- 			},
+			-- 		},
+			-- 	},
+			-- }))
+			--
+			--
+			--
+			--
+
+			-- TODO: WIP: Format config
+			-- TODO: use eslint language server for better experience than null-ls' builtin eslint
+			lsp.eslint.setup({
+				settings = {
+					packageManager = "yarn",
+				},
+				on_attach = function(client, bufnr)
+					vim.api.nvim_create_autocmd("BufWritePre", {
+						buffer = bufnr,
+						command = "EslintFixAll",
+					})
+				end,
+			})
+
+			-- Format keymap
+			vim.keymap.set("n", "<leader>F", "<cmd>lua vim.lsp.buf.format({ async = true })<CR>", {
+				desc = "LSP: format",
+				silent = true,
+			})
+
+			-- lsp_lines config
+			require("lsp_lines").setup()
+			vim.diagnostic.config({
+				virtual_text = false,
+				-- update_in_insert = true, -- aggressively real-time updates while in insert mode
+			}) -- disable regular virtual text diagnostic
+			vim.keymap.set("", "<Leader>l", "<cmd>lua require('lsp_lines').toggle()<CR>", { desc = "Toggle lsp_lines" })
+			--[[ -- hide diagnostics on entering Insert mode ]]
+			--[[ vim.api.nvim_create_autocmd('InsertEnter', { ]]
+			--[[ 	callback = function() ]]
+			--[[ 			vim.diagnostic.hide() ]]
+			--[[ 	end, ]]
+			--[[ }) ]]
+			--[[ -- show diagnostics when exiting Insert mode ]]
+			--[[ vim.api.nvim_create_autocmd('ModeChanged', { ]]
+			--[[ 	pattern = 'i:*', ]]
+			--[[ 	callback = function() ]]
+			--[[ 			vim.diagnostic.show() ]]
+			--[[ 	end, ]]
+			--[[ }) ]]
+
+			-- ESLint fix all in buffer
+			vim.keymap.set("n", "<leader>L", "<cmd>EslintFixAll<CR>", {
+				silent = true,
+				desc = "LSP: Lint auto-fix buffer",
+			})
+		end,
+	},
+
+	-- Lspsaga for improving LSP UI/UX (vague, i know)
+	{
+		"nvimdev/lspsaga.nvim",
+		dependencies = {
+			"nvim-treesitter/nvim-treesitter", -- optional; -- Please make sure you install markdown and markdown_inline parser
+			"nvim-tree/nvim-web-devicons", -- optional
+		},
+		-- 	event = "LspAttach",
+		config = function()
+			require("lspsaga").setup({
+				ui = {
+					-- This option only works in Neovim 0.9
+					title = true,
+					-- Border type can be single, double, rounded, solid, shadow.
+					border = "single",
+					winblend = 20,
+					expand = "",
+					collapse = "",
+					code_action = "💡",
+					incoming = "",
+					outgoing = "",
+					hover = " ",
+					-- kind = {}, -- defined in https://github.com/nvimdev/lspsaga.nvim/blob/main/lua/lspsaga/lspkind.lua
+				},
+
+				-- may not *actually* be a lightbulb, that's just whawt the setting is called
+				-- lightbulb = {
+				-- 	enable = true,
+				-- 	enable_in_insert = true,
+				-- 	sign = true,
+				-- 	sign_priority = 40,
+				-- 	virtual_text = false, -- for some reason, it's enabled in both the signcol AND virtualtext by default
+				-- },
+			})
+		end,
+			keys = {
+				-- Most borrowed from the example config:
+				-- https://github.com/nvimdev/lspsaga.nvim#example-configuration
+				-- TODO add more mappings from example config?
+
+				-- Hover docs
+				{
+					"K", -- key map
+					"<cmd>Lspsaga hover_doc<CR>", -- command
+					mode = "n",
+					desc = "Hover docs",
+				},
+
+				-- Finder (see definition, references)
+				{
+					"gh", -- key map
+					"<cmd>Lspsaga finder<CR>", -- command
+					mode = "n",
+					desc = "Finder (definitions, refs)",
+				},
+
+				-- Code actions
+				-- {
+				-- 	"<leader>ca", -- key map
+				-- 	-- use Lspsaga for code actions
+				-- 	"<cmd>Lspsaga code_action<CR>", -- command
+				-- 	mode = "n",
+				-- 	desc = "Code actions",
+				-- },
+				{
+					"<leader>cA", -- key map
+					-- use native LSP's vim.ui.select for code actions
+					"<cmd>lua vim.lsp.buf.code_action()<CR>", -- command
+					mode = "n",
+					desc = "Code actions 🔭",
+				},
+
+				-- Rename symbol/variable
+				{
+					"<leader>rn", -- key map
+					"<cmd>Lspsaga rename<CR>", -- command
+					mode = "n",
+					desc = "Rename symbol/variable",
+				},
+
+				-- Peek definition
+				{
+					"gp", -- key map
+					"<cmd>Lspsaga preview_definition<CR>", -- command
+					mode = "n",
+					desc = "Peek definition",
+				},
+
+				-- Go to definition
+				{
+					"gdd", -- key map
+					"<cmd>Lspsaga goto_definition<CR>", -- command
+					mode = "n",
+					desc = "Go to definition",
+				},
+
+				-- Go to definition in vsplit
+				{
+					"gdv", -- key map
+					-- Note that this opens in a split.. TODO do this with <mod> per https://github.com/prabirshrestha/vim-lsp/issues/169#issuecomment-619449593
+					"<cmd>vsplit<cr><cmd>Lspsaga goto_definition<CR>", -- command
+					mode = "n",
+					desc = "Go to definition vsplit",
+				},
+
+				-- Go to definition in split
+				{
+					"gds", -- key map
+					-- Note that this opens in a split.. TODO do this with <mod> per ^^^
+					"<cmd>split<cr><cmd>Lspsaga goto_definition<CR>", -- command
+					mode = "n",
+					desc = "Go to definition hsplit",
+				},
+
+				-- Show line diagnostics
+				{
+					"<leader>cd", -- key map
+					"<cmd>Lspsaga show_line_diagnostics<CR>", -- command
+					mode = "n",
+					desc = "Show line diagnostics",
+				},
+
+				-- Diagnostic jump
+				-- You can use <C-o> to jump back to your previous location
+				{
+					"[e", -- key map
+					"<cmd>Lspsaga diagnostic_jump_prev<CR>", -- command
+					mode = "n",
+					desc = "Diagnostic jump prev",
+				},
+				{
+					"]e", -- key map
+					"<cmd>Lspsaga diagnostic_jump_next<CR>", -- command
+					mode = "n",
+					desc = "Diagnostic jump next",
+				},
+			},
+	},
 }, {
 	-- 	https://github.com/folke/lazy.nvim#%EF%B8%8F-configuration
 	--

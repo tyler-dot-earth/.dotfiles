@@ -1,0 +1,6 @@
+-- via https://f1sty.github.io/neovim/nvim/lsp/language-server/config/dotfiles/completion/2023/09/10/simple-nvim-lsp-setup.html
+-- vim.lsp.start({
+-- 	name = "lsp_name",
+-- 	cmd = { "language_server_cmd" },
+-- 	root_dir = vim.fs.dirname(vim.fs.find({ "file_that_indicates_root_dir", "another_one" }, { upward = true })[1]),
+-- })
