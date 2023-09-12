@@ -90,158 +90,154 @@ require("lazy").setup({
 	{
 		"catppuccin/nvim",
 		name = "catppuccin",
-		config = function()
+		init = function()
 			vim.g.catppuccin_flavour = "frappe" -- Has to be set in order for empty argument of get_palette to work
+		end,
+		config = function()
+			-- vim.g.catppuccin_flavour = "frappe" -- Has to be set in order for empty argument of get_palette to work
 
 			-- used for some color tweaks later
 			local catppuccin_flavour = require("catppuccin.palettes").get_palette() -- g:catppuccin_flavour's palette
 			-- TODO ^ how the fuck do i get lsp autocompletion on this variable?
 
 			require("catppuccin").setup({
-				-- dim_inactive = {
-				-- 	enabled = false,
-				-- 	shade = "dark",
-				-- 	percentage = 0.15,
-				-- },
-				-- transparent_background = true, -- or else some things (vague, i know) aren't transparent
-				-- term_colors = true, -- TODO wtf this do? trying this
-				-- compile = {
-				-- 	enabled = true, -- true = faster startup
-				-- 	path = vim.fn.stdpath("cache") .. "/catppuccin",
-				-- },
-				-- styles = {
-				-- 	comments = { "italic" },
-				-- 	conditionals = { "italic" },
-				-- 	loops = {},
-				-- 	functions = {},
-				-- 	keywords = {},
-				-- 	strings = {},
-				-- 	variables = {},
-				-- 	numbers = {},
-				-- 	booleans = {},
-				-- 	properties = {},
-				-- 	types = {},
-				-- 	operators = {},
-				-- },
-				-- integrations = {
-				-- 	treesitter = true,
-				-- 	native_lsp = {
-				-- 		enabled = true,
-				-- 		virtual_text = {
-				-- 			errors = { "italic" },
-				-- 			hints = { "italic" },
-				-- 			warnings = { "italic" },
-				-- 			information = { "italic" },
-				-- 		},
-				-- 		underlines = {
-				-- 			errors = { "underline" },
-				-- 			hints = { "underline" },
-				-- 			warnings = { "underline" },
-				-- 			information = { "underline" },
-				-- 		},
-				-- 	},
-				-- 	lsp_trouble = false,
-				-- 	cmp = true,
-				-- 	lsp_saga = true,
-				-- 	gitsigns = true,
-				-- 	leap = false,
-				-- 	telescope = true,
-				-- 	dap = {
-				-- 		enabled = false,
-				-- 		enable_ui = false,
-				-- 	},
-				-- 	which_key = true,
-				-- 	indent_blankline = {
-				-- 		-- i set these colors manually elsewhere, without using these settings...
-				-- 		-- which TODO makes me feel like i did it wrong since here we are
-				-- 		enabled = false,
-				-- 		colored_indent_levels = false,
-				-- 	},
-				-- 	hop = true,
-				-- 	fidget = true,
-				-- },
-				-- color_overrides = {
-				-- 	-- Related reading
-				-- 	-- -> Catppuccin styleguide: https://github.com/catppuccin/catppuccin/blob/d7a1918a23fb28e912bfd721eedef0ff452db872/docs/style-guide.md
+				dim_inactive = {
+					enabled = false,
+					shade = "dark",
+					percentage = 0.15,
+				},
+				transparent_background = true, -- or else some things (vague, i know) aren't transparent
+				term_colors = true, -- TODO wtf this do? trying this
+				compile = {
+					enabled = true, -- true = faster startup
+					path = vim.fn.stdpath("cache") .. "/catppuccin",
+				},
+				styles = {
+					comments = { "italic" },
+					conditionals = { "italic" },
+					loops = {},
+					functions = {},
+					keywords = {},
+					strings = {},
+					variables = {},
+					numbers = {},
+					booleans = {},
+					properties = {},
+					types = {},
+					operators = {},
+				},
+				integrations = {
+					treesitter = true,
+					native_lsp = {
+						enabled = true,
+						virtual_text = {
+							errors = { "italic" },
+							hints = { "italic" },
+							warnings = { "italic" },
+							information = { "italic" },
+						},
+						underlines = {
+							errors = { "underline" },
+							hints = { "underline" },
+							warnings = { "underline" },
+							information = { "underline" },
+						},
+					},
+					lsp_trouble = false,
+					cmp = true,
+					lsp_saga = true,
+					gitsigns = true,
+					leap = false,
+					telescope = true,
+					dap = {
+						enabled = false,
+						enable_ui = false,
+					},
+					which_key = true,
+					indent_blankline = {
+						-- i set these colors manually elsewhere, without using these settings...
+						-- which TODO makes me feel like i did it wrong since here we are
+						enabled = false,
+						colored_indent_levels = false,
+					},
+					hop = true,
+					fidget = true,
+				},
+				color_overrides = {
+					-- Related reading
+					-- -> Catppuccin styleguide: https://github.com/catppuccin/catppuccin/blob/d7a1918a23fb28e912bfd721eedef0ff452db872/docs/style-guide.md
+
+					-- TODO
+					all = {
+						-- the default rainbow is too red,
+						-- i like this rainbow better:
+						-- rainbow1 = { fg = catppuccin_flavour.lavender },
+						-- rainbow2 = { fg = catppuccin_flavour.blue },
+						-- rainbow3 = { fg = catppuccin_flavour.teal },
+						-- rainbow4 = { fg = catppuccin_flavour.green },
+						-- rainbow5 = { fg = catppuccin_flavour.yellow },
+						-- rainbow6 = { fg = catppuccin_flavour.peach },
+						-- rainbow7 = { fg = catppuccin_flavour.pink },
+
+						-- example
+						--[[ 	text = "#ffffff", ]]
+					},
+					-- theme-specific tweaks
+					--[[ latte = { ]]
+					--[[ 	base = "#ff0000", ]]
+					--[[ 	mantle = "#242424", ]]
+					--[[ 	crust = "#474747", ]]
+					--[[ }, ]]
+				},
 				--
-				-- 	-- TODO
-				-- 	all = {
-				-- 		-- the default rainbow is too red,
-				-- 		-- i like this rainbow better:
-				-- 		--[[ rainbow1 = { fg = catppuccin_flavour.blue }, ]]
-				-- 		--[[ rainbow2 = { fg = catppuccin_flavour.teal }, ]]
-				-- 		--[[ rainbow3 = { fg = catppuccin_flavour.green }, ]]
-				-- 		--[[ rainbow4 = { fg = catppuccin_flavour.yellow }, ]]
-				-- 		--[[ rainbow5 = { fg = catppuccin_flavour.peach }, ]]
-				-- 		--[[ rainbow6 = { fg = catppuccin_flavour.red }, ]]
-				-- 		--[[ rainbow7 = { fg = catppuccin_flavour.pink }, ]]
-				-- 		rainbow1 = { fg = catppuccin_flavour.lavender },
-				-- 		rainbow2 = { fg = catppuccin_flavour.blue },
-				-- 		rainbow3 = { fg = catppuccin_flavour.teal },
-				-- 		rainbow4 = { fg = catppuccin_flavour.green },
-				-- 		rainbow5 = { fg = catppuccin_flavour.yellow },
-				-- 		rainbow6 = { fg = catppuccin_flavour.peach },
-				-- 		rainbow7 = { fg = catppuccin_flavour.pink },
-				--
-				-- 		-- example
-				-- 		--[[ 	text = "#ffffff", ]]
-				-- 	},
-				-- 	-- theme-specific tweaks
-				-- 	--[[ latte = { ]]
-				-- 	--[[ 	base = "#ff0000", ]]
-				-- 	--[[ 	mantle = "#242424", ]]
-				-- 	--[[ 	crust = "#474747", ]]
-				-- 	--[[ }, ]]
-				-- },
-				--
-				-- highlight_overrides = {
-				-- 	-- TODO
-				-- 	all = function(colors)
-				-- 		return {
-				-- 			-- alias catpuccin's `rainbowX` to indent_blankline's expected colors
-				-- 			IndentBlanklineIndent1 = colors.rainbow1,
-				-- 			IndentBlanklineIndent2 = colors.rainbow2,
-				-- 			IndentBlanklineIndent3 = colors.rainbow3,
-				-- 			IndentBlanklineIndent4 = colors.rainbow4,
-				-- 			IndentBlanklineIndent5 = colors.rainbow5,
-				-- 			IndentBlanklineIndent6 = colors.rainbow6,
-				-- 			IndentBlanklineIndent7 = colors.rainbow7,
-				-- 			-- IndentBlanklineContextChar = { fg = "#ff0000", bg = "#ff0000" },
-				-- 			--[[ IndentBlanklineContextStart = { ]]
-				-- 			--[[ 	fg = "#ff0000", ]]
-				-- 			--[[ 	bg = "#ff0000", ]]
-				-- 			--[[ 	-- guisp = "#ff0000", ]]
-				-- 			--[[ 	-- gui = "undercurl", ]]
-				-- 			--[[ }, ]]
-				--
-				-- 			-- Improved "go to definition" highlighting
-				-- 			SagaBeacon = { bg = catppuccin_flavour.yellow },
-				--
-				-- 			-- the default greay isn't very visible
-				-- 			CursorLine = { bg = catppuccin_flavour.surface0 }, -- row highlight
-				-- 			CursorColumn = { bg = catppuccin_flavour.surface0 }, -- col highlight
-				-- 			-- TODO styling Cursor doesn't seem to work for me. not sure why.
-				-- 			--[[ Cursor = { ]]
-				-- 			--[[ 	bg = catppuccin_flavour.yellow, ]]
-				-- 			--[[ 	fg = catppuccin_flavour.surface3, ]]
-				-- 			--[[ }, ]]
-				--
-				-- 			-- fidget.nvim overrides
-				-- 			FidgetTitle = {
-				-- 				fg = catppuccin_flavour.blue,
-				-- 			},
-				-- 			FidgetTask = {
-				-- 				fg = catppuccin_flavour.teal,
-				-- 			},
-				--
-				-- 			-- nvim-treesitter-context
-				-- 			TreesitterContext = {
-				-- 				bg = catppuccin_flavour.surface0,
-				-- 				blend = 20,
-				-- 			},
-				-- 		}
-				-- 	end,
-				-- },
+				highlight_overrides = {
+					-- TODO
+					all = function(colors)
+						return {
+							-- alias catpuccin's `rainbowX` to indent_blankline's expected colors
+							IndentBlanklineIndent1 = colors.rainbow1,
+							IndentBlanklineIndent2 = colors.rainbow2,
+							IndentBlanklineIndent3 = colors.rainbow3,
+							IndentBlanklineIndent4 = colors.rainbow4,
+							IndentBlanklineIndent5 = colors.rainbow5,
+							IndentBlanklineIndent6 = colors.rainbow6,
+							IndentBlanklineIndent7 = colors.rainbow7,
+							-- IndentBlanklineContextChar = { fg = "#ff0000", bg = "#ff0000" },
+							--[[ IndentBlanklineContextStart = { ]]
+							--[[ 	fg = "#ff0000", ]]
+							--[[ 	bg = "#ff0000", ]]
+							--[[ 	-- guisp = "#ff0000", ]]
+							--[[ 	-- gui = "undercurl", ]]
+							--[[ }, ]]
+
+							-- Improved "go to definition" highlighting
+							SagaBeacon = { bg = catppuccin_flavour.yellow },
+
+							-- the default greay isn't very visible
+							CursorLine = { bg = catppuccin_flavour.surface0 }, -- row highlight
+							CursorColumn = { bg = catppuccin_flavour.surface0 }, -- col highlight
+							-- TODO styling Cursor doesn't seem to work for me. not sure why.
+							--[[ Cursor = { ]]
+							--[[ 	bg = catppuccin_flavour.yellow, ]]
+							--[[ 	fg = catppuccin_flavour.surface3, ]]
+							--[[ }, ]]
+
+							-- fidget.nvim overrides
+							FidgetTitle = {
+								fg = catppuccin_flavour.blue,
+							},
+							FidgetTask = {
+								fg = catppuccin_flavour.teal,
+							},
+
+							-- nvim-treesitter-context
+							TreesitterContext = {
+								bg = catppuccin_flavour.surface0,
+								blend = 20,
+							},
+						}
+					end,
+				},
 				--
 				-- --[[ custom_highlights = function(colors) ]]
 				-- --[[ 	return { ]]
@@ -277,6 +273,43 @@ require("lazy").setup({
 			}
 		end,
 	},
+	-- TODO couldn't get copilot.lua working
+	-- {
+	-- 	"zbirenbaum/copilot.lua",
+	-- 	name = "copilot.lua",
+	-- 	enabled = true,
+	-- 	lazy = false,
+	-- 	event = { "InsertEnter" },
+	-- 	config = function()
+	-- 		require("copilot").setup({
+	-- 			suggestion = {
+	-- 				enabled = true,
+	-- 				auto_trigger = false,
+	-- 				debounce = 75,
+	-- 				keymap = {
+	-- 					accept = "<M-l>",
+	-- 					accept_word = false,
+	-- 					accept_line = false,
+	-- 					next = "<M-]>",
+	-- 					prev = "<M-[>",
+	-- 					dismiss = "<C-]>",
+	-- 				},
+	-- 			},
+	-- 			filetypes = {
+	-- 				-- typescript = true,
+	-- 				markdown = false,
+	-- 				env = false, -- ft=sh is what .env uses for syntax by default
+	-- 				sh = function() -- ... for good measure
+	-- 					if string.match(vim.fs.basename(vim.api.nvim_buf_get_name(0)), "^%.env.*") then
+	-- 						-- disable for .env files
+	-- 						return false
+	-- 					end
+	-- 					return true
+	-- 				end,
+	-- 			},
+	-- 		})
+	-- 	end,
+	-- },
 
 	-- File browser
 	{
@@ -684,6 +717,35 @@ require("lazy").setup({
 						context_commentstring = {
 							enable = true,
 						},
+
+						-- Incremental selection based on the named nodes from the grammar.
+						incremental_selection = {
+							enable = true,
+							keymaps = {
+								init_selection = "gnn", -- set to `false` to disable one of the mappings
+								node_incremental = "grn",
+								scope_incremental = "grc",
+								node_decremental = "grm",
+								init_selection = "<Enter>",
+								node_incremental = "<Enter>",
+								node_decremental = "<BS>",
+							},
+						},
+
+						-- Indentation based on treesitter for the = operator. NOTE: This is an experimental feature.
+						indent = {
+							enable = true,
+						},
+
+						highlight = {
+							enable = true,
+							disable = { "" }, -- list of language that will be disabled
+							-- Setting this to true will run `:h syntax` and tree-sitter at the same time.
+							-- Set this to `true` if you depend on 'syntax' being enabled (like for indentation).
+							-- Using this option may slow down your editor, and you may see some duplicate highlights.
+							-- Instead of true it can also be a list of languages
+							additional_vim_regex_highlighting = true,
+						},
 					})
 				end,
 			},
@@ -724,249 +786,124 @@ require("lazy").setup({
 				},
 			},
 		},
-		opts = {
-			-- A list of parser names, or "all"
-			ensure_installed = {
-				"typescript",
-				"tsx",
-				"javascript",
-				"json",
-				"json5",
-				"css",
-				"html",
-				"markdown",
-				"markdown_inline",
-				"yaml",
-				"regex",
-				"lua",
-				"vim",
-			},
+		config = function()
+			require("nvim-treesitter.configs").setup({
+				-- A list of parser names, or "all"
+				ensure_installed = {
+					"typescript",
+					"tsx",
+					"javascript",
+					"json",
+					"json5",
+					"css",
+					"html",
+					"markdown",
+					"markdown_inline",
+					"yaml",
+					"regex",
+					"lua",
+					"vim",
+				},
 
-			highlight = {
-				enable = true,
-				disable = { "" }, -- list of language that will be disabled
-				-- Setting this to true will run `:h syntax` and tree-sitter at the same time.
-				-- Set this to `true` if you depend on 'syntax' being enabled (like for indentation).
-				-- Using this option may slow down your editor, and you may see some duplicate highlights.
-				-- Instead of true it can also be a list of languages
-				additional_vim_regex_highlighting = true,
-			},
-
-			-- nvim-ts-context-commentstring stuff
-			-- NOTE: some config in Comment.nvim relevant as well;
-			-- see https://github.com/JoosepAlviste/nvim-ts-context-commentstring#commentnvim=
-			context_commentstring = {
-				enable = true,
-				enable_autocmd = false, -- for Comment.nvim, per https://github.com/JoosepAlviste/nvim-ts-context-commentstring/wiki/Integrations#commentnvim
-			},
-
-			-- TODO unsure if works, saw it somewhere
-			-- indent = { enable = true },
-
-			-- nvim-treesitter-textobjects config
-			-- mostly lets me jump around using treesitter awareness
-			textobjects = {
-				select = {
+				highlight = {
 					enable = true,
+					disable = { "" }, -- list of language that will be disabled
+					-- Setting this to true will run `:h syntax` and tree-sitter at the same time.
+					-- Set this to `true` if you depend on 'syntax' being enabled (like for indentation).
+					-- Using this option may slow down your editor, and you may see some duplicate highlights.
+					-- Instead of true it can also be a list of languages
+					additional_vim_regex_highlighting = true,
+				},
 
-					-- Automatically jump forward to textobj, similar to targets.vim
-					lookahead = true,
+				-- nvim-ts-context-commentstring stuff
+				-- NOTE: some config in Comment.nvim relevant as well;
+				-- see https://github.com/JoosepAlviste/nvim-ts-context-commentstring#commentnvim=
+				context_commentstring = {
+					enable = true,
+					enable_autocmd = false, -- for Comment.nvim, per https://github.com/JoosepAlviste/nvim-ts-context-commentstring/wiki/Integrations#commentnvim
+				},
 
+				-- nvim-treesitter-textobjects config
+				-- mostly lets me jump around using treesitter awareness
+				textobjects = {
+					select = {
+						enable = true,
+
+						-- Automatically jump forward to textobj, similar to targets.vim
+						lookahead = true,
+
+						keymaps = {
+							-- You can use the capture groups defined in textobjects.scm
+							["af"] = "@function.outer",
+							["if"] = "@function.inner",
+							["ac"] = "@class.outer",
+							["ic"] = "@class.inner",
+						},
+						-- You can choose the select mode (default is charwise 'v')
+						selection_modes = {
+							["@parameter.outer"] = "v", -- charwise
+							["@function.outer"] = "V", -- linewise
+							["@class.outer"] = "<c-v>", -- blockwise
+						},
+						-- If you set this to `true` (default is `false`) then any textobject is
+						-- extended to include preceding xor succeeding whitespace. Succeeding
+						-- whitespace has priority in order to act similarly to eg the built-in
+						-- `ap`.
+						include_surrounding_whitespace = true,
+					},
+
+					swap = {
+						enable = true,
+						swap_next = {
+							["<leader>a"] = "@parameter.inner",
+						},
+						swap_previous = {
+							["<leader>A"] = "@parameter.inner",
+						},
+					},
+
+					move = {
+						enable = true,
+						set_jumps = true, -- whether to set jumps in the jumplist
+						goto_next_start = {
+							["]m"] = "@function.outer",
+							["]]"] = "@class.outer",
+						},
+						goto_next_end = {
+							["]M"] = "@function.outer",
+							["]["] = "@class.outer",
+						},
+						goto_previous_start = {
+							["[m"] = "@function.outer",
+							["[["] = "@class.outer",
+						},
+						goto_previous_end = {
+							["[M"] = "@function.outer",
+							["[]"] = "@class.outer",
+						},
+					},
+				},
+
+				-- Incremental selection based on the named nodes from the grammar.
+				incremental_selection = {
+					enable = true,
 					keymaps = {
-						-- You can use the capture groups defined in textobjects.scm
-						["af"] = "@function.outer",
-						["if"] = "@function.inner",
-						["ac"] = "@class.outer",
-						["ic"] = "@class.inner",
+						init_selection = "gnn", -- set to `false` to disable one of the mappings
+						node_incremental = "grn",
+						scope_incremental = "grc",
+						node_decremental = "grm",
+						init_selection = "<Enter>",
+						node_incremental = "<Enter>",
+						node_decremental = "<BS>",
 					},
-					-- You can choose the select mode (default is charwise 'v')
-					selection_modes = {
-						["@parameter.outer"] = "v", -- charwise
-						["@function.outer"] = "V", -- linewise
-						["@class.outer"] = "<c-v>", -- blockwise
-					},
-					-- If you set this to `true` (default is `false`) then any textobject is
-					-- extended to include preceding xor succeeding whitespace. Succeeding
-					-- whitespace has priority in order to act similarly to eg the built-in
-					-- `ap`.
-					include_surrounding_whitespace = true,
 				},
 
-				swap = {
+				-- Indentation based on treesitter for the = operator. NOTE: This is an experimental feature.
+				indent = {
 					enable = true,
-					swap_next = {
-						["<leader>a"] = "@parameter.inner",
-					},
-					swap_previous = {
-						["<leader>A"] = "@parameter.inner",
-					},
 				},
-
-				move = {
-					enable = true,
-					set_jumps = true, -- whether to set jumps in the jumplist
-					goto_next_start = {
-						["]m"] = "@function.outer",
-						["]]"] = "@class.outer",
-					},
-					goto_next_end = {
-						["]M"] = "@function.outer",
-						["]["] = "@class.outer",
-					},
-					goto_previous_start = {
-						["[m"] = "@function.outer",
-						["[["] = "@class.outer",
-					},
-					goto_previous_end = {
-						["[M"] = "@function.outer",
-						["[]"] = "@class.outer",
-					},
-				},
-			},
-
-			-- Incremental selection based on the named nodes from the grammar.
-			incremental_selection = {
-				enable = true,
-				keymaps = {
-					init_selection = "gnn", -- set to `false` to disable one of the mappings
-					node_incremental = "grn",
-					scope_incremental = "grc",
-					node_decremental = "grm",
-					-- init_selection = "<Enter>",
-					-- node_incremental = "<Enter>",
-					-- node_decremental = "<BS>",
-				},
-			},
-
-			-- Indentation based on treesitter for the = operator. NOTE: This is an experimental feature.
-			-- indent = {
-			-- 	enable = true,
-			-- },
-		},
-		-- ^^ TODO those opts aren't being used.
-		-- -- TODO using config (below) works...
-		-- -- TODO what am i doing wrong?
-		-- config = function()
-		-- 	require("nvim-treesitter.configs").setup({
-		-- 		-- A list of parser names, or "all"
-		-- 		ensure_installed = {
-		-- 			"typescript",
-		-- 			"tsx",
-		-- 			"javascript",
-		-- 			"json",
-		-- 			"json5",
-		-- 			"css",
-		-- 			"html",
-		-- 			"markdown",
-		-- 			"markdown_inline",
-		-- 			"yaml",
-		-- 			"regex",
-		-- 			"lua",
-		-- 			"vim",
-		-- 		},
-		--
-		-- 		highlight = {
-		-- 			enable = true,
-		-- 			disable = { "" }, -- list of language that will be disabled
-		-- 			-- Setting this to true will run `:h syntax` and tree-sitter at the same time.
-		-- 			-- Set this to `true` if you depend on 'syntax' being enabled (like for indentation).
-		-- 			-- Using this option may slow down your editor, and you may see some duplicate highlights.
-		-- 			-- Instead of true it can also be a list of languages
-		-- 			additional_vim_regex_highlighting = true,
-		-- 		},
-		--
-		-- 		-- nvim-ts-context-commentstring stuff
-		-- 		-- NOTE: some config in Comment.nvim relevant as well;
-		-- 		-- see https://github.com/JoosepAlviste/nvim-ts-context-commentstring#commentnvim=
-		-- 		context_commentstring = {
-		-- 			enable = true,
-		-- 			enable_autocmd = false, -- for Comment.nvim, per https://github.com/JoosepAlviste/nvim-ts-context-commentstring/wiki/Integrations#commentnvim
-		-- 		},
-		--
-		-- 		-- TODO unsure if works, saw it somewhere
-		-- 		-- indent = { enable = true },
-		--
-		-- 		-- nvim-treesitter-textobjects config
-		-- 		-- mostly lets me jump around using treesitter awareness
-		-- 		textobjects = {
-		-- 			select = {
-		-- 				enable = true,
-		--
-		-- 				-- Automatically jump forward to textobj, similar to targets.vim
-		-- 				lookahead = true,
-		--
-		-- 				keymaps = {
-		-- 					-- You can use the capture groups defined in textobjects.scm
-		-- 					["af"] = "@function.outer",
-		-- 					["if"] = "@function.inner",
-		-- 					["ac"] = "@class.outer",
-		-- 					["ic"] = "@class.inner",
-		-- 				},
-		-- 				-- You can choose the select mode (default is charwise 'v')
-		-- 				selection_modes = {
-		-- 					["@parameter.outer"] = "v", -- charwise
-		-- 					["@function.outer"] = "V", -- linewise
-		-- 					["@class.outer"] = "<c-v>", -- blockwise
-		-- 				},
-		-- 				-- If you set this to `true` (default is `false`) then any textobject is
-		-- 				-- extended to include preceding xor succeeding whitespace. Succeeding
-		-- 				-- whitespace has priority in order to act similarly to eg the built-in
-		-- 				-- `ap`.
-		-- 				include_surrounding_whitespace = true,
-		-- 			},
-		--
-		-- 			swap = {
-		-- 				enable = true,
-		-- 				swap_next = {
-		-- 					["<leader>a"] = "@parameter.inner",
-		-- 				},
-		-- 				swap_previous = {
-		-- 					["<leader>A"] = "@parameter.inner",
-		-- 				},
-		-- 			},
-		--
-		-- 			move = {
-		-- 				enable = true,
-		-- 				set_jumps = true, -- whether to set jumps in the jumplist
-		-- 				goto_next_start = {
-		-- 					["]m"] = "@function.outer",
-		-- 					["]]"] = "@class.outer",
-		-- 				},
-		-- 				goto_next_end = {
-		-- 					["]M"] = "@function.outer",
-		-- 					["]["] = "@class.outer",
-		-- 				},
-		-- 				goto_previous_start = {
-		-- 					["[m"] = "@function.outer",
-		-- 					["[["] = "@class.outer",
-		-- 				},
-		-- 				goto_previous_end = {
-		-- 					["[M"] = "@function.outer",
-		-- 					["[]"] = "@class.outer",
-		-- 				},
-		-- 			},
-		-- 		},
-		--
-		-- 		-- Incremental selection based on the named nodes from the grammar.
-		-- 		incremental_selection = {
-		-- 			enable = true,
-		-- 			keymaps = {
-		-- 				init_selection = "gnn", -- set to `false` to disable one of the mappings
-		-- 				node_incremental = "grn",
-		-- 				scope_incremental = "grc",
-		-- 				node_decremental = "grm",
-		-- 				-- init_selection = "<Enter>",
-		-- 				-- node_incremental = "<Enter>",
-		-- 				-- node_decremental = "<BS>",
-		-- 			},
-		-- 		},
-		--
-		-- 		-- Indentation based on treesitter for the = operator. NOTE: This is an experimental feature.
-		-- 		-- indent = {
-		-- 		-- 	enable = true,
-		-- 		-- },
-		-- 	})
-		-- end,
+			})
+		end,
 	},
 
 	-- Substitute variants (like case differences),
@@ -1131,20 +1068,6 @@ require("lazy").setup({
 	},
 
 	-- auto-expand splits
-	-- TODO try focus.nvim instead?
-	-- {
-	-- 	"camspiers/lens.vim",
-	-- 	dependencies = {
-	-- 		"camspiers/animate.vim",
-	-- 	},
-	-- 	init = function()
-	-- 		-- TODO not sure how to set the settings since this isn't a lua plugin lol
-	-- 		-- vim.g.lens.disabled_filetypes = { "nerdtree", "fzf" }
-	-- 	end,
-	-- 	-- keymap = {
-	-- 	-- 	-- TODO toggle on and off?
-	-- 	-- },
-	-- },
 	{
 		"nvim-focus/focus.nvim",
 		lazy = false,
@@ -1172,75 +1095,18 @@ require("lazy").setup({
 
 	{
 		"pmizio/typescript-tools.nvim",
-		enable = true,
-		lazy = false,
-		-- dependencies = {
-		-- 	"nvim-lua/plenary.nvim",
-		-- 	"neovim/nvim-lspconfig",
-		-- },
-		-- opts = {
-		-- 	settings = {
-		-- 		-- spawn additional tsserver instance to calculate diagnostics on it
-		-- 		separate_diagnostic_server = true,
-		-- 		-- "change"|"insert_leave" determine when the client asks the server about diagnostic
-		-- 		publish_diagnostic_on = "insert_leave",
-		-- 		-- to include all supported code actions specify commands exposed as code_actions
-		-- 		-- expose_as_code_action = "all",
-		-- 		expose_as_code_action = {
-		-- 			"fix_all",
-		-- 			"add_missing_imports",
-		-- 			"remove_unused",
-		-- 			"remove_unused_imports",
-		-- 			"organize_imports",
-		-- 		},
-		-- 		-- string|nil - specify a custom path to `tsserver.js` file, if this is nil or file under path
-		-- 		-- not exists then standard path resolution strategy is applied
-		-- 		tsserver_path = nil,
-		-- 		-- specify a list of plugins to load by tsserver, e.g., for support `styled-components`
-		-- 		-- (see 💅 `styled-components` support section)
-		-- 		tsserver_plugins = {},
-		-- 		-- this value is passed to: https://nodejs.org/api/cli.html#--max-old-space-sizesize-in-megabytes
-		-- 		-- memory limit in megabytes or "auto"(basically no limit)
-		-- 		tsserver_max_memory = "auto",
-		-- 		-- described below
-		-- 		tsserver_format_options = {},
-		-- 		tsserver_file_preferences = {},
-		-- 		-- mirror of VSCode's `typescript.suggest.completeFunctionCalls`
-		-- 		complete_function_calls = false,
-		--
-		-- 		-- Note that handlers can be used to override certain LSP methods.
-		-- 		-- For example, you can use the filter_diagnostics helper to ignore specific errors:
-		-- 		-- handlers = {
-		-- 		-- 	["textDocument/publishDiagnostics"] = api.filter_diagnostics(
-		-- 		-- 	-- Ignore 'This may be converted to an async function' diagnostics.
-		-- 		-- 	{ 80006 }
-		-- 		-- 	),
-		-- 		-- },
-		--
-		-- 		-- tsserver_file_preferences = {
-		-- 		-- 	includeInlayParameterNameHints = "all",
-		-- 		-- 	includeCompletionsForModuleExports = true,
-		-- 		-- 	quotePreference = "auto",
-		-- 		-- 	-- ...,
-		-- 		-- },
-		-- 		-- tsserver_format_options = {
-		-- 		-- 	allowIncompleteCompletions = false,
-		-- 		-- 	allowRenameOfImportPath = false,
-		-- 		-- 	-- ...,
-		-- 		-- },
-		-- 	},
-		-- },
-		event = { "BufReadPre", "BufNewFile" },
-		ft = { "typescript", "typescriptreact" },
 		dependencies = {
 			"nvim-lua/plenary.nvim",
 			"neovim/nvim-lspconfig",
 		},
+		enable = true,
+		-- lazy = false,
+		event = { "BufReadPre", "BufNewFile" },
+		ft = { "typescript", "typescriptreact" },
 		config = function()
 			require("typescript-tools").setup({
 				settings = {
 					-- spawn additional tsserver instance to calculate diagnostics on it
-					-- separate_diagnostic_server = true,
 					separate_diagnostic_server = true,
 					-- "change"|"insert_leave" determine when the client asks the server about diagnostic
 					publish_diagnostic_on = "insert_leave",
@@ -1293,31 +1159,37 @@ require("lazy").setup({
 		end,
 	},
 
-	-- { "hrsh7th/cmp-nvim-lsp" },
+	-- Completion
 	{
 		"hrsh7th/nvim-cmp",
 		name = "nvim-cmp",
 		dependencies = {
 			{ "hrsh7th/cmp-nvim-lsp" },
+			{ "onsails/lspkind.nvim" },
+
+			-- Snippets
+			"dcampos/nvim-snippy",
+			"dcampos/cmp-snippy",
+
+			-- Random completion sources
+			-- DONT FORGET TO ADD THEM TO sources IN config() BELOW
+			"hrsh7th/cmp-emoji", -- :shortcodes: -> emoji
+			"jcha0713/cmp-tw2css", -- tailwind shorthand -> expanded css
+			"hrsh7th/cmp-copilot", -- copilot.vim
+			"hrsh7th/cmp-nvim-lsp-signature-help", -- show function signature
+			-- "zbirenbaum/copilot.lua", -- copilot.lua
 		},
-		-- opts = {
-		-- 	settings = {
-		-- 		window = {
-		-- 			-- completion = cmp.config.window.bordered(),
-		-- 			-- documentation = cmp.config.window.bordered(),
-		-- 		},
-		--
-		-- 		sources = cmp.config.sources({
-		-- 			{ name = "nvim_lsp" },
-		-- 		}, {
-		-- 			{ name = "buffer" },
-		-- 		}),
-		-- 	},
-		-- },
 		config = function()
 			local cmp = require("cmp")
+			local lspkind = require("lspkind")
 
 			cmp.setup({
+				snippet = {
+					-- REQUIRED - you must specify a snippet engine
+					expand = function(args)
+						require("snippy").expand_snippet(args.body) -- For `snippy` users.
+					end,
+				},
 				window = {
 					-- completion = cmp.config.window.bordered(),
 					-- documentation = cmp.config.window.bordered(),
@@ -1325,12 +1197,110 @@ require("lazy").setup({
 
 				sources = cmp.config.sources({
 					{ name = "nvim_lsp" },
+					{ name = "emoji" },
+					{ name = "cmp-tw2css" },
+					{ name = "copilot" },
+					{ name = "nvim_lsp_signature_help" },
 				}, {
 					{ name = "buffer" },
 				}),
+
+				mapping = cmp.mapping.preset.insert({
+					-- default uses up / down when the completion menu is open
+					-- ['<C-b>'] = cmp.mapping.scroll_docs(-4),
+					-- ['<C-f>'] = cmp.mapping.scroll_docs(4),
+					["<C-Space>"] = cmp.mapping.complete(),
+					-- ['<C-e>'] = cmp.mapping.abort(),
+					["<CR>"] = cmp.mapping.confirm({ select = true }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
+				}),
+
+				formatting = {
+					format = lspkind.cmp_format({
+						mode = "symbol", -- show only symbol annotations
+						maxwidth = 50, -- prevent the popup from showing more than provided characters (e.g 50 will not show more than 50 characters)
+						ellipsis_char = "...", -- when popup menu exceed maxwidth, the truncated part would show ellipsis_char instead (must define maxwidth first)
+
+						-- The function below will be called before any actual modifications from lspkind
+						-- so that you can provide more controls on popup customization. (See [#30](https://github.com/onsails/lspkind-nvim/pull/30))
+						-- before = function (entry, vim_item)
+						--   ...
+						--   return vim_item
+						-- end
+
+						-- symbol_map = {
+						-- 	Boolean = "[] Boolean",
+						-- 	Character = "[] Character",
+						-- 	Class = "[] Class",
+						-- 	Color = "[] Color",
+						-- 	Constant = "[] Constant",
+						-- 	Constructor = "[] Constructor",
+						-- 	Enum = "[] Enum",
+						-- 	EnumMember = "[] EnumMember",
+						-- 	Event = "[ﳅ] Event",
+						-- 	Field = "[] Field",
+						-- 	File = "[] File",
+						-- 	Folder = "[ﱮ] Folder",
+						-- 	Function = "[󰊕] Function",
+						-- 	Interface = "[] Interface",
+						-- 	Keyword = "[] Keyword",
+						-- 	Method = "[] Method",
+						-- 	Module = "[] Module",
+						-- 	Number = "[] Number",
+						-- 	Operator = "[Ψ] Operator",
+						-- 	Parameter = "[] Parameter",
+						-- 	Property = "[] Property",
+						-- 	Reference = "[] Reference",
+						-- 	Snippet = "[] Snippet",
+						-- 	String = "[] String",
+						-- 	Struct = "[ﯟ] Struct",
+						-- 	Text = "[] Text",
+						-- 	TypeParameter = "[] TypeParameter",
+						-- 	Unit = "[] Unit",
+						-- 	Value = "[] Value",
+						-- 	Variable = "[󰫧] Variable",
+						-- 	Copilot = "[]",
+						-- },
+
+						-- let's try something weird
+						symbol_map = {
+							Boolean = "👍🏻 Boolean",
+							Character = "🔤 Character",
+							Class = "🎓 Class",
+							Color = "🌈 Color",
+							Constant = "🔒 Constant",
+							Constructor = "🛠 Constructor",
+							Enum = "🔢 Enum",
+							EnumMember = "🔠 EnumMember",
+							Event = "🔔 Event",
+							Field = "🌱 Field",
+							File = "📄 File",
+							Folder = "📁 Folder",
+							Function = "🔨 Function",
+							Interface = "🔗 Interface",
+							Keyword = "🔑 Keyword",
+							Method = "🔎 Method",
+							Module = "📦 Module",
+							Number = "💯 Number",
+							Operator = "➕➖ Operator",
+							Parameter = "📝 Parameter",
+							Property = "🔐 Property",
+							Reference = "📚 Reference",
+							Snippet = "✂️ Snippet",
+							String = "💬 String",
+							Struct = "🏗 Struct",
+							Text = "📖 Text",
+							TypeParameter = "📏 TypeParameter",
+							Unit = "📏 Unit",
+							Value = "💰 Value",
+							Variable = "🔀 Variable",
+							Copilot = "✈️ Copilot",
+						},
+					}),
+				},
 			})
 		end,
 	},
+	-- { "hrsh7th/cmp-nvim-lsp" },
 
 	-- LSP (Language Server Protocol) integration
 	-- TODO push some of this to individual ftplugin files?
@@ -1349,23 +1319,9 @@ require("lazy").setup({
 		},
 		config = function()
 			-- LSP configuration
+			-- https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md
 
 			local lsp = require("lspconfig")
-			-- https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md
-			--
-			-- lsp["tsserver"].setup({}) -- DONT enable if using typescript-tools.nvim
-			--
-			-- Configure LSP for various servers via vscode-langservers-extracted (via `npm i -g vscode-langservers-extracted`)
-			-- lsp["html"].setup() -- npm i -g vscode-langservers-extracted
-			-- lsp["cssls"].setup() -- npm i -g vscode-langservers-extracted
-			-- lsp["eslint"].setup()
-			-- lsp["jsonls"].setup() -- npm i -g vscode-langservers-extracted
-			--
-			-- https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#prismals
-			-- lsp["prismals"].setup() -- npm install -g @prisma/language-server
-			--
-			-- https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#tailwindcss
-			-- lsp["tailwindcss"].setup({}) -- npm install -g @tailwindcss/language-server
 
 			-- Set up lspconfig.
 			-- local capabilities = require("cmp_nvim_lsp").default_capabilities()
@@ -1374,54 +1330,22 @@ require("lazy").setup({
 			-- 	capabilities = capabilities,
 			-- })
 
-			--
-			--
-			--
-			--
-			-- Configure LSP for ESLint
-			-- lsp["eslint"].setup()
-			-- Configure LSP for various servers via vscode-langservers-extracted (via `npm i -g vscode-langservers-extracted`)
-			-- lsp["html"].setup(coq.lsp_ensure_capabilities())
-			-- lsp["cssls"].setup(coq.lsp_ensure_capabilities())
-			-- lsp["jsonls"].setup(coq.lsp_ensure_capabilities())
-			-- lsp["prismals"].setup(coq.lsp_ensure_capabilities())
-			-- Configure LSP for TypeScript (via `npm install -g typescript typescript-language-server`)
-			-- TODO maybe using mason.nvim to install language servers
-			-- Configure LSP for typescript + coq via typescript.nvim
-			-- require("typescript").setup(coq.lsp_ensure_capabilities({
-			-- 	disable_commands = false, -- prevent the plugin from creating Vim commands
-			-- 	debug = false, -- enable debug logging for commands
-			-- 	go_to_source_definition = {
-			-- 		fallback = true, -- fall back to standard LSP definition on failure
-			-- 	},
-			-- 	server = {
-			-- 		-- root_dir = root_pattern("package.json", "tsconfig.json", "jsconfig.json", ".git"),
-			-- 		filetypes = {
-			-- 			"javascript",
-			-- 			"javascriptreact",
-			-- 			"javascript.jsx",
-			-- 			"typescript",
-			-- 			"typescriptreact",
-			-- 			"typescript.tsx",
-			-- 		},
-			--
-			-- 		init_options = {
-			-- 			preferences = { -- https://github.com/typescript-language-server/typescript-language-server#initializationoptions:~:text=interface%20UserPreferences
-			-- 				-- TODO not sure that this is working... took from.
-			-- 				-- https://github.com/jose-elias-alvarez/typescript.nvim/issues/23#issuecomment-1205284644
-			-- 				importModuleSpecifierPreference = "non-relative", -- can't be set in tsconfig, has to be per editor?
-			-- 			},
-			-- 		},
-			-- 	},
-			-- }))
-			--
-			--
-			--
-			--
+			local capabilities = vim.lsp.protocol.make_client_capabilities()
+			capabilities = require("cmp_nvim_lsp").default_capabilities(capabilities)
 
-			-- TODO: WIP: Format config
-			-- TODO: use eslint language server for better experience than null-ls' builtin eslint
-			lsp.eslint.setup({
+			-- lsp["tsserver"].setup({}) -- DONT enable if using typescript-tools.nvim
+
+			-- npm i -g vscode-langservers-extracted
+			lsp["html"].setup({
+				capabilities = capabilities,
+			})
+			-- npm i -g vscode-langservers-extracted
+			lsp["cssls"].setup({
+				capabilities = capabilities,
+			})
+			-- npm i -g vscode-langservers-extracted
+			lsp["eslint"].setup({
+				capabilities = capabilities,
 				settings = {
 					packageManager = "yarn",
 				},
@@ -1432,6 +1356,34 @@ require("lazy").setup({
 					})
 				end,
 			})
+			-- npm i -g vscode-langservers-extracted
+			lsp["jsonls"].setup({
+				capabilities = capabilities,
+			})
+			-- https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#prismals
+			-- npm install -g @prisma/language-server
+			lsp["prismals"].setup({
+				capabilities = capabilities,
+			})
+			-- https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#tailwindcss
+			-- npm install -g @tailwindcss/language-server
+			lsp["tailwindcss"].setup({
+				capabilities = capabilities,
+			})
+
+			-- TODO: WIP: Format config
+			-- TODO: use eslint language server for better experience than null-ls' builtin eslint
+			-- lsp.eslint.setup({
+			-- 	settings = {
+			-- 		packageManager = "yarn",
+			-- 	},
+			-- 	on_attach = function(client, bufnr)
+			-- 		vim.api.nvim_create_autocmd("BufWritePre", {
+			-- 			buffer = bufnr,
+			-- 			command = "EslintFixAll",
+			-- 		})
+			-- 	end,
+			-- })
 
 			-- Format keymap
 			vim.keymap.set("n", "<leader>F", "<cmd>lua vim.lsp.buf.format({ async = true })<CR>", {
@@ -1503,108 +1455,140 @@ require("lazy").setup({
 				-- },
 			})
 		end,
-			keys = {
-				-- Most borrowed from the example config:
-				-- https://github.com/nvimdev/lspsaga.nvim#example-configuration
-				-- TODO add more mappings from example config?
+		keys = {
+			-- Most borrowed from the example config:
+			-- https://github.com/nvimdev/lspsaga.nvim#example-configuration
+			-- TODO add more mappings from example config?
 
-				-- Hover docs
-				{
-					"K", -- key map
-					"<cmd>Lspsaga hover_doc<CR>", -- command
-					mode = "n",
-					desc = "Hover docs",
-				},
-
-				-- Finder (see definition, references)
-				{
-					"gh", -- key map
-					"<cmd>Lspsaga finder<CR>", -- command
-					mode = "n",
-					desc = "Finder (definitions, refs)",
-				},
-
-				-- Code actions
-				-- {
-				-- 	"<leader>ca", -- key map
-				-- 	-- use Lspsaga for code actions
-				-- 	"<cmd>Lspsaga code_action<CR>", -- command
-				-- 	mode = "n",
-				-- 	desc = "Code actions",
-				-- },
-				{
-					"<leader>cA", -- key map
-					-- use native LSP's vim.ui.select for code actions
-					"<cmd>lua vim.lsp.buf.code_action()<CR>", -- command
-					mode = "n",
-					desc = "Code actions 🔭",
-				},
-
-				-- Rename symbol/variable
-				{
-					"<leader>rn", -- key map
-					"<cmd>Lspsaga rename<CR>", -- command
-					mode = "n",
-					desc = "Rename symbol/variable",
-				},
-
-				-- Peek definition
-				{
-					"gp", -- key map
-					"<cmd>Lspsaga preview_definition<CR>", -- command
-					mode = "n",
-					desc = "Peek definition",
-				},
-
-				-- Go to definition
-				{
-					"gdd", -- key map
-					"<cmd>Lspsaga goto_definition<CR>", -- command
-					mode = "n",
-					desc = "Go to definition",
-				},
-
-				-- Go to definition in vsplit
-				{
-					"gdv", -- key map
-					-- Note that this opens in a split.. TODO do this with <mod> per https://github.com/prabirshrestha/vim-lsp/issues/169#issuecomment-619449593
-					"<cmd>vsplit<cr><cmd>Lspsaga goto_definition<CR>", -- command
-					mode = "n",
-					desc = "Go to definition vsplit",
-				},
-
-				-- Go to definition in split
-				{
-					"gds", -- key map
-					-- Note that this opens in a split.. TODO do this with <mod> per ^^^
-					"<cmd>split<cr><cmd>Lspsaga goto_definition<CR>", -- command
-					mode = "n",
-					desc = "Go to definition hsplit",
-				},
-
-				-- Show line diagnostics
-				{
-					"<leader>cd", -- key map
-					"<cmd>Lspsaga show_line_diagnostics<CR>", -- command
-					mode = "n",
-					desc = "Show line diagnostics",
-				},
-
-				-- Diagnostic jump
-				-- You can use <C-o> to jump back to your previous location
-				{
-					"[e", -- key map
-					"<cmd>Lspsaga diagnostic_jump_prev<CR>", -- command
-					mode = "n",
-					desc = "Diagnostic jump prev",
-				},
-				{
-					"]e", -- key map
-					"<cmd>Lspsaga diagnostic_jump_next<CR>", -- command
-					mode = "n",
-					desc = "Diagnostic jump next",
-				},
+			-- Hover docs
+			{
+				"K", -- key map
+				"<cmd>Lspsaga hover_doc<CR>", -- command
+				mode = "n",
+				desc = "Hover docs",
 			},
+
+			-- Finder (see definition, references)
+			{
+				"gh", -- key map
+				"<cmd>Lspsaga finder<CR>", -- command
+				mode = "n",
+				desc = "Finder (definitions, refs)",
+			},
+
+			-- Code actions
+			-- {
+			-- 	"<leader>ca", -- key map
+			-- 	-- use Lspsaga for code actions
+			-- 	"<cmd>Lspsaga code_action<CR>", -- command
+			-- 	mode = "n",
+			-- 	desc = "Code actions",
+			-- },
+			{
+				"<leader>ca", -- key map
+				-- use native LSP's vim.ui.select for code actions
+				"<cmd>lua vim.lsp.buf.code_action()<CR>", -- command
+				mode = "n",
+				desc = "Code actions 🔭",
+			},
+
+			-- Rename symbol/variable
+			{
+				"<leader>rn", -- key map
+				"<cmd>Lspsaga rename<CR>", -- command
+				mode = "n",
+				desc = "Rename symbol/variable",
+			},
+
+			-- Peek definition
+			{
+				"gp", -- key map
+				"<cmd>Lspsaga preview_definition<CR>", -- command
+				mode = "n",
+				desc = "Peek definition",
+			},
+
+			-- Go to definition
+			{
+				"gdd", -- key map
+				"<cmd>Lspsaga goto_definition<CR>", -- command
+				mode = "n",
+				desc = "Go to definition",
+			},
+
+			-- Go to definition in vsplit
+			{
+				"gdv", -- key map
+				-- Note that this opens in a split.. TODO do this with <mod> per https://github.com/prabirshrestha/vim-lsp/issues/169#issuecomment-619449593
+				"<cmd>vsplit<cr><cmd>Lspsaga goto_definition<CR>", -- command
+				mode = "n",
+				desc = "Go to definition vsplit",
+			},
+
+			-- Go to definition in split
+			{
+				"gds", -- key map
+				-- Note that this opens in a split.. TODO do this with <mod> per ^^^
+				"<cmd>split<cr><cmd>Lspsaga goto_definition<CR>", -- command
+				mode = "n",
+				desc = "Go to definition hsplit",
+			},
+
+			-- Show line diagnostics
+			{
+				"<leader>cd", -- key map
+				"<cmd>Lspsaga show_line_diagnostics<CR>", -- command
+				mode = "n",
+				desc = "Show line diagnostics",
+			},
+
+			-- Diagnostic jump
+			-- You can use <C-o> to jump back to your previous location
+			{
+				"[e", -- key map
+				"<cmd>Lspsaga diagnostic_jump_prev<CR>", -- command
+				mode = "n",
+				desc = "Diagnostic jump prev",
+			},
+			{
+				"]e", -- key map
+				"<cmd>Lspsaga diagnostic_jump_next<CR>", -- command
+				mode = "n",
+				desc = "Diagnostic jump next",
+			},
+		},
+	},
+
+	-- Displays the type-checking results in a quickfix list and provides visual notifications about the progress and completion of type-checking
+	{
+		"dmmulroy/tsc.nvim",
+		name = "tsc.nvim",
+		opts = {
+			-- auto_open_qflist = true,
+			-- auto_close_qflist = false,
+			-- bin_path = utils.find_tsc_bin(),
+			-- enable_progress_notifications = true,
+			-- flags = {
+			-- 	noEmit = true,
+			-- 	project = function()
+			-- 		return utils.find_nearest_tsconfig()
+			-- 	end,
+			-- },
+			-- hide_progress_notifications_from_history = true,
+			-- spinner = { "⣾", "⣽", "⣻", "⢿", "⡿", "⣟", "⣯", "⣷" },
+		},
+	},
+
+	-- Deactivates the hlsearch when you move the cursor
+	{
+		"asiryk/auto-hlsearch.nvim",
+		opts = {
+			-- Defaults
+			-- remap_keys = { "/", "?", "*", "#", "n", "N" },
+			-- create_commands = true,
+			-- pre_hook = function() end,
+			-- post_hook = function() end,
+		},
 	},
 }, {
 	-- 	https://github.com/folke/lazy.nvim#%EF%B8%8F-configuration
