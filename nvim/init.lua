@@ -490,6 +490,7 @@ require("lazy").setup({
 						prompt_position = "top",
 						preview_cutoff = 120,
 					},
+					wrap_results = true,
 					path_display = { "smart" },
 					winblend = 20,
 					border = {},
