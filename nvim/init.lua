@@ -192,8 +192,8 @@ require("lazy").setup({
 			local colors = require("catppuccin.palettes").get_palette()
 			-- TODO ^ how the fuck do i get lsp autocompletion on this variable?
 
-			print(vim.inspect(colors))
-			print("fooooooo")
+			-- print(vim.inspect(colors))
+			-- print("fooooooo")
 
 			require("catppuccin").setup({
 				dim_inactive = {
