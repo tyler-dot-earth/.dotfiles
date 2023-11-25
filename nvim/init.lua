@@ -462,6 +462,7 @@ require("lazy").setup({
 
 			telescope.setup({
 				defaults = {
+					dynamic_preview_title = true,
 					mappings = {
 						n = {
 							["<c-d>"] = actions.delete_buffer,
@@ -523,12 +524,12 @@ require("lazy").setup({
 					},
 					git_files = {
 						hidden = true,
-						previewer = false,
+						previewer = true,
 						layout_config = {
 							horizontal = {
-								width = 0.5,
-								height = 0.4,
-								preview_width = 0.6,
+								width = 0.8,
+								height = 0.8,
+								preview_width = 0.5,
 							},
 						},
 					},
@@ -559,12 +560,12 @@ require("lazy").setup({
 					buffers = {
 						-- initial_mode = "normal",
 						sort_lastused = true,
-						previewer = false,
+						previewer = true,
 						layout_config = {
 							horizontal = {
 								width = 0.8,
-								height = 0.6,
-								preview_width = 0.6,
+								height = 0.8,
+								preview_width = 0.5,
 							},
 						},
 					},
