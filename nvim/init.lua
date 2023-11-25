@@ -1215,6 +1215,15 @@ require("lazy").setup({
 				},
 			})
 		end,
+		keys = {
+			-- NERDTree in current buffer's directory
+			{
+				"<c-l>", -- key map
+				"<cmd>FocusSplitNicely<CR>", -- command
+				mode = "n",
+				desc = "Split nicely (golden ratio)",
+			},
+		},
 	},
 
 	-- TODO compare to https://github.com/Pocco81/true-zen.nvim
