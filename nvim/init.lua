@@ -113,6 +113,9 @@ require("lazy").setup({
 			-- 	vim.api.nvim_set_hl(0, "IndentBlanklineIndent7", vim.api.nvim_get_hl_by_name("IndentBlanklineIndent7", true))
 			-- end)
 
+			-- sync with rainbow-delimiters
+			vim.g.rainbow_delimiters = { highlight = highlight }
+
 			local ibl = require("ibl")
 			ibl.setup({
 				indent = {
@@ -257,6 +260,7 @@ require("lazy").setup({
 					},
 					hop = true,
 					fidget = true,
+					-- rainbow_delimiters = true, -- manually set to sync w/ indent-blankline, not sure this is necessary
 				},
 				color_overrides = {
 					-- Related reading
@@ -1732,6 +1736,12 @@ require("lazy").setup({
 			-- pre_hook = function() end,
 			-- post_hook = function() end,
 		},
+	},
+
+	-- Rainbow parens n shit
+	{
+		"https://gitlab.com/HiPhish/rainbow-delimiters.nvim",
+		name = "rainbow-delimiters",
 	},
 }, {
 	-- 	https://github.com/folke/lazy.nvim#%EF%B8%8F-configuration
