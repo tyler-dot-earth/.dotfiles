@@ -470,6 +470,12 @@ require("lazy").setup({
 						i = {
 							["<c-d>"] = actions.delete_buffer,
 						},
+						i = {
+							['<ScrollWheelUp>'] = actions.preview_scrolling_up,
+						},
+						i = {
+							['<ScrollWheelDown>'] = actions.preview_scrolling_down,
+						},
 					},
 					theme = "dropdown",
 					previewer = true,
