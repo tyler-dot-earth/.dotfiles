@@ -303,6 +303,7 @@ require("lazy").setup({
 							IndentBlanklineIndent5 = { fg = colors.rainbow5 },
 							IndentBlanklineIndent6 = { fg = colors.rainbow6 },
 							IndentBlanklineIndent7 = { fg = colors.rainbow7 },
+							IblScope = { fg = colors.yellow, bg = colors.yellow },
 							-- IndentBlanklineContextChar = { fg = "#ff0000", bg = "#ff0000" },
 							--[[ IndentBlanklineContextStart = { ]]
 							--[[ 	fg = "#ff0000", ]]
