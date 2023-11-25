@@ -47,35 +47,39 @@ require("lazy").setup({
 	-- :help indent_blankline.txt
 	{
 		"lukas-reineke/indent-blankline.nvim",
+		main = "ibl",
 		name = "indent_blankline.nvim",
 		opts = {
-			char_highlight_list = {
-				"IndentBlanklineIndent1",
-				"IndentBlanklineIndent2",
-				"IndentBlanklineIndent3",
-				"IndentBlanklineIndent4",
-				"IndentBlanklineIndent5",
-				"IndentBlanklineIndent6",
-				"IndentBlanklineIndent7",
-			},
-			space_char_highlight_list = {
-				"IndentBlanklineIndent1",
-				"IndentBlanklineIndent2",
-				"IndentBlanklineIndent3",
-				"IndentBlanklineIndent4",
-				"IndentBlanklineIndent5",
-				"IndentBlanklineIndent6",
-				"IndentBlanklineIndent7",
-			},
+			-- everything below commented out for change to v2->v3 migration
+			-- V3 migration guide — https://github.com/lukas-reineke/indent-blankline.nvim/wiki/Migrate-to-version-3)
+			--
+			-- char_highlight_list = {
+			-- 	"IndentBlanklineIndent1",
+			-- 	"IndentBlanklineIndent2",
+			-- 	"IndentBlanklineIndent3",
+			-- 	"IndentBlanklineIndent4",
+			-- 	"IndentBlanklineIndent5",
+			-- 	"IndentBlanklineIndent6",
+			-- 	"IndentBlanklineIndent7",
+			-- },
+			-- space_char_highlight_list = {
+			-- 	"IndentBlanklineIndent1",
+			-- 	"IndentBlanklineIndent2",
+			-- 	"IndentBlanklineIndent3",
+			-- 	"IndentBlanklineIndent4",
+			-- 	"IndentBlanklineIndent5",
+			-- 	"IndentBlanklineIndent6",
+			-- 	"IndentBlanklineIndent7",
+			-- },
 			--[[ space_char_blankline = " ", ]]
-			show_current_context = true,
-			show_current_context_start = true,
-			show_end_of_line = false, -- hide EOL listchar on blanklines
-			char = "┃",
-			space_char_blankline = "·", -- prob only use if you set char
-			char_blankline = "┊",
-			context_char = "█",
-			context_char_blankline = "║",
+			-- show_current_context = true,
+			-- show_current_context_start = true,
+			-- show_end_of_line = false, -- hide EOL listchar on blanklines
+			-- char = "┃",
+			-- space_char_blankline = "·", -- prob only use if you set char
+			-- char_blankline = "┊",
+			-- context_char = "█",
+			-- context_char_blankline = "║",
 		},
 	},
 
@@ -699,6 +703,10 @@ require("lazy").setup({
 			-- Treesitter-based contextual comments (eg do {/* these */} in jsx depending on cursor location)
 			{
 				"JoosepAlviste/nvim-ts-context-commentstring",
+				dependencies = {
+					-- "nvim-treesitter/nvim-treesitter",
+					-- "numToStr/Comment.nvim",
+				},
 				config = function()
 					require("nvim-treesitter.configs").setup({
 						ensure_installed = {
@@ -1018,9 +1026,10 @@ require("lazy").setup({
 					-- formatting.prettier_eslint, -- TODO investigate this
 				},
 				on_attach = function(client)
-					if client.server_capabilities.documentFormattingProvider then
-						vim.cmd("autocmd BufWritePre <buffer> lua vim.lsp.buf.format({ timeout_ms = 4000 })")
-					end
+					-- Auto-format on save if document has formatter(s)
+					-- if client.server_capabilities.documentFormattingProvider then
+					-- 	vim.cmd("autocmd BufWritePre <buffer> lua vim.lsp.buf.format({ timeout_ms = 4000 })")
+					-- end
 				end,
 			}
 		end,
@@ -1072,7 +1081,37 @@ require("lazy").setup({
 		"nvim-focus/focus.nvim",
 		lazy = false,
 		config = function()
-			require("focus").setup()
+			require("focus").setup({
+				enable = true, -- Enable module
+				commands = true, -- Create Focus commands
+				autoresize = {
+					enable = false, -- Enable or disable auto-resizing of splits
+					width = 0, -- Force width for the focused window
+					height = 0, -- Force height for the focused window
+					minwidth = 0, -- Force minimum width for the unfocused window
+					minheight = 0, -- Force minimum height for the unfocused window
+					height_quickfix = 10, -- Set the height of quickfix panel
+				},
+				split = {
+					bufnew = false, -- Create blank buffer for new split windows
+					tmux = false, -- Create tmux splits instead of neovim splits
+				},
+				ui = {
+					number = false, -- Display line numbers in the focussed window only
+					relativenumber = false, -- Display relative line numbers in the focussed window only
+					hybridnumber = false, -- Display hybrid line numbers in the focussed window only
+					absolutenumber_unfocussed = false, -- Preserve absolute numbers in the unfocussed windows
+
+					cursorline = true, -- Display a cursorline in the focussed window only
+					cursorcolumn = false, -- Display cursorcolumn in the focussed window only
+					colorcolumn = {
+						enable = false, -- Display colorcolumn in the foccused window only
+						list = "+1", -- Set the comma-saperated list for the colorcolumn
+					},
+					signcolumn = true, -- Display signcolumn in the focussed window only
+					winhighlight = false, -- Auto highlighting for focussed/unfocussed windows
+				},
+			})
 		end,
 	},
 
@@ -1175,7 +1214,7 @@ require("lazy").setup({
 			-- DONT FORGET TO ADD THEM TO sources IN config() BELOW
 			"hrsh7th/cmp-emoji", -- :shortcodes: -> emoji
 			"jcha0713/cmp-tw2css", -- tailwind shorthand -> expanded css
-			"hrsh7th/cmp-copilot", -- copilot.vim
+			-- "hrsh7th/cmp-copilot", -- copilot.vim
 			"hrsh7th/cmp-nvim-lsp-signature-help", -- show function signature
 			-- "zbirenbaum/copilot.lua", -- copilot.lua
 		},
@@ -1184,6 +1223,9 @@ require("lazy").setup({
 			local lspkind = require("lspkind")
 
 			cmp.setup({
+				-- enabled = true,
+				-- preselect = cmp.PreselectMode.None, -- prevent <Enter> from selecting choice without menu interaction
+
 				snippet = {
 					-- REQUIRED - you must specify a snippet engine
 					expand = function(args)
@@ -1199,7 +1241,7 @@ require("lazy").setup({
 					{ name = "nvim_lsp" },
 					{ name = "emoji" },
 					{ name = "cmp-tw2css" },
-					{ name = "copilot" },
+					-- { name = "copilot" },
 					{ name = "nvim_lsp_signature_help" },
 				}, {
 					{ name = "buffer" },
@@ -1211,7 +1253,11 @@ require("lazy").setup({
 					-- ['<C-f>'] = cmp.mapping.scroll_docs(4),
 					["<C-Space>"] = cmp.mapping.complete(),
 					-- ['<C-e>'] = cmp.mapping.abort(),
-					["<CR>"] = cmp.mapping.confirm({ select = true }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
+
+					-- Accept currently selected item.
+					["<CR>"] = cmp.mapping.confirm({
+						select = false, -- Set `select` to `false` to only confirm explicitly selected items.
+					}),
 				}),
 
 				formatting = {
