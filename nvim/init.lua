@@ -49,38 +49,123 @@ require("lazy").setup({
 		"lukas-reineke/indent-blankline.nvim",
 		main = "ibl",
 		name = "indent_blankline.nvim",
-		opts = {
-			-- everything below commented out for change to v2->v3 migration
-			-- V3 migration guide — https://github.com/lukas-reineke/indent-blankline.nvim/wiki/Migrate-to-version-3)
-			--
-			-- char_highlight_list = {
-			-- 	"IndentBlanklineIndent1",
-			-- 	"IndentBlanklineIndent2",
-			-- 	"IndentBlanklineIndent3",
-			-- 	"IndentBlanklineIndent4",
-			-- 	"IndentBlanklineIndent5",
-			-- 	"IndentBlanklineIndent6",
-			-- 	"IndentBlanklineIndent7",
-			-- },
-			-- space_char_highlight_list = {
-			-- 	"IndentBlanklineIndent1",
-			-- 	"IndentBlanklineIndent2",
-			-- 	"IndentBlanklineIndent3",
-			-- 	"IndentBlanklineIndent4",
-			-- 	"IndentBlanklineIndent5",
-			-- 	"IndentBlanklineIndent6",
-			-- 	"IndentBlanklineIndent7",
-			-- },
-			--[[ space_char_blankline = " ", ]]
-			-- show_current_context = true,
-			-- show_current_context_start = true,
-			-- show_end_of_line = false, -- hide EOL listchar on blanklines
-			-- char = "┃",
-			-- space_char_blankline = "·", -- prob only use if you set char
-			-- char_blankline = "┊",
-			-- context_char = "█",
-			-- context_char_blankline = "║",
+		dependencies = {
+			"nvim-treesitter/nvim-treesitter",
+			"catppuccin/nvim",
 		},
+		-- opts = {
+		-- 	-- need to upgrade to v3 from v2
+		-- 	-- https://github.com/lukas-reineke/indent-blankline.nvim/wiki/Migrate-to-version-3
+		--
+		-- 	-- char_highlight_list = {
+		-- 	-- 	"IndentBlanklineIndent1",
+		-- 	-- 	"IndentBlanklineIndent2",
+		-- 	-- 	"IndentBlanklineIndent3",
+		-- 	-- 	"IndentBlanklineIndent4",
+		-- 	-- 	"IndentBlanklineIndent5",
+		-- 	-- 	"IndentBlanklineIndent6",
+		-- 	-- 	"IndentBlanklineIndent7",
+		-- 	-- },
+		-- 	-- space_char_highlight_list = {
+		-- 	-- 	"IndentBlanklineIndent1",
+		-- 	-- 	"IndentBlanklineIndent2",
+		-- 	-- 	"IndentBlanklineIndent3",
+		-- 	-- 	"IndentBlanklineIndent4",
+		-- 	-- 	"IndentBlanklineIndent5",
+		-- 	-- 	"IndentBlanklineIndent6",
+		-- 	-- 	"IndentBlanklineIndent7",
+		-- 	-- },
+		-- 	-- --[[ space_char_blankline = " ", ]]
+		-- 	-- show_current_context = true,
+		-- 	-- show_current_context_start = true,
+		-- 	-- show_end_of_line = false, -- hide EOL listchar on blanklines
+		-- 	-- char = "┃",
+		-- 	-- space_char_blankline = "·", -- prob only use if you set char
+		-- 	-- char_blankline = "┊",
+		-- 	-- context_char = "█",
+		-- 	-- context_char_blankline = "║",
+		-- },
+		config = function()
+			-- local colors = require("catppuccin.palettes").get_palette()
+			-- TODO not sure how to re-use the highlights that i set elsewhere,
+			-- so i'm just kind of re-declaring them here for now... hm.
+			-- ^^^^ actually, it SEEMS like i don't need the hooks... but if indent highlighting breaks,
+			-- i'll try using the hook. 
+			local highlight = {
+				"IndentBlanklineIndent1",
+				"IndentBlanklineIndent2",
+				"IndentBlanklineIndent3",
+				"IndentBlanklineIndent4",
+				"IndentBlanklineIndent5",
+				"IndentBlanklineIndent6",
+				"IndentBlanklineIndent7",
+			}
+			-- create the highlight groups in the highlight setup hook, so they are reset
+			-- every time the colorscheme changes
+			-- local hooks = require "ibl.hooks"
+			-- hooks.register(hooks.type.HIGHLIGHT_SETUP, function()
+			-- 	vim.api.nvim_set_hl(0, "IndentBlanklineIndent1", vim.api.nvim_get_hl_by_name("IndentBlanklineIndent1", true))
+			-- 	vim.api.nvim_set_hl(0, "IndentBlanklineIndent2", vim.api.nvim_get_hl_by_name("IndentBlanklineIndent2", true))
+			-- 	vim.api.nvim_set_hl(0, "IndentBlanklineIndent3", vim.api.nvim_get_hl_by_name("IndentBlanklineIndent3", true))
+			-- 	vim.api.nvim_set_hl(0, "IndentBlanklineIndent4", vim.api.nvim_get_hl_by_name("IndentBlanklineIndent4", true))
+			-- 	vim.api.nvim_set_hl(0, "IndentBlanklineIndent5", vim.api.nvim_get_hl_by_name("IndentBlanklineIndent5", true))
+			-- 	vim.api.nvim_set_hl(0, "IndentBlanklineIndent6", vim.api.nvim_get_hl_by_name("IndentBlanklineIndent6", true))
+			-- 	vim.api.nvim_set_hl(0, "IndentBlanklineIndent7", vim.api.nvim_get_hl_by_name("IndentBlanklineIndent7", true))
+			-- end)
+
+			local ibl = require("ibl")
+			ibl.setup({
+				indent = {
+					char = "│",
+					tab_char = "│", -- uses 'lcs-tab' by default if 'list' is set, otherwises uses 'ibl.config.indent.char'
+					highlight = highlight, -- highlight group, or list of highligh groups
+					-- in v3/2023-11-25, there is no equiv to "current context" from v2 afaict. so, TODO
+				},
+				scope = {
+					-- NOTE: scope is not the current indentation level!
+					-- Instead, it is the indentation level where variables
+					-- or functions are accessible.
+
+					-- enabled = false,
+
+					-- include = {
+					-- 	node_type = {
+					-- 		lua = {
+					-- 			'chunk',
+					-- 			'do_statement',
+					-- 			'while_statement',
+					-- 			'repeat_statement',
+					-- 			'if_statement',
+					-- 			'for_statement',
+					-- 			'function_declaration',
+					-- 			'function_definition',
+					-- 			'table_constructor',
+					-- 			'assignment_statement',
+					-- 		},
+					-- 		typescript = {
+					-- 			'statement_block',
+					-- 			'function',
+					-- 			'arrow_function',
+					-- 			'function_declaration',
+					-- 			'method_definition',
+					-- 			'for_statement',
+					-- 			'for_in_statement',
+					-- 			'catch_clause',
+					-- 			'object_pattern',
+					-- 			'arguments',
+					-- 			'switch_case',
+					-- 			'switch_statement',
+					-- 			'switch_default',
+					-- 			'object',
+					-- 			'object_type',
+					-- 			'ternary_expression',
+					-- 		},
+					-- 	},
+					-- },
+				},
+				-- vim.opt.listchars:append("space: "),
+			})
+		end
 	},
 
 	-- manage global and project-local settings
@@ -94,15 +179,21 @@ require("lazy").setup({
 	{
 		"catppuccin/nvim",
 		name = "catppuccin",
+		priority = 1000,
 		init = function()
-			vim.g.catppuccin_flavour = "frappe" -- Has to be set in order for empty argument of get_palette to work
+			vim.g.catppuccin_flavour = "frappe" -- Has to be set in order for empty argument of get_palette to work?
 		end,
 		config = function()
 			-- vim.g.catppuccin_flavour = "frappe" -- Has to be set in order for empty argument of get_palette to work
-
 			-- used for some color tweaks later
-			local catppuccin_flavour = require("catppuccin.palettes").get_palette() -- g:catppuccin_flavour's palette
+			-- local catppuccin_flavour = require("catppuccin.palettes").get_palette() -- g:catppuccin_flavour's palette
 			-- TODO ^ how the fuck do i get lsp autocompletion on this variable?
+
+			local colors = require("catppuccin.palettes").get_palette()
+			-- TODO ^ how the fuck do i get lsp autocompletion on this variable?
+
+			print(vim.inspect(colors))
+			print("fooooooo")
 
 			require("catppuccin").setup({
 				dim_inactive = {
@@ -175,13 +266,13 @@ require("lazy").setup({
 					all = {
 						-- the default rainbow is too red,
 						-- i like this rainbow better:
-						-- rainbow1 = { fg = catppuccin_flavour.lavender },
-						-- rainbow2 = { fg = catppuccin_flavour.blue },
-						-- rainbow3 = { fg = catppuccin_flavour.teal },
-						-- rainbow4 = { fg = catppuccin_flavour.green },
-						-- rainbow5 = { fg = catppuccin_flavour.yellow },
-						-- rainbow6 = { fg = catppuccin_flavour.peach },
-						-- rainbow7 = { fg = catppuccin_flavour.pink },
+						rainbow1 = colors.lavender,
+						rainbow2 = colors.blue,
+						rainbow3 = colors.teal,
+						rainbow4 = colors.green,
+						rainbow5 = colors.yellow,
+						rainbow6 = colors.peach,
+						rainbow7 = colors.pink,
 
 						-- example
 						--[[ 	text = "#ffffff", ]]
@@ -199,13 +290,15 @@ require("lazy").setup({
 					all = function(colors)
 						return {
 							-- alias catpuccin's `rainbowX` to indent_blankline's expected colors
-							IndentBlanklineIndent1 = colors.rainbow1,
-							IndentBlanklineIndent2 = colors.rainbow2,
-							IndentBlanklineIndent3 = colors.rainbow3,
-							IndentBlanklineIndent4 = colors.rainbow4,
-							IndentBlanklineIndent5 = colors.rainbow5,
-							IndentBlanklineIndent6 = colors.rainbow6,
-							IndentBlanklineIndent7 = colors.rainbow7,
+							IndentBlanklineIndent1 = { fg = colors.rainbow1 },
+							IndentBlanklineIndent1 = { fg = colors.rainbow1 },
+							IndentBlanklineIndent1 = { fg = colors.rainbow1 },
+							IndentBlanklineIndent2 = { fg = colors.rainbow2 },
+							IndentBlanklineIndent3 = { fg = colors.rainbow3 },
+							IndentBlanklineIndent4 = { fg = colors.rainbow4 },
+							IndentBlanklineIndent5 = { fg = colors.rainbow5 },
+							IndentBlanklineIndent6 = { fg = colors.rainbow6 },
+							IndentBlanklineIndent7 = { fg = colors.rainbow7 },
 							-- IndentBlanklineContextChar = { fg = "#ff0000", bg = "#ff0000" },
 							--[[ IndentBlanklineContextStart = { ]]
 							--[[ 	fg = "#ff0000", ]]
@@ -215,11 +308,11 @@ require("lazy").setup({
 							--[[ }, ]]
 
 							-- Improved "go to definition" highlighting
-							SagaBeacon = { bg = catppuccin_flavour.yellow },
+							SagaBeacon = { bg = colors.yellow },
 
 							-- the default greay isn't very visible
-							CursorLine = { bg = catppuccin_flavour.surface0 }, -- row highlight
-							CursorColumn = { bg = catppuccin_flavour.surface0 }, -- col highlight
+							CursorLine = { bg = colors.surface0 }, -- row highlight
+							CursorColumn = { bg = colors.surface0 }, -- col highlight
 							-- TODO styling Cursor doesn't seem to work for me. not sure why.
 							--[[ Cursor = { ]]
 							--[[ 	bg = catppuccin_flavour.yellow, ]]
@@ -228,15 +321,15 @@ require("lazy").setup({
 
 							-- fidget.nvim overrides
 							FidgetTitle = {
-								fg = catppuccin_flavour.blue,
+								fg = colors.blue,
 							},
 							FidgetTask = {
-								fg = catppuccin_flavour.teal,
+								fg = colors.teal,
 							},
 
 							-- nvim-treesitter-context
 							TreesitterContext = {
-								bg = catppuccin_flavour.surface0,
+								bg = colors.surface0,
 								blend = 20,
 							},
 						}
