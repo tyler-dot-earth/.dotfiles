@@ -800,6 +800,9 @@ require("lazy").setup({
 					-- "nvim-treesitter/nvim-treesitter",
 					-- "numToStr/Comment.nvim",
 				},
+				init = function()
+					vim.g.skip_ts_context_commentstring_module = true
+				end,
 				config = function()
 					require("nvim-treesitter.configs").setup({
 						ensure_installed = {
@@ -815,8 +818,9 @@ require("lazy").setup({
 							"vim",
 						},
 
+						-- @ DEPRECATED - Set vim.g.skip_ts_context_commentstring_module = true somewhere in your configuration to skip backwards compatibility routines and speed up loading.
 						context_commentstring = {
-							enable = true,
+							enable = false,
 						},
 
 						-- Incremental selection based on the named nodes from the grammar.
