@@ -686,6 +686,25 @@ require("lazy").setup({
 				desc = "Planets",
 			})
 
+			-- requires ripgrep installed
+			vim.keymap.set("n", "<leader>G", function()
+				builtin.live_grep({
+					path_display = { "absolute" },
+				})
+			end, {
+				silent = true,
+				desc = "grep (live)",
+			})
+
+			vim.keymap.set("n", "<leader>g", function()
+				builtin.grep_string({
+					path_display = { "absolute" },
+				})
+			end, {
+				silent = true,
+				desc = "grep (string)",
+			})
+
 			vim.keymap.set("n", "<leader>Db", function()
 				builtin.builtin({
 					path_display = { "absolute" },
