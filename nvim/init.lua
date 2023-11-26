@@ -666,6 +666,34 @@ require("lazy").setup({
 				silent = true,
 				desc = "Find buffer",
 			})
+
+			vim.keymap.set("n", "<leader>Ds", function()
+				builtin.lsp_document_symbols({
+					path_display = { "absolute" },
+				})
+			end, {
+				silent = true,
+				desc = "Document symbols",
+			})
+
+			-- lol i guess it makes sense.
+			vim.keymap.set("n", "<leader>Dp", function()
+				builtin.planets({
+					path_display = { "absolute" },
+				})
+			end, {
+				silent = true,
+				desc = "Planets",
+			})
+
+			vim.keymap.set("n", "<leader>Db", function()
+				builtin.builtin({
+					path_display = { "absolute" },
+				})
+			end, {
+				silent = true,
+				desc = "Builtins",
+			})
 		end,
 
 		-- TODO use `keys = {...}` instead of fn#config?
