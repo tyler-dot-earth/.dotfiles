@@ -1808,6 +1808,68 @@ require("lazy").setup({
 		"https://gitlab.com/HiPhish/rainbow-delimiters.nvim",
 		name = "rainbow-delimiters",
 	},
+
+	-- Obsidian
+	{
+		"epwalsh/obsidian.nvim",
+		name = "obsidian.nvim",
+		version = "*",  -- recommended, use latest release instead of latest commit
+		lazy = true,
+		ft = "markdown",
+		-- Replace the above line with this if you only want to load obsidian.nvim for markdown files in your vault:
+		-- event = {
+		--   -- If you want to use the home shortcut '~' here you need to call 'vim.fn.expand'.
+		--   -- E.g. "BufReadPre " .. vim.fn.expand "~" .. "/my-vault/**.md"
+		--   "BufReadPre path/to/my-vault/**.md",
+		--   "BufNewFile path/to/my-vault/**.md",
+		-- },
+		dependencies = {
+			-- Required.
+			"nvim-lua/plenary.nvim",
+
+			-- see below for full list of optional dependencies 👇
+		},
+		opts = {
+			workspaces = {
+				{
+					name = "pkm",
+					path = os.getenv("PKM_DIR"),
+				},
+				-- {
+				-- 	name = "pkm2",
+				-- 	path = "~/vaults/another",
+				-- },
+			},
+
+			-- see below for full list of options 👇
+		},
+		keys = {
+			{
+				"gd", -- key map
+				"<cmd>ObsidianFollowLink<CR>", -- command
+				mode = "n",
+				desc = "Obsidian: follow link",
+				ft = "markdown",
+			},
+
+			{
+				"gt", -- key map
+				"<cmd>ObsidianToday<CR>", -- command
+				mode = "n",
+				desc = "Obsidian: today",
+				ft = "markdown",
+			},
+
+			{
+				-- ObsidianQuickSwitch
+				"<Leader><Leader>", -- key map
+				"<cmd>ObsidianQuickSwitch<CR>", -- command
+				mode = "n",
+				desc = "Obsidian: quick switch",
+				ft = "markdown",
+			}
+		},
+	},
 }, {
 	-- 	https://github.com/folke/lazy.nvim#%EF%B8%8F-configuration
 	--
