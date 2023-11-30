@@ -1870,6 +1870,11 @@ require("lazy").setup({
 			}
 		},
 	},
+
+	-- Virtual line text showing git blame
+	{
+		"f-person/git-blame.nvim"
+	},
 }, {
 	-- 	https://github.com/folke/lazy.nvim#%EF%B8%8F-configuration
 	--
