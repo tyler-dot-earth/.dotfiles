@@ -1231,6 +1231,15 @@ require("lazy").setup({
 		opts = {},
 		-- Optional dependencies
 		dependencies = { "nvim-tree/nvim-web-devicons" },
+		keys = {
+			-- run :Oil command
+			{
+				"<Leader>O", -- key map
+				"<cmd>Oil<CR>", -- command
+				mode = "n",
+				desc = "Oil (cwd)",
+			},
+		}
 	},
 
 	-- auto-expand splits
