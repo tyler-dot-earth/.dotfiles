@@ -1905,6 +1905,11 @@ require("lazy").setup({
 			persist_timer = false
 		}
 	},
+
+	-- fancy notifications
+	{
+		"rcarriga/nvim-notify",
+	},
 }, {
 	-- 	https://github.com/folke/lazy.nvim#%EF%B8%8F-configuration
 	--
