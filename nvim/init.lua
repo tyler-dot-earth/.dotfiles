@@ -1399,7 +1399,7 @@ require("lazy").setup({
 
 			cmp.setup({
 				-- enabled = true,
-				-- preselect = cmp.PreselectMode.None, -- prevent <Enter> from selecting choice without menu interaction
+				preselect = cmp.PreselectMode.None, -- prevent <Enter> from selecting choice without menu interaction
 
 				snippet = {
 					-- REQUIRED - you must specify a snippet engine
