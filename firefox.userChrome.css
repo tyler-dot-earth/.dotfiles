@@ -2,9 +2,39 @@
 
 /* Stuff because I use vertical tabs in a sidebar via an extension */
 /* BEGIN */
-#TabsToolbar { visibility: collapse; } /* to hide the native tabs */
-#sidebar-header { visibility: collapse; } /* to hide the sidebar header */
+
+#TabsToolbar {
+  visibility: collapse;
+}
+
+/* to hide the native tabs */
+#sidebar-header {
+  visibility: collapse;
+}
+
+/* to hide the sidebar header */
+#sidebar-splitter.sidebar-splitter {
+  background-color: var(--toolbar-bgcolor) !important;
+}
+
 /* END/*
+
+/* NOT SURE IF urlBar STUFF IS WORKING */
+#urlbar-results {
+  display: flex !important;
+  flex-direction: column !important;
+}
+
+.urlbarView-row[type="history"] {
+  order: 0 !important;
+}
+
+.urlbarView-row[type="search"] {
+  order: 1 !important;
+}
+
+/* END/*
+
 
 /* URL bar color based on SSL/secrutiy/etc */
 /* via https://www.reddit.com/r/FirefoxCSS/comments/7dkhuh/color_your_url_bar_based_on_website_security/ */
@@ -37,61 +67,74 @@
 
 /* about:about */
 #urlbar[pageproxystate='valid'] #identity-box.unknownIdentity:after {
-  background: #ff0039; /* Firefox Red 50 */
+  background: #ff0039;
+  /* Firefox Red 50 */
 }
 
 /* about:config */
 #urlbar[pageproxystate='valid'] #identity-box.chromeUI:after {
-  background: #0a84ff; /* Firefox Blue 50 */
+  background: #0a84ff;
+  /* Firefox Blue 50 */
 }
 
 /* uBlock Origin Dashboard */
 #urlbar[pageproxystate='valid'] #identity-box.extensionPage:after {
-  background: #45a1ff; /* Firefox Blue 40 */
+  background: #45a1ff;
+  /* Firefox Blue 40 */
 }
 
 /* https://www.github.com/ */
-#urlbar[pageproxystate='valid'] #identity-box.verifiedIdentity:after{
-  background: #058b00; /* Firefox Green 70 */
+#urlbar[pageproxystate='valid'] #identity-box.verifiedIdentity:after {
+  background: #058b00;
+  /* Firefox Green 70 */
 }
 
 /* https://www.google.com/ */
-#urlbar[pageproxystate='valid'] #identity-box.verifiedDomain:after{
-  background: #12bc00; /* Firefox Green 60 */
+#urlbar[pageproxystate='valid'] #identity-box.verifiedDomain:after {
+  background: #12bc00;
+  /* Firefox Green 60 */
 }
 
 /* https://mixed-script.badssl.com/ */
 #urlbar[pageproxystate='valid'] #identity-box.mixedActiveBlocked:after {
-  background: #30e60b; /* Firefox Green 50 */
+  background: #30e60b;
+  /* Firefox Green 50 */
 }
 
 /* https://mixed.badssl.com/ */
 #urlbar[pageproxystate='valid'] #identity-box.mixedDisplayContent:after {
-  background: #d7b600; /* Firefox Yellow 60 */
+  background: #d7b600;
+  /* Firefox Yellow 60 */
 }
 
 /* https://very.badssl.com/ */
 #urlbar[pageproxystate='valid'] #identity-box.mixedDisplayContentLoadedActiveBlocked:after {
-  background: #d7b600; /* Firefox Yellow 60 */
+  background: #d7b600;
+  /* Firefox Yellow 60 */
 }
 
 /* https://self-signed.badssl.com/ but add certificate exception */
 #urlbar[pageproxystate='valid'] #identity-box.certUserOverridden:after {
-  background: #ffe900; /* Firefox Yellow 50 */
+  background: #ffe900;
+  /* Firefox Yellow 50 */
 }
 
 /* Don't know an example for this */
 #urlbar[pageproxystate='valid'] #identity-box.weakCipher:after {
-  background: #a47f00; /* Firefox Yellow 70 */
+  background: #a47f00;
+  /* Firefox Yellow 70 */
 }
 
 /* https://mixed-script.badssl.com/ but disable protection */
 #urlbar[pageproxystate='valid'] #identity-box.mixedActiveContent:after {
-  background: #d70022;  /* Firefox Red 60 */
+  background: #d70022;
+  /* Firefox Red 60 */
 }
 
 /* http://http-login.badssl.com/ */
 #urlbar[pageproxystate='valid'] #identity-box.insecureLoginForms:after {
-  background: #a4000f;  /* Firefox Red 70 */
+  background: #a4000f;
+  /* Firefox Red 70 */
 }
+
 /* END */
