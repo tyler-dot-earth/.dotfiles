@@ -1,0 +1,51 @@
+git:
+  confirmOnDiscard: true
+  paging:
+    colorArg: always
+    pager: delta --paging=never --features=everforest-dark
+
+os:
+  editPreset: "nvim"
+
+keybinding:
+  commits:
+    openInBrowser: "o"
+  files:
+    toggleBlame: "b"
+  universal:
+    editFile: "e"
+    editFileAtLine: "E"
+
+gui:
+  showFileTree: true
+  showBranchCommitHash: true
+  showBottomLine: false
+  showNumstatInFilesView: true
+  # theme:
+  #   activeBorderColor:
+  #     - "#a7c080"
+  #     - bold
+  #   inactiveBorderColor:
+  #     - "#7fbbb3"
+  #   searchingActiveBorderColor:
+  #     - "#dbbc7f"
+  #     - bold
+  #   optionsTextColor:
+  #     - "#d3c6aa"
+  #   selectedLineBgColor:
+  #     - "#3a4248"
+  #   selectedRangeBgColor:
+  #     - "#3a4248"
+  #   cherryPickedCommitBgColor:
+  #     - "#3a4248"
+  #   cherryPickedCommitFgColor:
+  #     - "#d3c6aa"
+  #   unstagedChangesColor:
+  #     - "#e67e80"
+  #   defaultFgColor:
+  #     - "#d3c6aa"
+  nerdFontsVersion: "3"
+  sidePanelWidth: 0.25 # 👈 25%
+  # halfScreenSidePanelWidth: 0.25 # 👈 25% # NOT A REAL CONFIG https://github.com/jesseduffield/lazygit/issues/4740#issuecomment-3070223846
+
+# confirmOnQuit: true
