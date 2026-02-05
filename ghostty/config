@@ -3,8 +3,8 @@
 
 mouse-scroll-multiplier = 1
 
-window-width = 1280
-window-height = 720
+window-width = 140
+window-height = 40
 
 font-family = "Dank Mono"
 font-size = 14
