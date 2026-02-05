@@ -1,0 +1,74 @@
+# reload config default keybind:
+# ctrl+shift+,
+
+mouse-scroll-multiplier = 1
+
+window-width = 1280
+window-height = 720
+
+font-family = "Dank Mono"
+font-size = 14
+# adjust-cell-height = "20%" # 20% = +20%; https://ghostty.org/docs/config/reference#adjust-cell-height
+adjust-cell-height = 60%
+
+# theming
+## built-in
+theme = dark:everforest-dark-soft,light:everforest-dark-soft
+## custom
+## ~/.config/ghostty/themes/
+# theme = dark:"Everforest Dark - Hard",light:"Everforest Dark - Hard"
+# theme = dark:"everforest-dark",light:"everforest-light"
+# theme = dark:"everforest-dark-medium",light:"everforest-light-medium"
+
+cursor-opacity = 1
+
+# background-opacity = 0.85
+# background-opacity = 0.90
+# background-opacity = 0.92
+
+gtk-titlebar-hide-when-maximized = true
+
+# split config into multiple files
+# config-file = some/relative/sub/config
+# config-file = ?optional/config
+# config-file = /absolute/path/config
+
+# trigger sequences
+keybind = ctrl+g>n=new_window
+keybind = ctrl+g>c=new_tab
+keybind = ctrl+g>n=next_tab
+keybind = ctrl+g>p=previous_tab
+keybind = ctrl+g>space=toggle_tab_overview
+keybind = ctrl+g>'=new_split:right
+keybind = ctrl+g>/=new_split:down
+keybind = ctrl+g>right=goto_split:right
+keybind = ctrl+g>left=goto_split:left
+# keybind = ctrl+g>up=goto_split:up
+# keybind = ctrl+g>down=goto_split:down
+keybind = ctrl+g>z=toggle_split_zoom
+keybind = ctrl+g>.=equalize_splits
+keybind = ctrl+g>f=toggle_fullscreen
+keybind = ctrl+g>f>u=increase_font_size:1
+keybind = ctrl+g>f>d=decrease_font_size:1
+keybind = ctrl+g>f>r=reset_font_size
+
+# scrollback
+# keybind = ctrl+g>/=write_scrollback_file:open
+
+# quick terminal
+# keybind = global:ctrl+grave_accent=toggle_quick_terminal
+
+# for programmatic titles
+# see https://github.com/ghostty-org/ghostty/issues/2509#issuecomment-2660991697
+shell-integration-features = no-title
+
+# custom-shader = ./shaders/cursor_blaze.glsl
+# custom-shader = ./shaders/cursor_blaze_no_trail.glsl
+# custom-shader = ./shaders/cursor_blaze_tapered.glsl
+# custom-shader = ./shaders/cursor_smear.glsl
+custom-shader = ./shaders/cursor_smear_fade.glsl
+# custom-shader = ./shaders/debug_cursor_animated.glsl
+# custom-shader = ./shaders/debug_cursor_static.glsl
+# custom-shader = ./shaders/manga_slash.glsl
+custom-shader-animation = always
+keybind = shift+enter=text:\n
