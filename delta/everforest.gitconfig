@@ -1,0 +1,60 @@
+[delta "everforest-light"]
+	blame-palette = "#fdf6e3 #f4f0d9 #efebd4 #e6e2cc #dad6c2"
+	commit-decoration-style = box ul
+	light = true
+	file-decoration-style = "#5c6a72"
+	file-style = "#5c6a72"
+	hunk-header-decoration-style = box ul
+	hunk-header-file-style = bold
+	hunk-header-line-number-style = bold "#939f91"
+	hunk-header-style = file line-number syntax
+	line-numbers-left-style = "#999f93"
+	line-numbers-minus-style = bold "#f85552"
+	line-numbers-plus-style = bold "#8da101"
+	line-numbers-right-style = "#999f93"
+	line-numbers-zero-style = "#999f93"
+	# 25% red 75% base
+	minus-emph-style = bold syntax "#f0c7c7"
+	# 10% red 90% base
+	minus-style = syntax "#f3e4e4"
+	# 25% green 75% base
+	plus-emph-style = bold syntax "#d7e3c9"
+	# 10% green 90% base
+	plus-style = syntax "#e5eadf"
+	map-styles = \
+		bold purple => syntax "#e1c6ee", \
+		bold blue => syntax "#c4d3e9", \
+		bold cyan => syntax "#b8e1dd", \
+		bold yellow => syntax "#f1d9ab"
+	syntax-theme = Everforest Light
+
+[delta "everforest-dark"]
+	blame-palette = "#2b3339 #232a2e #1e2326 #374145 #4a555b"
+	commit-decoration-style = box ul
+	dark = true
+	file-decoration-style = "#d3c6aa"
+	file-style = "#d3c6aa"
+	hunk-header-decoration-style = box ul
+	hunk-header-file-style = bold
+	hunk-header-line-number-style = bold "#859289"
+	hunk-header-style = file line-number syntax
+	line-numbers-left-style = "#7a8478"
+	line-numbers-minus-style = bold "#e67e80"
+	line-numbers-plus-style = bold "#a7c080"
+	line-numbers-right-style = "#7a8478"
+	line-numbers-zero-style = "#7a8478"
+	# 25% red 75% base
+	minus-emph-style = bold syntax "#4c3743"
+	# 10% red 90% base
+	minus-style = syntax "#3c2d36"
+	# 25% green 75% base
+	plus-emph-style = bold syntax "#445349"
+	# 10% green 90% base
+	plus-style = syntax "#343f3a"
+	map-styles = \
+		bold purple => syntax "#4b4c5b", \
+		bold blue => syntax "#3d4c5f", \
+		bold cyan => syntax "#3a515d", \
+		bold yellow => syntax "#4d4c43"
+	# Should match the name of the batcat theme
+	syntax-theme = Everforest Dark Soft
