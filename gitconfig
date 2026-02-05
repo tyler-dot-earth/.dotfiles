@@ -1,0 +1,27 @@
+[init]
+	defaultBranch = main
+
+[include]
+	# for things like name/email
+	path = ~/.gitconfig_private
+
+[core]
+	editor = nvim
+
+# delta diff pager
+[core]
+	pager = delta # --side-by-side
+
+[interactive]
+	diffFilter = delta --color-only --diff-so-fancy
+
+[delta]
+	navigate = true
+	; features = catppuccin-frappe
+	; features = catppuccin-mocha
+
+[merge]
+	conflictstyle = diff3
+
+[diff]
+	colorMoved = default
