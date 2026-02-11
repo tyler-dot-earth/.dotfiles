@@ -1,3 +1,6 @@
 [submodule "themes/kanagawa"]
 	path = themes/kanagawa
 	url = git@github.com:rebelot/kanagawa.nvim.git
+[submodule "git-hunks"]
+	path = git-hunks
+	url = https://github.com/rockorager/git-hunks.git
