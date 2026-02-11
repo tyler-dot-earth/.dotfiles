@@ -1,0 +1,32 @@
+# Voxtype configuration
+# Docs: https://github.com/peteonrails/voxtype
+# Place this file at ~/.config/voxtype/config.toml
+#
+# Autostart: Run `voxtype setup systemd` to install a systemd user service
+# that starts automatically on login.
+
+state_file = "auto"
+
+[hotkey]
+# Disable built-in hotkey - use compositor keybindings instead
+enabled = false
+
+[audio]
+device = "default"
+sample_rate = 16000
+max_duration_secs = 60
+
+[whisper]
+model = "base.en"
+language = "en"
+translate = false
+
+[output]
+mode = "type"
+fallback_to_clipboard = true
+type_delay_ms = 0
+
+[output.notification]
+on_recording_start = false
+on_recording_stop = false
+on_transcription = true
