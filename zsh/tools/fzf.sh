@@ -13,3 +13,20 @@ fzf-history-widget() {
 
 zle -N fzf-history-widget
 bindkey '^R' fzf-history-widget
+
+fzf-file-widget() {
+  local selected
+  selected=$(
+    rg --files --hidden --glob '!{node_modules/*,.git/*}' 2>/dev/null |
+      fzf --height 50% --layout=reverse --border \
+          --preview 'batcat --color=always --line-range :50 {} 2>/dev/null || cat {}' \
+          --preview-window 'right:60%'
+  ) || return
+
+  LBUFFER="${LBUFFER}${selected}"
+  CURSOR=${#LBUFFER}
+  zle reset-prompt
+}
+
+zle -N fzf-file-widget
+bindkey '^F' fzf-file-widget
