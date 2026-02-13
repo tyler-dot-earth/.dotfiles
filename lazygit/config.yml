@@ -49,3 +49,18 @@ gui:
   # halfScreenSidePanelWidth: 0.25 # 👈 25% # NOT A REAL CONFIG https://github.com/jesseduffield/lazygit/issues/4740#issuecomment-3070223846
 
 # confirmOnQuit: true
+
+customCommands:
+  - key: "C"
+    context: "files"
+    description: "Commit with gitmoji + fzf (auto-detects graphite)"
+    subprocess: true
+    command: |
+      sh -c '
+        EMOJI=$(gitmoji -l | fzf --height=50% --reverse --prompt="gitmoji: " | sed -E "s/.* - (:[a-z_]+:) - .*/\1/")
+        [ -z "$EMOJI" ] && exit 1
+        read -rp "message: " MSG
+        [ -z "$MSG" ] && exit 1
+        if gt info >/dev/null 2>&1; then gt mod -m "$EMOJI $MSG"; else git commit -m "$EMOJI $MSG"; fi
+      '
+    loadingText: "Opening fzf..."
