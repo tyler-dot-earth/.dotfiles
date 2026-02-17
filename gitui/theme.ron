@@ -1,0 +1,51 @@
+(
+// Selection colors - subtle wave blue highlight
+selection_bg: Some("#2D4F67"),
+selection_fg: Some("#DCD7BA"),
+
+// Disable selection text override so diff colors stay visible
+use_selection_fg: Some(false),
+
+// Tab/Navigation - use terminal default for cleaner look
+selected_tab: Some("Reset"),
+
+// Main text colors
+command_fg: Some("#DCD7BA"),
+
+// Command bar - dark background to blend with terminal
+cmdbar_bg: Some("#1a1a22"),
+cmdbar_extra_lines_bg: Some("#1a1a22"),
+
+// Muted text
+disabled_fg: Some("#727169"),
+
+// Diff line colors
+diff_line_add: Some("#76946A"),
+diff_line_delete: Some("#C34043"),
+
+// Diff file colors - softened pastels
+diff_file_added: Some("#98BB6C"),
+diff_file_removed: Some("#E46876"),
+diff_file_moved: Some("#938AA9"),
+diff_file_modified: Some("#DCA561"),
+
+// Git metadata - distinct colors
+commit_hash: Some("#7E9CD8"),
+commit_time: Some("#658594"),
+commit_author: Some("#E6C384"),
+
+// Status/Alerts
+danger_fg: Some("#FF5D62"),
+push_gauge_bg: Some("#7E9CD8"),
+push_gauge_fg: Some("#16161D"),
+
+// Tags and branches
+tag_fg: Some("#D27E99"),
+branch_fg: Some("#DCA561"),
+
+// UI elements
+block_title_focused: Some("#7E9CD8"),
+
+// Line break - disabled for cleaner look
+line_break: Some(""),
+)
