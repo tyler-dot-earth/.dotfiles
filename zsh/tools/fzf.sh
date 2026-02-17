@@ -2,7 +2,7 @@ fzf-history-widget() {
   local selected
   selected=$(
     fc -rl 1 |
-      sed -E 's/^[[:space:]]*\*?[[:space:]]*[0-9]*[[:space:]]*//' |
+      sed -E 's/^[[:space:]]*\*[[:space:]]*//; s/^[[:space:]]*[0-9]*[[:space:]]*//' |
       fzf --no-sort --exact --height 40% --layout=reverse --border
   ) || return
 
