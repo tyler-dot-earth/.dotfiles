@@ -17,6 +17,7 @@ plugins=(
   zsh-autosuggestions
   zsh-history-substring-search
   eza
+  zoxide
 )
 
 source $ZSH/oh-my-zsh.sh
