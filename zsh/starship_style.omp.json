@@ -1,0 +1,104 @@
+{
+  "$schema": "https://raw.githubusercontent.com/JanDeDobbeleer/oh-my-posh/main/themes/schema.json",
+  "palette": {
+    "fujiWhite": "#DCD7BA",
+    "sumiInk0": "#16161D",
+    "sumiInk2": "#2A2A37",
+    "sumiInk4": "#54546D",
+    "waveAqua2": "#7AA89F",
+    "fujiGray": "#727169",
+    "springViolet2": "#9CABCA",
+    "oniViolet": "#957FB8",
+    "crystalBlue": "#7E9CD8",
+    "springBlue": "#7FB4CA",
+    "springGreen": "#98BB6C",
+    "carpYellow": "#E6C384",
+    "sakuraPink": "#D27E99",
+    "waveRed": "#E46876",
+    "katanaGray": "#717C7C"
+  },
+  "blocks": [
+    {
+      "type": "prompt",
+      "alignment": "left",
+      "newline": false,
+      "segments": [
+        {
+          "type": "path",
+          "style": "plain",
+          "foreground": "p:crystalBlue",
+          "template": " \uf07b {{ .Path }}"
+        },
+        {
+          "type": "git",
+          "style": "plain",
+          "foreground": "p:oniViolet",
+          "properties": {
+            "fetch_status": true,
+            "local_working_icon": "Δ",
+            "local_staged_icon": "λ",
+            "stash_icon": "",
+            "untracked_icon": "ε"
+          }
+        },
+        {
+          "type": "node",
+          "style": "plain",
+          "foreground": "p:springGreen",
+          "template": " {{ .Full }}"
+        },
+        {
+          "type": "python",
+          "style": "plain",
+          "foreground": "p:carpYellow",
+          "template": " {{ .Full }}"
+        },
+        {
+          "type": "rust",
+          "style": "plain",
+          "foreground": "p:waveRed",
+          "template": " {{ .Full }}"
+        },
+        {
+          "type": "go",
+          "style": "plain",
+          "foreground": "p:crystalBlue",
+          "template": " {{ .Full }}"
+        },
+        {
+          "type": "executiontime",
+          "style": "plain",
+          "foreground": "p:carpYellow",
+          "template": " {{ .Duration }}"
+        }
+      ]
+    },
+    {
+      "type": "prompt",
+      "alignment": "right",
+      "segments": [
+        {
+          "type": "time",
+          "style": "plain",
+          "foreground": "p:katanaGray",
+          "template": "{{ .CurrentDate | date .Format }}"
+        }
+      ]
+    },
+    {
+      "type": "prompt",
+      "alignment": "left",
+      "newline": true,
+      "segments": [
+        {
+          "type": "text",
+          "style": "plain",
+          "foreground": "p:springGreen",
+          "template": " \u276f "
+        }
+      ]
+    }
+  ],
+  "final_space": false,
+  "version": 3
+}

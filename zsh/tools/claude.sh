@@ -1,1 +1,1 @@
-alias claude="$HOME/.claude/local/claude"
+alias claude="$HOME/.local/bin/claude"

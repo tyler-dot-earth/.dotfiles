@@ -1,0 +1,119 @@
+"$schema" = 'https://starship.rs/config-schema.json'
+
+add_newline = false
+command_timeout = 1000
+
+format = """
+$directory\
+$git_branch\
+$git_status\
+$git_state\
+${custom.graphite_stack}\
+$nodejs\
+$python\
+$rust\
+$golang\
+$cmd_duration\
+$line_break\
+$character"""
+
+# right_format = """
+# $time"""
+
+[character]
+# success_symbol = "[➜](bold green)"
+# error_symbol = "[➜](bold red)"
+# vimcmd_symbol = "[➜](bold green)"
+success_symbol = "[➜](bold green)"
+error_symbol = "[➜](bold red)"
+vimcmd_symbol = "[❮](bold green)"
+
+[directory]
+# truncation_length = 3
+# truncate_to_repo = true
+# style = "bold cyan"
+# format = "[$path]($style)"
+# read_only = " 🔒"
+format = "[󰉋 $path]($style)"
+style = "bold cyan"
+truncation_length = 3
+truncate_to_repo = true
+read_only = " 🔒"
+
+[git_branch]
+symbol = ""
+style = "bold purple"
+format = " [$symbol  $branch]($style)"
+
+[git_status]
+conflicted = "⇆"
+ahead = "⇡${count}"
+behind = "⇣${count}"
+diverged = "⇕⇡${ahead_count}⇣${behind_count} "
+untracked = "ε"
+modified = "Δ"
+staged = "λ"
+renamed = "»"
+deleted = "∅"
+stashed = ""
+style = "bold yellow"
+# format = " [$all_status$ahead_behind]($style) "
+format = " [$all_status$ahead_behind]($style)"
+
+[git_state]
+# format = " [$modified$untracked$ahead_behind]"
+format = " [$state( $progress_current/$progress_total )]($style)"
+# format = " [$state${progress_current:+( $progress_current/$progress_total)}]($style)"
+# format = " [ $state${progress_current:+( $progress_current/$progress_total)}]($style)"
+style = "bold yellow"
+
+[custom.graphite_stack]
+command = "gt log short --stack --no-interactive 2>/dev/null | perl -CS -ne 'if (/^\\s*[\\x{25C9}\\x{25EF}]/){$total++; $pos=$total if /^\\s*\\x{25C9}/} END{$total_non=$total-1; if ($total_non==1 && $pos==1){print \"1\"} elsif ($total_non>1 && $pos && $pos<$total){$pos=$total_non-$pos+1; print \"$pos/$total_non\"}}'"
+when = "command -v gt >/dev/null 2>&1 && gt log short --stack --no-interactive 2>/dev/null | perl -CS -ne 'if (/^\\s*[\\x{25C9}\\x{25EF}]/){$total++} END{$total_non=$total-1; exit($total_non>0?0:1)}'"
+require_repo = true
+format = "[$symbol $output]($style)"
+# symbol = "󰘬"
+symbol = ""
+style = "bold white"
+
+[nodejs]
+detect_files = ["package.json"]
+symbol = ""
+format = " [$symbol ($version)]($style) "
+style = "bold green"
+
+[python]
+symbol = " "
+format = "[${symbol}${pyenv_prefix}(${version})]($style) "
+style = "bold yellow"
+
+[rust]
+symbol = " "
+format = "[$symbol($version)]($style) "
+style = "bold red"
+
+[golang]
+symbol = " "
+format = "[$symbol($version)]($style) "
+style = "bold cyan"
+
+[cmd_duration]
+# min_time = 2_000
+min_time = 250
+format = "[󰔟 $duration]($style) "
+style = "bold yellow"
+
+# [time]
+# disabled = false
+# format = '[$time]($style)'
+# style = "bold white"
+# time_format = "%T"
+[time]
+disabled = false
+time_format = "%H:%M"
+format = " [󰥔 $time]($style)"
+
+[status]
+disabled = false
+format = "[$status]($style) "
+style = "bold red"

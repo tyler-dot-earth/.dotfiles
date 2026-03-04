@@ -1,3 +1,3 @@
-if [ -f ~/.config/tmux/tmux.conf ]; then
+if [[ -n "$TMUX" ]] && [[ -f ~/.config/tmux/tmux.conf ]]; then
   tmux source-file ~/.config/tmux/tmux.conf
 fi
