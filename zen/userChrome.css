@@ -1,3 +1,74 @@
+/* Bigger workspaces icons */
 #zen-workspaces-button .zen-workspace-icon {
-  font-size: 130%;
+  font-size: 150% !important;
 }
+
+.tab-text.tab-label {
+  /*! color: red; */
+  /* text-shadow: 0 1px 0 rgba(0, 0, 0, 0.75); */
+
+  /*   font-weight: 500 !important; */
+
+  /*   --tab-text-shadow: light-dark(rgba(255, 255, 255, 0.15), rgb(0, 0, 0, 0.15));
+  text-shadow: -1px 2px 0 var(--tab-text-shadow); */
+
+  /*   --tab-text-shadow: light-dark(rgb(0, 0, 0, 0.15), rgba(255, 255, 255, 0.15));
+  text-shadow: 1px 1px 0 var(--tab-text-shadow), 1px 1px 4px var(--tab-text-shadow);
+  color: white; */
+
+  /*   mix-blend-mode: difference; */
+}
+
+#zen-media-controls-toolbar {
+  & > toolbaritem {
+    --zen-media-control-bg: light-dark(
+      rgba(255, 255, 255, 0.27),
+      rgba(0, 0, 0, 0.27)
+    ) !important;
+    background: var(--zen-media-control-bg) !important;
+    backdrop-filter: blur(10px) !important;
+  }
+
+  & #zen-media-info-vbox {
+    color: white;
+    opacity: 1;
+  }
+}
+
+tab[selected="true"] {
+  & .tab-background {
+    --tab-selected-bgcolor: light-dark(
+      rgba(255, 255, 255, 0.12),
+      rgba(0, 0, 0, 0.12)
+    );
+    background: var(--tab-selected-bgcolor);
+
+    --tab-selected-shadow: 0px 1px 1px 0px
+      light-dark(rgba(0, 0, 0, 0.09), rgba(0, 0, 0, 0.1)) !important;
+    box-shadow: var(--tab-selected-shadow);
+  }
+
+  & .tab-text.tab-label {
+    font-weight: 500;
+  }
+}
+
+/* :not(.tab-stack) */
+.tab-label {
+  white-space: wrap !important;
+
+  display: -webkit-box;
+  -webkit-line-clamp: 2; /* number of lines */
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* .zen-workspace-pinned-tabs-section { */
+/* 	position: sticky; */
+/* 	top: 0; */
+/* 	background: color-mix( */
+/* 		in srgb, */
+/* 		var(--zen-main-browser-background) 60%, */
+/* 		transparent */
+/* 	); */
+/* } */
