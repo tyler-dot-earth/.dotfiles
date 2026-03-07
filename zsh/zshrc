@@ -1,13 +1,8 @@
-# source "${0:A:h}/init.sh"
-# WARN: ↑ too simplistic; won't resolve path if symlinked
+# Resolve this file's directory reliably when sourced from ~/.zshrc.
+ZSHRC_DIR="${${(%):-%N}:A:h}"
 
-# %N expands to the path of the file currently being sourced
-# this works correctly even when .zshrc itself is a symlink
-ZSHRC_FILE="${(%):-%N}"
-
-# :A resolves the path to an absolute, symlink-free location
-# :h extracts the directory containing that file
-ZSHRC_DIR="${ZSHRC_FILE:A:h}"
-
-# source init.sh relative to the real .zshrc directory
+# Set ZSH_DEBUG_STARTUP=1 before starting zsh to log optional startup decisions.
 source "$ZSHRC_DIR/init.sh"
+
+# opencode
+export PATH=~/.opencode/bin:$PATH

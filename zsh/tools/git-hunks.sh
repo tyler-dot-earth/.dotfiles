@@ -2,7 +2,8 @@
 # https://github.com/rockorager/git-hunks
 
 # Add git-hunks to PATH if it exists as a submodule
-GIT_HUNKS_DIR="${0:A:h}/../../git-hunks"
+ZSH_TOOL_FILE_DIR="${${(%):-%N}:A:h}"
+GIT_HUNKS_DIR="$ZSH_TOOL_FILE_DIR/../../git-hunks"
 if [[ -d "$GIT_HUNKS_DIR" && -x "$GIT_HUNKS_DIR/git-hunks" ]]; then
   export PATH="$GIT_HUNKS_DIR:$PATH"
 fi

@@ -33,3 +33,21 @@ Create a new `.sh` file in `tools/` and it will be automatically sourced on next
 ## Private Configuration
 
 Machine-specific configuration should go in `~/.zshrc_private` (created outside this repo).
+
+## Startup Debugging
+
+Set `ZSH_DEBUG_STARTUP=1` to print debug messages about optional startup components (Homebrew, Oh My Zsh, oh-my-posh, Deno env, fzf widgets, and private config) and whether each one was loaded or skipped.
+
+One-off debug shell:
+
+```bash
+ZSH_DEBUG_STARTUP=1 zsh -l
+```
+
+Debug when re-sourcing current shell:
+
+```bash
+ZSH_DEBUG_STARTUP=1 source ~/.zshrc
+```
+
+Normal startup stays quiet unless `ZSH_DEBUG_STARTUP` is enabled.
