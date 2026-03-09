@@ -6,3 +6,6 @@ source "$ZSHRC_DIR/init.sh"
 
 # opencode
 export PATH=~/.opencode/bin:$PATH
+
+# LM Studio
+export PATH="$PATH:~/.lmstudio/bin"

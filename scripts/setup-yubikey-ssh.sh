@@ -43,6 +43,31 @@ append_if_missing() {
   fi
 }
 
+detect_pinentry_program() {
+  local os
+  os="$(uname -s)"
+
+  if [[ "$os" == "Darwin" ]]; then
+    for candidate in /opt/homebrew/bin/pinentry-mac /usr/local/bin/pinentry-mac; do
+      if [[ -x "$candidate" ]]; then
+        printf '%s\n' "$candidate"
+        return 0
+      fi
+    done
+  else
+    # Prefer GUI pinentry on Linux desktops, with curses fallback.
+    local candidate
+    for candidate in pinentry-gnome3 pinentry-gtk-2 pinentry-qt pinentry-curses pinentry; do
+      if command -v "$candidate" >/dev/null 2>&1; then
+        command -v "$candidate"
+        return 0
+      fi
+    done
+  fi
+
+  return 1
+}
+
 mkdir -p "$GNUPGHOME" "$SSH_INCLUDE_DIR"
 chmod 700 "$GNUPGHOME" "$SSH_DIR"
 
@@ -53,18 +78,13 @@ append_if_missing "enable-ssh-support" "$GPG_AGENT_CONF"
 append_if_missing "default-cache-ttl 600" "$GPG_AGENT_CONF"
 append_if_missing "max-cache-ttl 7200" "$GPG_AGENT_CONF"
 
-if [[ "$(uname -s)" == "Darwin" ]] && ! grep -Eq '^[[:space:]]*pinentry-program[[:space:]]+' "$GPG_AGENT_CONF"; then
-  pinentry_found=0
-  for pinentry in /opt/homebrew/bin/pinentry-mac /usr/local/bin/pinentry-mac; do
-    if [[ -x "$pinentry" ]]; then
-      append_if_missing "pinentry-program $pinentry" "$GPG_AGENT_CONF"
-      pinentry_found=1
-      break
-    fi
-  done
-
-  if [[ $pinentry_found -eq 0 ]]; then
+if ! grep -Eq '^[[:space:]]*pinentry-program[[:space:]]+' "$GPG_AGENT_CONF"; then
+  if pinentry_program="$(detect_pinentry_program)"; then
+    append_if_missing "pinentry-program $pinentry_program" "$GPG_AGENT_CONF"
+  elif [[ "$(uname -s)" == "Darwin" ]]; then
     echo "Warning: pinentry-mac not found; install it for GUI PIN prompts (brew install pinentry-mac)." >&2
+  else
+    echo "Warning: no pinentry program found in PATH; install one (e.g. pinentry-gnome3 or pinentry-qt)." >&2
   fi
 fi
 

@@ -36,7 +36,7 @@ If `gpg`/`gpgconf` is missing on macOS:
 brew install gnupg pinentry-mac
 ```
 
-This script configures `~/.gnupg/gpg-agent.conf` with `enable-ssh-support`, adds an SSH include (`~/.ssh/config.d/10-gpg-agent.conf`) with `IdentityAgent`, and ensures `~/.ssh/config` includes `~/.ssh/config.d/*.conf`.
+This script configures `~/.gnupg/gpg-agent.conf` with `enable-ssh-support`, selects a platform-appropriate `pinentry-program` when available (macOS: `pinentry-mac`; Linux: GUI pinentry preferred), adds an SSH include (`~/.ssh/config.d/10-gpg-agent.conf`) with `IdentityAgent`, and ensures `~/.ssh/config` includes `~/.ssh/config.d/*.conf`.
 
 After running it:
 

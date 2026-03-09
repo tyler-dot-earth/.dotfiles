@@ -30,6 +30,9 @@ rdfind() {
 
 alias lg="lazygit"
 
+bindkey -v
+KEYTIMEOUT=1
+
 setopt COMPLETE_IN_WORD
 zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}' 'r:|[._-]=**'
 zstyle ':completion:*' list-colors ''

@@ -8,6 +8,9 @@ HISTFILE=~/.zsh_history
 HISTSIZE=50000
 SAVEHIST=50000
 
+# Make Ctrl-W stop at path separators when editing command lines.
+WORDCHARS="${WORDCHARS//\/}"
+
 HOMEBREW_BIN=""
 for candidate in /opt/homebrew/bin/brew /usr/local/bin/brew /home/linuxbrew/.linuxbrew/bin/brew; do
   if [[ -x "$candidate" ]]; then
